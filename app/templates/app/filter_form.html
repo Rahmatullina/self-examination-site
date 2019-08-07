@@ -1,0 +1,600 @@
+{% load static %}
+<!doctype html>
+<html>
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <!-- jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+   <!-- Bootstrap CSS for bottom menu-->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static "app/filter_style.css" %}">
+
+</header>
+<body>
+<div class=my-menu>
+  <div class=my-header>
+    <ul>
+      <li class=my-logo>logo</li>
+      <li class=my-site-title>site title</li>
+      <li class=my-search-box>search box</li>
+      <li class=my-social>social</li>
+      <span style="margin-left:1%">
+        <img src="{% static "app/user4.png" %}" style="height:40px">
+        <span>{{ username }}</span>
+      </span>
+        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+              <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+</a>
+<form action="" method="post">
+{% csrf_token %}
+<div class="background-form">
+<div class="main-form">
+    <div class="my-form">
+        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</p>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne"  class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+  <!--First body start-->
+<table>
+<!--
+ <thead>
+ <tr>
+     <th data-campo='name' rowspan="3" data-toggle="tooltip" title="Наименование муниципального образования"></th>
+     <th data-campo='Id' rowspan="3" data-toggle="tooltip" title="Идентификатор услуги в РГМУ"></th>
+   <th data-campo='amount' rowspan="3" data-toggle="tooltip" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+       в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом)"></th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ"><sup>1</sup></th>
+</tr>
+<tr>
+    <th data-campo='link' rowspan="2" data-toggle="tooltip" title="Ссылка на услугу *"></th>
+    <th data-campo='record' rowspan="2" data-toggle="tooltip" title="Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме"></th>
+    <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" title="Наличие кнопки 'Получить услугу'"><sup>2</sup></th>
+    <th data-campo='reglament' rowspan="2" data-toggle="tooltip" title="Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ"></th>
+    <th data-campo='quality' rowspan="2" data-toggle="tooltip" title="Возможность оценки качества предоставления услуги"></th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" title="Орган власти подключен к  ФГИС ДО"><sup>3</sup></th>
+    <th data-campo='printing' rowspan="2" data-toggle="tooltip" title="Возможность печати электронной формы заявления"></th>
+    <th data-campo='edition' rowspan="2" data-toggle="tooltip" title="Возможность редактировать черновик заявления"></th>
+    <th data-campo="warning" colspan="3" data-toggle="tooltip" title="Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля 'коментраии' на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений"></th>
+   <th data-campo="availiblity" colspan="2" data-toggle="tooltip" title="Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и в АИС СОЗ"></th>
+</tr>
+<tr>
+    <th data-campo="term" data-toggle="tooltip" title="Срок рассмотрения заявления (личный кабинет)"><sup>4</sup></th>
+    <th data-campo="notification" data-toggle="tooltip" title="Уведомление о результате рассмотрения заявления в личном кабинете"><sup>5</sup></th>
+    <th data-comp="refusion" data-toggle="tooltip" title="Причины отказа (личный кабинет)"><sup>6</sup></th>
+    <th data-comp="example" data-toggle="tooltip" title="Образец документа"><sup>7</sup></th>
+    <th data-comp="template" data-toggle="tooltip" title="Шаблон (форма, бланк) документа"><sup>8</sup></th>
+</tr>
+ </thead>
+ -->
+ <tbody>
+ {% for object in objects.residential_premises %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.residential_premises_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.residential_premises_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.residential_premises_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.residential_premises_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.residential_premises_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.residential_premises_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.residential_premises_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.residential_premises_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.residential_premises_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.residential_premises_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.residential_premises_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.residential_premises_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.residential_premises_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.residential_premises_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.residential_premises_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!--First body end-->
+</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Second body start -->
+<table>
+<tbody>
+ {% for object in objects.housing_transfer %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.housing_transfer_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.housing_transfer_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.housing_transfer_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.housing_transfer_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.housing_transfer_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.housing_transfer_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.housing_transfer_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.housing_transfer_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.housing_transfer_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.housing_transfer_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.housing_transfer_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.housing_transfer_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.housing_transfer_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.housing_transfer_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.housing_transfer_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Second body end -->
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Выдача разрешения на установку и эксплуатацию рекламной конструкции 
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+          <!-- Third body start -->
+<table>
+<tbody>
+ {% for object in objects.advertising_structures %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.advertising_structures_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.advertising_structures_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.advertising_structures_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.advertising_structures_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.advertising_structures_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.advertising_structures_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.advertising_structures_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.advertising_structures_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.advertising_structures_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.advertising_structures_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.advertising_structures_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.advertising_structures_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.advertising_structures_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.advertising_structures_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.advertising_structures_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Third body end -->
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Выдача разрешения на строительство, реконструкцию объектов капитального строительства
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Fourth body start -->
+<table>
+<tbody>
+ {% for object in objects.capital_construction %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.capital_construction_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.capital_construction_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.capital_construction_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.capital_construction_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.capital_construction_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.capital_construction_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.capital_construction_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.capital_construction_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.capital_construction_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.capital_construction_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.capital_construction_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.capital_construction_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.capital_construction_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.capital_construction_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.capital_construction_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Fourth body end -->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Fifth body start -->
+<table>
+<tbody>
+ {% for object in objects.preschool_education %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.preschool_education_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.preschool_education_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.preschool_education_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.preschool_education_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.preschool_education_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.preschool_education_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.preschool_education_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.preschool_education_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.preschool_education_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.preschool_education_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.preschool_education_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.preschool_education_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.preschool_education_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.preschool_education_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.preschool_education_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Fifth body end -->
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Sixth body start -->
+<table>
+<tbody>
+ {% for object in objects.school_education %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.school_education_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.school_education_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.school_education_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.school_education_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.school_education_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.school_education_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.school_education_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.school_education_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.school_education_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.school_education_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.school_education_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.school_education_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.school_education_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.school_education_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.school_education_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Sixth body end -->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Принятие на учет граждан в качестве нуждающихся в жилых помещениях
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+      <div class="card-body">
+
+                    <!-- Seventh body start -->
+<table>
+<tbody>
+ {% for object in objects.needing_premises %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.needing_premises_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.needing_premises_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.needing_premises_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.needing_premises_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.needing_premises_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.needing_premises_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.needing_premises_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.needing_premises_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.needing_premises_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.needing_premises_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.needing_premises_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.needing_premises_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.needing_premises_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.needing_premises_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.needing_premises_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Seventh body end -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingEight">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          Выдача градостроительных планов земельных участков
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Eighth body start -->
+<table>
+<tbody>
+ {% for object in objects.town_planning %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.town_planning_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.town_planning_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.town_planning_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.town_planning_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.town_planning_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.town_planning_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.town_planning_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.town_planning_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.town_planning_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.town_planning_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.town_planning_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.town_planning_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.town_planning_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.town_planning_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.town_planning_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Eighth body end -->
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingNine">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий
+        </button>
+      </h2>
+    </div>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Nineth body start -->
+<table>
+<tbody>
+ {% for object in objects.archive_reference %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.archive_reference_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.archive_reference_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.archive_reference_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.archive_reference_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.archive_reference_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.archive_reference_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.archive_reference_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.archive_reference_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.archive_reference_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.archive_reference_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.archive_reference_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.archive_reference_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.archive_reference_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.archive_reference_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.archive_reference_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Nineth body end -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingTen">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+      <div class="card-body">
+                    <!-- Tenth body start -->
+<table>
+<tbody>
+ {% for object in objects.land_schemes %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.land_schemes_id_RGMU}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+   за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.land_schemes_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.land_schemes_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме">{{ object.land_schemes_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'">{{ object.land_schemes_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ">{{ object.land_schemes_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги">{{ object.land_schemes_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО">{{ object.land_schemes_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)">{{ object.land_schemes_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)">{{ object.land_schemes_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)">{{ object.land_schemes_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)">{{ object.land_schemes_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)">{{ object.land_schemes_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа">{{ object.land_schemes_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)">{{ object.land_schemes_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<!-- Tenth body end -->
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</form>
+<form action="" method="get">
+    {% csrf_token %}
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{ month }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/with_troubles/{{ year }}/01/">Январь</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/02/">Февраль</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/03/">Март</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/04/">Апрель</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/05/">Май</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/06/">Июнь</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/07/">Июль</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/08/">Август</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/09/">Сентябрь</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/10/">Октябрь</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/11/">Ноябрь</a></li>
+            <li><a href="/result_form/with_troubles/{{ year }}/12/">Декабрь</a></li>
+        </ul>
+        </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown"> {{ year }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/with_troubles/2017/{{ month }}/">2017</a></li>
+            <li><a href="/result_form/with_troubles/2018/{{ month }}/">2018</a></li>
+            <li><a href="/result_form/with_troubles/2019/{{ month }}/">2019</a></li>
+        </ul>
+        </li>
+          <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор региона
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+              {% for name in zipped %}
+                <li><a href="/result_form/{{ year }}/{{ month }}/{{ name.1 }}/">{{ name.0 }}</a></li>
+              {%  endfor %}
+
+          </ul>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор услуги
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/residential_premises/{{ year }}/{{ month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a></li>
+            <li><a href="/result_form/housing_transfer/{{ year }}/{{ month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a></li>
+            <li><a href="/result_form/advertising_structures/{{ year }}/{{ month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a></li>
+            <li><a href="/result_form/capital_construction/{{ year }}/{{ month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a></li>
+            <li><a href="/result_form/preschool_education/{{ year }}/{{ month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)</a></li>
+            <li><a href="/result_form/school_education/{{ year }}/{{ month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a></li>
+            <li><a href="/result_form/needing_premises/{{ year }}/{{ month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a></li>
+            <li><a href="/result_form/town_planning/{{ year }}/{{ month }}/">Выдача градостроительных планов земельных участков</a></li>
+            <li><a href="/result_form/archive_reference/{{ year }}/{{ month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a></li>
+            <li><a href="/result_form/land_schemes/{{ year }}/{{ month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a></li>
+          </ul>
+          </li>
+          <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор фильтра
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="/result_form/not_sent/{{ year }}/{{ month }}/">Регионы, не заполнившие форму</a></li>
+              <li><a href="/result_form/with_troubles/{{ year }}/{{ month }}">Региона, имеющие затруднения</a></li>
+          </ul>
+      </ul>
+    </div>
+  </div>
+</nav>
+</form>
+<!-- functions -->
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+</body>
+</html>

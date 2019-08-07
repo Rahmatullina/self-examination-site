@@ -1,0 +1,2367 @@
+{% load static %}
+<!doctype html>
+<html>
+<header>
+  <link rel="stylesheet" href="{% static "app/fill_style.css" %}">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</header>
+<body>
+<div class=my-menu>
+  <div class=my-header>
+    <ul>
+      <li class=my-logo>logo</li>
+      <li class=my-site-title>site title</li>
+      <li class=my-search-box>search box</li>
+      <li class=my-social>social</li>
+      <span style="margin-left:1%">
+        <img src="{% static "app/user4.png" %}" style="height:40px">
+        <span>{{ username }}</span>
+      </span>
+        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+              <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+</a>
+<form action="" method="post">
+{% csrf_token %}
+<div class="background-form">
+<div class="main-form">
+    <div class="my-form">
+        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</p>
+        <div>Ваш регион:{{region_form.region_name}}</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne"  class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        
+<!-- First card body-->   
+      
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.residential_premises_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.residential_premises_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.residential_premises_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+       
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.residential_premises_has_advanced_appointment }}
+</div>
+
+<div id="heading1" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.residential_premises_has_btn_get_service }}
+</div>
+
+<div id="heading2" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.residential_premises_has_reglament }}
+</div>
+
+<div id="heading3" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.residential_premises_has_estimation_quality }}
+</div>
+
+
+<div id="heading4" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading5" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_electronic_form_printing }}
+</div>
+
+<div id="heading6" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_edition_draft }}
+</div>
+
+<div id="heading7" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_term_of_consideration }}
+</div>
+
+
+<div id="heading8" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_notif_consider_result }}
+</div>
+
+<div id="heading9" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_causes_of_failure }}
+</div>
+
+
+<div id="heading10" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_sample_document }}
+</div>
+
+<div id="heading11" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.residential_premises_has_document_template }}
+</div>
+
+<div id="heading12" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.residential_premises_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+<!-- First card body end-->
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+      
+<!-- Second card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.housing_transfer_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.housing_transfer_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.housing_transfer_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.housing_transfer_has_advanced_appointment }}
+</div>
+
+<div id="heading13" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.housing_transfer_has_btn_get_service }}
+</div>
+
+<div id="heading14" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.housing_transfer_has_reglament }}
+</div>
+
+<div id="heading15" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.housing_transfer_has_estimation_quality }}
+</div>
+
+
+<div id="heading16" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading17" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_electronic_form_printing }}
+</div>
+
+<div id="heading18" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_edition_draft }}
+</div>
+
+<div id="heading19" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_term_of_consideration }}
+</div>
+
+
+<div id="heading20" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_notif_consider_result }}
+</div>
+
+<div id="heading21" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_causes_of_failure }}
+</div>
+
+
+<div id="heading22" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_sample_document }}
+</div>
+
+<div id="heading23" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.housing_transfer_has_document_template }}
+</div>
+
+<div id="heading24" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.housing_transfer_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+<!-- Second card body end-->
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Выдача разрешения на установку и эксплуатацию рекламной конструкции 
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+<!--Third card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.advertising_structures_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.advertising_structures_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.advertising_structures_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.advertising_structures_has_advanced_appointment }}
+</div>
+
+<div id="heading25" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.advertising_structures_has_btn_get_service }}
+</div>
+
+<div id="heading26" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.advertising_structures_has_reglament }}
+</div>
+
+<div id="heading27" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.advertising_structures_has_estimation_quality }}
+</div>
+
+
+<div id="heading28" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading29" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_electronic_form_printing }}
+</div>
+
+<div id="heading30" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_edition_draft }}
+</div>
+
+<div id="heading31" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_term_of_consideration }}
+</div>
+
+
+<div id="heading32" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_notif_consider_result }}
+</div>
+
+<div id="heading33" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_causes_of_failure }}
+</div>
+
+
+<div id="heading34" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_sample_document }}
+</div>
+
+<div id="heading35" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.advertising_structures_has_document_template }}
+</div>
+
+<div id="heading36" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.advertising_structures_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+ <!--Third card body end-->
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Выдача разрешения на строительство, реконструкцию объектов капитального строительства
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Fourth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.capital_construction_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.capital_construction_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.capital_construction_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.capital_construction_has_advanced_appointment }}
+</div>
+
+<div id="heading37" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.capital_construction_has_btn_get_service }}
+</div>
+
+<div id="heading38" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.capital_construction_has_reglament }}
+</div>
+
+<div id="heading39" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.capital_construction_has_estimation_quality }}
+</div>
+
+
+<div id="heading40" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading41" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_electronic_form_printing }}
+</div>
+
+<div id="heading42" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_edition_draft }}
+</div>
+
+<div id="heading43" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_term_of_consideration }}
+</div>
+
+
+<div id="heading44" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_notif_consider_result }}
+</div>
+
+<div id="heading45" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_causes_of_failure }}
+</div>
+
+
+<div id="heading46" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_sample_document }}
+</div>
+
+<div id="heading47" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.capital_construction_has_document_template }}
+</div>
+
+<div id="heading48" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.capital_construction_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Fourth card body end-->
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Fifth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.preschool_education_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.preschool_education_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.preschool_education_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.preschool_education_has_advanced_appointment }}
+</div>
+
+<div id="heading49" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.preschool_education_has_btn_get_service }}
+</div>
+
+<div id="heading50" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.preschool_education_has_reglament }}
+</div>
+
+<div id="heading51" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.preschool_education_has_estimation_quality }}
+</div>
+
+
+<div id="heading52" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading53" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_electronic_form_printing }}
+</div>
+
+<div id="heading54" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_edition_draft }}
+</div>
+
+<div id="heading55" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_term_of_consideration }}
+</div>
+
+
+<div id="heading56" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_notif_consider_result }}
+</div>
+
+<div id="heading57" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_causes_of_failure }}
+</div>
+
+
+<div id="heading58" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_sample_document }}
+</div>
+
+<div id="heading59" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.preschool_education_has_document_template }}
+</div>
+
+<div id="heading60" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.preschool_education_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Fifth card body end-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Sixth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.school_education_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.school_education_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.school_education_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.school_education_has_advanced_appointment }}
+</div>
+
+<div id="heading61" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.school_education_has_btn_get_service }}
+</div>
+
+<div id="heading62" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.school_education_has_reglament }}
+</div>
+
+<div id="heading63" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.school_education_has_estimation_quality }}
+</div>
+
+
+<div id="heading64" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading65" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_electronic_form_printing }}
+</div>
+
+<div id="heading66" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_edition_draft }}
+</div>
+
+<div id="heading67" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_term_of_consideration }}
+</div>
+
+
+<div id="heading68" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_notif_consider_result }}
+</div>
+
+<div id="heading69" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_causes_of_failure }}
+</div>
+
+
+<div id="heading70" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_sample_document }}
+</div>
+
+<div id="heading71" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.school_education_has_document_template }}
+</div>
+
+<div id="heading72" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.school_education_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Sixth card body end-->
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Принятие на учет граждан в качестве нуждающихся в жилых помещениях
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Seventh card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.needing_premises_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.needing_premises_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.needing_premises_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.needing_premises_has_advanced_appointment }}
+</div>
+
+<div id="heading73" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.needing_premises_has_btn_get_service }}
+</div>
+
+<div id="heading74" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.needing_premises_has_reglament }}
+</div>
+
+<div id="heading75" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.needing_premises_has_estimation_quality }}
+</div>
+
+
+<div id="heading76" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading77" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_electronic_form_printing }}
+</div>
+
+<div id="heading78" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_edition_draft }}
+</div>
+
+<div id="heading79" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_term_of_consideration }}
+</div>
+
+
+<div id="heading80" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_notif_consider_result }}
+</div>
+
+<div id="heading81" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_causes_of_failure }}
+</div>
+
+
+<div id="heading82" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_sample_document }}
+</div>
+
+<div id="heading83" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.needing_premises_has_document_template }}
+</div>
+
+<div id="heading84" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.needing_premises_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Seventh card body end-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingEight">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          Выдача градостроительных планов земельных участков
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Eighth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.town_planning_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.town_planning_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.town_planning_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.town_planning_has_advanced_appointment }}
+</div>
+
+<div id="heading85" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.town_planning_has_btn_get_service }}
+</div>
+
+<div id="heading86" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.town_planning_has_reglament }}
+</div>
+
+<div id="heading87" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.town_planning_has_estimation_quality }}
+</div>
+
+
+<div id="heading88" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading89" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_electronic_form_printing }}
+</div>
+
+<div id="heading90" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_edition_draft }}
+</div>
+
+<div id="heading91" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_term_of_consideration }}
+</div>
+
+
+<div id="heading92" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_notif_consider_result }}
+</div>
+
+<div id="heading93" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_causes_of_failure }}
+</div>
+
+
+<div id="heading94" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_sample_document }}
+</div>
+
+<div id="heading95" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.town_planning_has_document_template }}
+</div>
+
+<div id="heading96" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.town_planning_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Eighth card body end-->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingNine">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий
+        </button>
+      </h2>
+    </div>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Nineth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.archive_reference_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.archive_reference_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.archive_reference_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.archive_reference_has_advanced_appointment }}
+</div>
+
+<div id="heading97" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.archive_reference_has_btn_get_service }}
+</div>
+
+<div id="heading98" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.archive_reference_has_reglament }}
+</div>
+
+<div id="heading99" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.archive_reference_has_estimation_quality }}
+</div>
+
+
+<div id="heading100" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading101" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_electronic_form_printing }}
+</div>
+
+<div id="heading102" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_edition_draft }}
+</div>
+
+<div id="heading103" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_term_of_consideration }}
+</div>
+
+
+<div id="heading104" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_notif_consider_result }}
+</div>
+
+<div id="heading105" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_causes_of_failure }}
+</div>
+
+
+<div id="heading106" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_sample_document }}
+</div>
+
+<div id="heading107" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.archive_reference_has_document_template }}
+</div>
+
+<div id="heading108" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.archive_reference_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Nineth card body end-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingTen">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Tenth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.land_schemes_id_RGMU }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.land_schemes_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.land_schemes_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_schemes_has_advanced_appointment }}
+</div>
+
+<div id="heading109" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_schemes_has_btn_get_service }}
+</div>
+
+<div id="heading110" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_schemes_has_reglament }}
+</div>
+
+<div id="heading111" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_schemes_has_estimation_quality }}
+</div>
+
+
+<div id="heading112" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_connected_to_FGIS_DO }}
+</div>
+
+
+<div id="heading113" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_connected_to_FGIS_DO_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_electronic_form_printing }}
+</div>
+
+<div id="heading114" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_edition_draft }}
+</div>
+
+<div id="heading115" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_term_of_consideration }}
+</div>
+
+
+<div id="heading116" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_notif_consider_result }}
+</div>
+
+<div id="heading117" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_causes_of_failure }}
+</div>
+
+
+<div id="heading118" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_sample_document }}
+</div>
+
+<div id="heading119" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_schemes_has_document_template }}
+</div>
+
+<div id="heading120" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_schemes_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+
+
+<!--Tenth card body end-->
+        </div>
+    </div>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Сохранить и отправить</button>
+</div>
+</div>
+</div>
+</form>
+    <!-- functions --->
+    <!-- for first card-->
+    <script>$('#chk1_0').change(function() { $('#heading1').hide();area = $("#txtarea1");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk1_1').change(function() { $('#heading1').hide();area = $("#txtarea1");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk1_2').change(function() { $('#heading1').show();area = $("#txtarea1");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk2_0').change(function() { $('#heading2').hide();area = $("#txtarea2");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk2_1').change(function() { $('#heading2').hide();area = $("#txtarea2");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk2_2').change(function() { $('#heading2').show();area = $("#txtarea2");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk3_0').change(function() { $('#heading3').hide();area = $("#txtarea3");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk3_1').change(function() { $('#heading3').hide();area = $("#txtarea3");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk3_2').change(function() { $('#heading3').show();area = $("#txtarea3");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk4_0').change(function() { $('#heading4').hide();area = $("#txtarea4");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk4_1').change(function() { $('#heading4').hide();area = $("#txtarea4");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk4_2').change(function() { $('#heading4').show();area = $("#txtarea4");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk5_0').change(function() { $('#heading5').hide();area = $("#txtarea5");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk5_1').change(function() { $('#heading5').hide();area = $("#txtarea5");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk5_2').change(function() { $('#heading5').show();area = $("#txtarea5");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk6_0').change(function() { $('#heading6').hide();area = $("#txtarea6");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk6_1').change(function() { $('#heading6').hide();area = $("#txtarea6");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk6_2').change(function() { $('#heading6').show();area = $("#txtarea6");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk7_0').change(function() { $('#heading7').hide();area = $("#txtarea7");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk7_1').change(function() { $('#heading7').hide();area = $("#txtarea7");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk7_2').change(function() { $('#heading7').show();area = $("#txtarea7");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk8_0').change(function() { $('#heading8').hide();area = $("#txtarea8");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk8_1').change(function() { $('#heading8').hide();area = $("#txtarea8");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk8_2').change(function() { $('#heading8').show();area = $("#txtarea8");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk9_0').change(function() { $('#heading9').hide();area = $("#txtarea9");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk9_1').change(function() { $('#heading9').hide();area = $("#txtarea9");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk9_2').change(function() { $('#heading9').show();area = $("#txtarea9");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk10_0').change(function() { $('#heading10').hide();area = $("#txtarea10");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk10_1').change(function() { $('#heading10').hide();area = $("#txtarea10");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk10_2').change(function() { $('#heading10').show();area = $("#txtarea10");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk11_0').change(function() { $('#heading11').hide();area = $("#txtarea11");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk11_1').change(function() { $('#heading11').hide();area = $("#txtarea11");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk11_2').change(function() { $('#heading11').show();area = $("#txtarea11");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk12_0').change(function() { $('#heading12').hide();area = $("#txtarea12");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk12_1').change(function() { $('#heading12').hide();area = $("#txtarea12");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk12_2').change(function() { $('#heading12').show();area = $("#txtarea12");area.val('');area.prop('required',true);})</script>
+<!-- for second card-->
+    <script>$('#chk13_0').change(function() { $('#heading13').hide();area = $("#txtarea13");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk13_1').change(function() { $('#heading13').hide();area = $("#txtarea13");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk13_2').change(function() { $('#heading13').show();area = $("#txtarea13");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk14_0').change(function() { $('#heading14').hide();area = $("#txtarea14");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk14_1').change(function() { $('#heading14').hide();area = $("#txtarea14");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk14_2').change(function() { $('#heading14').show();area = $("#txtarea14");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk15_0').change(function() { $('#heading15').hide();area = $("#txtarea15");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk15_1').change(function() { $('#heading15').hide();area = $("#txtarea15");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk15_2').change(function() { $('#heading15').show();area = $("#txtarea15");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk16_0').change(function() { $('#heading16').hide();area = $("#txtarea16");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk16_1').change(function() { $('#heading16').hide();area = $("#txtarea16");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk16_2').change(function() { $('#heading16').show();area = $("#txtarea16");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk17_0').change(function() { $('#heading17').hide();area = $("#txtarea17");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk17_1').change(function() { $('#heading17').hide();area = $("#txtarea17");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk17_2').change(function() { $('#heading17').show();area = $("#txtarea17");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk18_0').change(function() { $('#heading18').hide();area = $("#txtarea18");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk18_1').change(function() { $('#heading18').hide();area = $("#txtarea18");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk18_2').change(function() { $('#heading18').show();area = $("#txtarea18");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk19_0').change(function() { $('#heading19').hide();area = $("#txtarea19");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk19_1').change(function() { $('#heading19').hide();area = $("#txtarea19");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk19_2').change(function() { $('#heading19').show();area = $("#txtarea19");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk20_0').change(function() { $('#heading20').hide();area = $("#txtarea20");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk20_1').change(function() { $('#heading20').hide();area = $("#txtarea20");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk20_2').change(function() { $('#heading20').show();area = $("#txtarea20");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk21_0').change(function() { $('#heading21').hide();area = $("#txtarea21");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk21_1').change(function() { $('#heading21').hide();area = $("#txtarea21");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk21_2').change(function() { $('#heading21').show();area = $("#txtarea21");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk22_0').change(function() { $('#heading22').hide();area = $("#txtarea22");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk22_1').change(function() { $('#heading22').hide();area = $("#txtarea22");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk22_2').change(function() { $('#heading22').show();area = $("#txtarea22");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk23_0').change(function() { $('#heading23').hide();area = $("#txtarea23");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk23_1').change(function() { $('#heading23').hide();area = $("#txtarea23");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk23_2').change(function() { $('#heading23').show();area = $("#txtarea23");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk24_0').change(function() { $('#heading24').hide();area = $("#txtarea24");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk24_1').change(function() { $('#heading24').hide();area = $("#txtarea24");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk24_2').change(function() { $('#heading24').show();area = $("#txtarea24");area.val('');area.prop('required',true);})</script>
+    <!-- for third card-->
+    <script>$('#chk25_0').change(function() { $('#heading25').hide();area = $("#txtarea25");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk25_1').change(function() { $('#heading25').hide();area = $("#txtarea25");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk25_2').change(function() { $('#heading25').show();area = $("#txtarea25");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk26_0').change(function() { $('#heading26').hide();area = $("#txtarea26");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk26_1').change(function() { $('#heading26').hide();area = $("#txtarea26");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk26_2').change(function() { $('#heading26').show();area = $("#txtarea26");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk27_0').change(function() { $('#heading27').hide();area = $("#txtarea27");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk27_1').change(function() { $('#heading27').hide();area = $("#txtarea27");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk27_2').change(function() { $('#heading27').show();area = $("#txtarea27");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk28_0').change(function() { $('#heading28').hide();area = $("#txtarea28");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk28_1').change(function() { $('#heading28').hide();area = $("#txtarea28");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk28_2').change(function() { $('#heading28').show();area = $("#txtarea28");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk29_0').change(function() { $('#heading29').hide();area = $("#txtarea29");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk29_1').change(function() { $('#heading29').hide();area = $("#txtarea29");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk29_2').change(function() { $('#heading29').show();area = $("#txtarea29");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk30_0').change(function() { $('#heading30').hide();area = $("#txtarea30");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk30_1').change(function() { $('#heading30').hide();area = $("#txtarea30");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk30_2').change(function() { $('#heading30').show();area = $("#txtarea30");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk31_0').change(function() { $('#heading31').hide();area = $("#txtarea31");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk31_1').change(function() { $('#heading31').hide();area = $("#txtarea31");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk31_2').change(function() { $('#heading31').show();area = $("#txtarea31");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk32_0').change(function() { $('#heading32').hide();area = $("#txtarea32");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk32_1').change(function() { $('#heading32').hide();area = $("#txtarea32");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk32_2').change(function() { $('#heading32').show();area = $("#txtarea32");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk33_0').change(function() { $('#heading33').hide();area = $("#txtarea33");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk33_1').change(function() { $('#heading33').hide();area = $("#txtarea33");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk33_2').change(function() { $('#heading33').show();area = $("#txtarea33");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk34_0').change(function() { $('#heading34').hide();area = $("#txtarea34");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk34_1').change(function() { $('#heading34').hide();area = $("#txtarea34");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk34_2').change(function() { $('#heading34').show();area = $("#txtarea34");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk35_0').change(function() { $('#heading35').hide();area = $("#txtarea35");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk35_1').change(function() { $('#heading35').hide();area = $("#txtarea35");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk35_2').change(function() { $('#heading35').show();area = $("#txtarea35");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk36_0').change(function() { $('#heading36').hide();area = $("#txtarea36");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk36_1').change(function() { $('#heading36').hide();area = $("#txtarea36");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk36_2').change(function() { $('#heading36').show();area = $("#txtarea36");area.val('');area.prop('required',true);})</script>
+    <!-- for fourth card-->
+    <script>$('#chk37_0').change(function() { $('#heading37').hide();area = $("#txtarea37");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk37_1').change(function() { $('#heading37').hide();area = $("#txtarea37");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk37_2').change(function() { $('#heading37').show();area = $("#txtarea37");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk38_0').change(function() { $('#heading38').hide();area = $("#txtarea38");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk38_1').change(function() { $('#heading38').hide();area = $("#txtarea38");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk38_2').change(function() { $('#heading38').show();area = $("#txtarea38");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk39_0').change(function() { $('#heading39').hide();area = $("#txtarea39");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk39_1').change(function() { $('#heading39').hide();area = $("#txtarea39");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk39_2').change(function() { $('#heading39').show();area = $("#txtarea39");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk40_0').change(function() { $('#heading40').hide();area = $("#txtarea40");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk40_1').change(function() { $('#heading40').hide();area = $("#txtarea40");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk40_2').change(function() { $('#heading40').show();area = $("#txtarea40");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk41_0').change(function() { $('#heading41').hide();area = $("#txtarea41");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk41_1').change(function() { $('#heading41').hide();area = $("#txtarea41");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk41_2').change(function() { $('#heading41').show();area = $("#txtarea41");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk42_0').change(function() { $('#heading42').hide();area = $("#txtarea42");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk42_1').change(function() { $('#heading42').hide();area = $("#txtarea42");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk42_2').change(function() { $('#heading42').show();area = $("#txtarea42");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk43_0').change(function() { $('#heading43').hide();area = $("#txtarea43");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk43_1').change(function() { $('#heading43').hide();area = $("#txtarea43");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk43_2').change(function() { $('#heading43').show();area = $("#txtarea43");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk44_0').change(function() { $('#heading44').hide();area = $("#txtarea44");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk44_1').change(function() { $('#heading44').hide();area = $("#txtarea44");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk44_2').change(function() { $('#heading44').show();area = $("#txtarea44");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk45_0').change(function() { $('#heading45').hide();area = $("#txtarea45");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk45_1').change(function() { $('#heading45').hide();area = $("#txtarea45");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk45_2').change(function() { $('#heading45').show();area = $("#txtarea45");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk46_0').change(function() { $('#heading46').hide();area = $("#txtarea46");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk46_1').change(function() { $('#heading46').hide();area = $("#txtarea46");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk46_2').change(function() { $('#heading46').show();area = $("#txtarea46");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk47_0').change(function() { $('#heading47').hide();area = $("#txtarea47");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk47_1').change(function() { $('#heading47').hide();area = $("#txtarea47");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk47_2').change(function() { $('#heading47').show();area = $("#txtarea47");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk48_0').change(function() { $('#heading48').hide();area = $("#txtarea48");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk48_1').change(function() { $('#heading48').hide();area = $("#txtarea48");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk48_2').change(function() { $('#heading48').show();area = $("#txtarea48");area.val('');area.prop('required',true);})</script>
+    <!-- for fifth card-->
+    <script>$('#chk49_0').change(function() { $('#heading49').hide();area = $("#txtarea49");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk49_1').change(function() { $('#heading49').hide();area = $("#txtarea49");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk49_2').change(function() { $('#heading49').show();area = $("#txtarea49");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk50_0').change(function() { $('#heading50').hide();area = $("#txtarea50");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk50_1').change(function() { $('#heading50').hide();area = $("#txtarea50");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk50_2').change(function() { $('#heading50').show();area = $("#txtarea50");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk51_0').change(function() { $('#heading51').hide();area = $("#txtarea51");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk51_1').change(function() { $('#heading51').hide();area = $("#txtarea51");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk51_2').change(function() { $('#heading51').show();area = $("#txtarea51");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk52_0').change(function() { $('#heading52').hide();area = $("#txtarea52");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk52_1').change(function() { $('#heading52').hide();area = $("#txtarea52");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk52_2').change(function() { $('#heading52').show();area = $("#txtarea52");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk53_0').change(function() { $('#heading53').hide();area = $("#txtarea53");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk53_1').change(function() { $('#heading53').hide();area = $("#txtarea53");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk53_2').change(function() { $('#heading53').show();area = $("#txtarea53");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk54_0').change(function() { $('#heading54').hide();area = $("#txtarea54");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk54_1').change(function() { $('#heading54').hide();area = $("#txtarea54");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk54_2').change(function() { $('#heading54').show();area = $("#txtarea54");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk55_0').change(function() { $('#heading55').hide();area = $("#txtarea55");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk55_1').change(function() { $('#heading55').hide();area = $("#txtarea55");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk55_2').change(function() { $('#heading55').show();area = $("#txtarea55");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk56_0').change(function() { $('#heading56').hide();area = $("#txtarea56");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk56_1').change(function() { $('#heading56').hide();area = $("#txtarea56");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk56_2').change(function() { $('#heading56').show();area = $("#txtarea56");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk57_0').change(function() { $('#heading57').hide();area = $("#txtarea57");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk57_1').change(function() { $('#heading57').hide();area = $("#txtarea57");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk57_2').change(function() { $('#heading57').show();area = $("#txtarea57");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk58_0').change(function() { $('#heading58').hide();area = $("#txtarea58");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk58_1').change(function() { $('#heading58').hide();area = $("#txtarea58");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk58_2').change(function() { $('#heading58').show();area = $("#txtarea58");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk59_0').change(function() { $('#heading59').hide();area = $("#txtarea59");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk59_1').change(function() { $('#heading59').hide();area = $("#txtarea59");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk59_2').change(function() { $('#heading59').show();area = $("#txtarea59");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk60_0').change(function() { $('#heading60').hide();area = $("#txtarea60");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk60_1').change(function() { $('#heading60').hide();area = $("#txtarea60");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk60_2').change(function() { $('#heading60').show();area = $("#txtarea60");area.val('');area.prop('required',true);})</script>
+    <!-- for sixth card-->
+    <script>$('#chk61_0').change(function() { $('#heading61').hide();area = $("#txtarea61");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk61_1').change(function() { $('#heading61').hide();area = $("#txtarea61");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk61_2').change(function() { $('#heading61').show();area = $("#txtarea61");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk62_0').change(function() { $('#heading62').hide();area = $("#txtarea62");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk62_1').change(function() { $('#heading62').hide();area = $("#txtarea62");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk62_2').change(function() { $('#heading62').show();area = $("#txtarea62");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk63_0').change(function() { $('#heading63').hide();area = $("#txtarea63");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk63_1').change(function() { $('#heading63').hide();area = $("#txtarea63");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk63_2').change(function() { $('#heading63').show();area = $("#txtarea63");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk64_0').change(function() { $('#heading64').hide();area = $("#txtarea64");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk64_1').change(function() { $('#heading64').hide();area = $("#txtarea64");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk64_2').change(function() { $('#heading64').show();area = $("#txtarea64");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk65_0').change(function() { $('#heading65').hide();area = $("#txtarea65");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk65_1').change(function() { $('#heading65').hide();area = $("#txtarea65");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk65_2').change(function() { $('#heading65').show();area = $("#txtarea65");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk66_0').change(function() { $('#heading66').hide();area = $("#txtarea66");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk66_1').change(function() { $('#heading66').hide();area = $("#txtarea66");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk66_2').change(function() { $('#heading66').show();area = $("#txtarea66");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk67_0').change(function() { $('#heading67').hide();area = $("#txtarea67");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk67_1').change(function() { $('#heading67').hide();area = $("#txtarea67");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk67_2').change(function() { $('#heading67').show();area = $("#txtarea67");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk68_0').change(function() { $('#heading68').hide();area = $("#txtarea68");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk68_1').change(function() { $('#heading68').hide();area = $("#txtarea68");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk68_2').change(function() { $('#heading68').show();area = $("#txtarea68");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk69_0').change(function() { $('#heading69').hide();area = $("#txtarea69");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk69_1').change(function() { $('#heading69').hide();area = $("#txtarea69");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk69_2').change(function() { $('#heading69').show();area = $("#txtarea69");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk70_0').change(function() { $('#heading70').hide();area = $("#txtarea70");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk70_1').change(function() { $('#heading70').hide();area = $("#txtarea70");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk70_2').change(function() { $('#heading70').show();area = $("#txtarea70");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk71_0').change(function() { $('#heading71').hide();area = $("#txtarea71");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk71_1').change(function() { $('#heading71').hide();area = $("#txtarea71");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk71_2').change(function() { $('#heading71').show();area = $("#txtarea71");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk72_0').change(function() { $('#heading72').hide();area = $("#txtarea72");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk72_1').change(function() { $('#heading72').hide();area = $("#txtarea72");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk72_2').change(function() { $('#heading72').show();area = $("#txtarea72");area.val('');area.prop('required',true);})</script>
+    <!-- for seventh card-->
+    <script>$('#chk73_0').change(function() { $('#heading73').hide();area = $("#txtarea73");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk73_1').change(function() { $('#heading73').hide();area = $("#txtarea73");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk73_2').change(function() { $('#heading73').show();area = $("#txtarea73");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk74_0').change(function() { $('#heading74').hide();area = $("#txtarea74");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk74_1').change(function() { $('#heading74').hide();area = $("#txtarea74");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk74_2').change(function() { $('#heading74').show();area = $("#txtarea74");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk75_0').change(function() { $('#heading75').hide();area = $("#txtarea75");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk75_1').change(function() { $('#heading75').hide();area = $("#txtarea75");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk75_2').change(function() { $('#heading75').show();area = $("#txtarea75");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk76_0').change(function() { $('#heading76').hide();area = $("#txtarea76");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk76_1').change(function() { $('#heading76').hide();area = $("#txtarea76");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk76_2').change(function() { $('#heading76').show();area = $("#txtarea76");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk77_0').change(function() { $('#heading77').hide();area = $("#txtarea77");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk77_1').change(function() { $('#heading77').hide();area = $("#txtarea77");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk77_2').change(function() { $('#heading77').show();area = $("#txtarea77");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk78_0').change(function() { $('#heading78').hide();area = $("#txtarea78");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk78_1').change(function() { $('#heading78').hide();area = $("#txtarea78");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk78_2').change(function() { $('#heading78').show();area = $("#txtarea78");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk79_0').change(function() { $('#heading79').hide();area = $("#txtarea79");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk79_1').change(function() { $('#heading79').hide();area = $("#txtarea79");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk79_2').change(function() { $('#heading79').show();area = $("#txtarea79");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk80_0').change(function() { $('#heading80').hide();area = $("#txtarea80");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk80_1').change(function() { $('#heading80').hide();area = $("#txtarea80");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk80_2').change(function() { $('#heading80').show();area = $("#txtarea80");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk81_0').change(function() { $('#heading81').hide();area = $("#txtarea81");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk81_1').change(function() { $('#heading81').hide();area = $("#txtarea81");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk81_2').change(function() { $('#heading81').show();area = $("#txtarea81");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk82_0').change(function() { $('#heading82').hide();area = $("#txtarea82");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk82_1').change(function() { $('#heading82').hide();area = $("#txtarea82");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk82_2').change(function() { $('#heading82').show();area = $("#txtarea82");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk83_0').change(function() { $('#heading83').hide();area = $("#txtarea83");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk83_1').change(function() { $('#heading83').hide();area = $("#txtarea83");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk83_2').change(function() { $('#heading83').show();area = $("#txtarea83");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk84_0').change(function() { $('#heading84').hide();area = $("#txtarea84");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk84_1').change(function() { $('#heading84').hide();area = $("#txtarea84");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk84_2').change(function() { $('#heading84').show();area = $("#txtarea84");area.val('');area.prop('required',true);})</script>
+    <!-- for eighth card-->
+    <script>$('#chk85_0').change(function() { $('#heading85').hide();area = $("#txtarea85");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk85_1').change(function() { $('#heading85').hide();area = $("#txtarea85");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk85_2').change(function() { $('#heading85').show();area = $("#txtarea85");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk86_0').change(function() { $('#heading86').hide();area = $("#txtarea86");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk86_1').change(function() { $('#heading86').hide();area = $("#txtarea86");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk86_2').change(function() { $('#heading86').show();area = $("#txtarea86");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk87_0').change(function() { $('#heading87').hide();area = $("#txtarea87");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk87_1').change(function() { $('#heading87').hide();area = $("#txtarea87");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk87_2').change(function() { $('#heading87').show();area = $("#txtarea87");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk88_0').change(function() { $('#heading88').hide();area = $("#txtarea88");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk88_1').change(function() { $('#heading88').hide();area = $("#txtarea88");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk88_2').change(function() { $('#heading88').show();area = $("#txtarea88");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk89_0').change(function() { $('#heading89').hide();area = $("#txtarea89");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk89_1').change(function() { $('#heading89').hide();area = $("#txtarea89");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk89_2').change(function() { $('#heading89').show();area = $("#txtarea89");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk90_0').change(function() { $('#heading90').hide();area = $("#txtarea90");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk90_1').change(function() { $('#heading90').hide();area = $("#txtarea90");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk90_2').change(function() { $('#heading90').show();area = $("#txtarea90");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk91_0').change(function() { $('#heading91').hide();area = $("#txtarea91");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk91_1').change(function() { $('#heading91').hide();area = $("#txtarea91");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk91_2').change(function() { $('#heading91').show();area = $("#txtarea91");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk92_0').change(function() { $('#heading92').hide();area = $("#txtarea92");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk92_1').change(function() { $('#heading92').hide();area = $("#txtarea92");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk92_2').change(function() { $('#heading92').show();area = $("#txtarea92");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk93_0').change(function() { $('#heading93').hide();area = $("#txtarea93");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk93_1').change(function() { $('#heading93').hide();area = $("#txtarea93");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk93_2').change(function() { $('#heading93').show();area = $("#txtarea93");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk94_0').change(function() { $('#heading94').hide();area = $("#txtarea94");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk94_1').change(function() { $('#heading94').hide();area = $("#txtarea94");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk94_2').change(function() { $('#heading94').show();area = $("#txtarea94");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk95_0').change(function() { $('#heading95').hide();area = $("#txtarea95");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk95_1').change(function() { $('#heading95').hide();area = $("#txtarea95");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk95_2').change(function() { $('#heading95').show();area = $("#txtarea95");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk96_0').change(function() { $('#heading96').hide();area = $("#txtarea96");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk96_1').change(function() { $('#heading96').hide();area = $("#txtarea96");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk96_2').change(function() { $('#heading96').show();area = $("#txtarea96");area.val('');area.prop('required',true);})</script>
+    <!-- for nineth card-->
+    <script>$('#chk97_0').change(function() { $('#heading97').hide();area = $("#txtarea97");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk97_1').change(function() { $('#heading97').hide();area = $("#txtarea97");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk97_2').change(function() { $('#heading97').show();area = $("#txtarea97");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk98_0').change(function() { $('#heading98').hide();area = $("#txtarea98");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk98_1').change(function() { $('#heading98').hide();area = $("#txtarea98");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk98_2').change(function() { $('#heading98').show();area = $("#txtarea98");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk99_0').change(function() { $('#heading99').hide();area = $("#txtarea99");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk99_1').change(function() { $('#heading99').hide();area = $("#txtarea99");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk99_2').change(function() { $('#heading99').show();area = $("#txtarea99");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk100_0').change(function() { $('#heading100').hide();area = $("#txtarea100");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk100_1').change(function() { $('#heading100').hide();area = $("#txtarea100");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk100_2').change(function() { $('#heading100').show();area = $("#txtarea100");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk101_0').change(function() { $('#heading101').hide();area = $("#txtarea101");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk101_1').change(function() { $('#heading101').hide();area = $("#txtarea101");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk101_2').change(function() { $('#heading101').show();area = $("#txtarea101");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk102_0').change(function() { $('#heading102').hide();area = $("#txtarea102");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk102_1').change(function() { $('#heading102').hide();area = $("#txtarea102");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk102_2').change(function() { $('#heading102').show();area = $("#txtarea102");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk103_0').change(function() { $('#heading103').hide();area = $("#txtarea103");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk103_1').change(function() { $('#heading103').hide();area = $("#txtarea103");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk103_2').change(function() { $('#heading103').show();area = $("#txtarea103");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk104_0').change(function() { $('#heading104').hide();area = $("#txtarea104");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk104_1').change(function() { $('#heading104').hide();area = $("#txtarea104");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk104_2').change(function() { $('#heading104').show();area = $("#txtarea104");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk105_0').change(function() { $('#heading105').hide();area = $("#txtarea105");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk105_1').change(function() { $('#heading105').hide();area = $("#txtarea105");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk105_2').change(function() { $('#heading105').show();area = $("#txtarea105");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk106_0').change(function() { $('#heading106').hide();area = $("#txtarea106");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk106_1').change(function() { $('#heading106').hide();area = $("#txtarea106");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk106_2').change(function() { $('#heading106').show();area = $("#txtarea106");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk107_0').change(function() { $('#heading107').hide();area = $("#txtarea107");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk107_1').change(function() { $('#heading107').hide();area = $("#txtarea107");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk107_2').change(function() { $('#heading107').show();area = $("#txtarea107");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk108_0').change(function() { $('#heading108').hide();area = $("#txtarea108");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk108_1').change(function() { $('#heading108').hide();area = $("#txtarea108");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk108_2').change(function() { $('#heading108').show();area = $("#txtarea108");area.val('');area.prop('required',true);})</script>
+    <!-- for tenth card-->
+    <script>$('#chk109_0').change(function() { $('#heading109').hide();area = $("#txtarea109");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk109_1').change(function() { $('#heading109').hide();area = $("#txtarea109");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk109_2').change(function() { $('#heading109').show();area = $("#txtarea109");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk110_0').change(function() { $('#heading110').hide();area = $("#txtarea110");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk110_1').change(function() { $('#heading110').hide();area = $("#txtarea110");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk110_2').change(function() { $('#heading110').show();area = $("#txtarea110");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk111_0').change(function() { $('#heading111').hide();area = $("#txtarea111");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk111_1').change(function() { $('#heading111').hide();area = $("#txtarea111");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk111_2').change(function() { $('#heading111').show();area = $("#txtarea111");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk112_0').change(function() { $('#heading112').hide();area = $("#txtarea112");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk112_1').change(function() { $('#heading112').hide();area = $("#txtarea112");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk112_2').change(function() { $('#heading112').show();area = $("#txtarea112");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk113_0').change(function() { $('#heading113').hide();area = $("#txtarea113");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk113_1').change(function() { $('#heading113').hide();area = $("#txtarea113");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk113_2').change(function() { $('#heading113').show();area = $("#txtarea113");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk114_0').change(function() { $('#heading114').hide();area = $("#txtarea114");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk114_1').change(function() { $('#heading114').hide();area = $("#txtarea114");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk114_2').change(function() { $('#heading114').show();area = $("#txtarea114");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk115_0').change(function() { $('#heading115').hide();area = $("#txtarea115");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk115_1').change(function() { $('#heading115').hide();area = $("#txtarea115");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk115_2').change(function() { $('#heading115').show();area = $("#txtarea115");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk116_0').change(function() { $('#heading116').hide();area = $("#txtarea116");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk116_1').change(function() { $('#heading116').hide();area = $("#txtarea116");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk116_2').change(function() { $('#heading116').show();area = $("#txtarea116");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk117_0').change(function() { $('#heading117').hide();area = $("#txtarea117");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk117_1').change(function() { $('#heading117').hide();area = $("#txtarea117");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk117_2').change(function() { $('#heading117').show();area = $("#txtarea117");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk118_0').change(function() { $('#heading118').hide();area = $("#txtarea118");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk118_1').change(function() { $('#heading118').hide();area = $("#txtarea118");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk118_2').change(function() { $('#heading118').show();area = $("#txtarea118");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk119_0').change(function() { $('#heading119').hide();area = $("#txtarea119");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk119_1').change(function() { $('#heading119').hide();area = $("#txtarea119");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk119_2').change(function() { $('#heading119').show();area = $("#txtarea119");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk120_0').change(function() { $('#heading120').hide();area = $("#txtarea120");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk120_1').change(function() { $('#heading120').hide();area = $("#txtarea120");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk120_2').change(function() { $('#heading120').show();area = $("#txtarea120");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+
+</body>
+</html>

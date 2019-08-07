@@ -1,0 +1,223 @@
+{% load static %}
+<html>
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static "app/start_style.css" %}">
+</header>
+<body>
+<div class=my-menu>
+  <div class=my-header>
+    <ul>
+      <li class=my-logo>logo</li>
+      <li class=my-site-title>site title</li>
+      <li class=my-search-box>search box</li>
+      <li class=my-social>social</li>
+      <span style="margin-left:1%">
+        <img src="{% static "app/user4.png" %}" style="height:40px">
+        <span>{{ username }}</span>
+      </span>
+        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+              <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+</a>
+<div class="background-form">
+<div class="main-form">
+<div class="my-form">
+<div style="margin-top: 50px" align="center" >
+    <a class="title" href="/self_examination_form/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLvmxlpHfOoO1gKFi5h2WF2JOWPrrBuCkOSIvboJiBxwrhWhpZQ" style="width: 25px;margin-right: 5px ;margin-top:7px;">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</a>
+ 
+<div>
+<div>
+<p align="center" style="margin-top: 10px;color: #22252d;font-size: 150%;">Наименование услуги: {{ full_service_name }}</div>
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).</th>
+   <th data-campo='exploring' colspan="13">Обследование действий, реализованных на порталах ЕПГУ/РПГУ<sup>1</sup>, и в АИС СОЗ</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2">Наличие кнопки "Получить услугу"<sup>2</sup></th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+   <th data-campo='isConnected' rowspan="2">Орган власти подключен к  ФГИС ДО<sup>3</sup></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term">Срок рассмотрения заявления (личный кабинет)<sup>4</sup></th>
+   <th data-campo="notification">Уведомление о результате рассмотрения заявления в личном кабинете<sup>5</sup></th>
+   <th data-comp="refusion">Причины отказа (личный кабинет)<sup>6</sup></th>
+   <th data-comp="example">Образец документа<sup>7</sup></th>
+   <th data-comp="template"> Шаблон (форма, бланк) документа <sup>8</sup></th>
+</tr>
+ </thead>
+ <tbody>
+
+ {% for object in objects %}
+    <tr><!--1-->
+   <td data-campo='name'>{{ object.region_name }}</td>
+   <td data-campo='Id'>{{ object.id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.statement_amount }}</td>
+   <td data-campo='link'>{{ object.link }}</td>
+   <td data-campo='record'>{{ object.has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+<div class="addition" align="left" >
+<p>Примечание:</p>
+<p><sup>1</sup>ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+<p><sup>2</sup> - в случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+<p><sup>3</sup>- в случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2</p>
+<p><sup>4</sup>- cрок рассмотрения заявления (личный кабинет):</p>
+<p style="margin-left: 10px;">да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления</p>
+<p style="margin-left: 10px;">нет - данная информация отсуствтует</p>
+<p style="margin-left: 10px;">не предусмотрено - данная информация не предусмотрена</p>
+<p><sup>5</sup>- уведомление о результате рассмотрения заявления в личном кабинете:</p>
+<p style="margin-left: 10px;">да - уведомление получено в течение 30 рабочих дней</p>
+<p style="margin-left: 10px;">нет - уведомление не получено, либо получено позднее</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p><sup>6</sup>- причины отказа:</p>
+<p style="margin-left: 10px;">да - уведомление получено в течение 30 рабочих дней</p>
+<p style="margin-left: 10px;">нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p><sup>7</sup>- обазец документа:</p>
+<p style="margin-left: 10px;">да - есть образец документа</p>
+<p style="margin-left: 10px;">нет - нет образца документа</p>
+<p style="margin-left: 10px;">не предусмотрено - образец не предусмотрен</p>
+<p><sup>8</sup>- электронная форма документа:</p>
+<p style="margin-left: 10px;">да - есть возможность заполнить шаблон (бланк) в электронном виде</p>
+<p style="margin-left: 10px;">нет - нет возможности заполнить шаблон (бланк) в электронном виде</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p style="margin-top: 15px;">АИС СОЗ - автоматизированная информационная система "Система обработки запросов"</p>
+<p>ФГИС ДО - Федеральная государственная информационная система досудебного обжалования
+</p>
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам
+</p>
+</div>
+<form action="" method="get">
+    {% csrf_token %}
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Меню</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{ month }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/01/">Январь</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/02/">Февраль</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/03/">Март</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/04/">Апрель</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/05/">Май</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/06/">Июнь</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/07/">Июль</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/08/">Август</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/09/">Сентябрь</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/10/">Октябрь</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/11/">Ноябрь</a></li>
+            <li><a href="/result_form/{{ service_name }}/{{ year }}/12/">Декабрь</a></li>
+        </ul>
+        </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown"> {{ year }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/{{ service_name }}/2017/{{ month }}/">2017</a></li>
+            <li><a href="/result_form/{{ service_name }}/2018/{{ month }}/">2018</a></li>
+            <li><a href="/result_form/{{ service_name }}/2019/{{ month }}/">2019</a></li>
+        </ul>
+        </li>
+          <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор региона
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+              {% for name in zipped %}
+                <li><a href="/result_form/{{ year }}/{{ month }}/{{ name.1 }}/">{{ name.0 }}</a></li>
+              {%  endfor %}
+
+          </ul>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор услуги
+          <span class="caret"></span>
+        </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/residential_premises/{{ year }}/{{ month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a></li>
+            <li><a href="/result_form/housing_transfer/{{ year }}/{{ month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a></li>
+            <li><a href="/result_form/advertising_structures/{{ year }}/{{ month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a></li>
+            <li><a href="/result_form/capital_construction/{{ year }}/{{ month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a></li>
+            <li><a href="/result_form/preschool_education/{{ year }}/{{ month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)</a></li>
+            <li><a href="/result_form/school_education/{{ year }}/{{ month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a></li>
+            <li><a href="/result_form/needing_premises/{{ year }}/{{ month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a></li>
+            <li><a href="/result_form/town_planning/{{ year }}/{{ month }}/">Выдача градостроительных планов земельных участков</a></li>
+            <li><a href="/result_form/archive_reference/{{ year }}/{{ month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a></li>
+            <li><a href="/result_form/land_schemes/{{ year }}/{{ month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a></li>
+          </ul>
+          </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор фильтра
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="/result_form/not_sent/{{ year }}/{{ month }}/">Регионы, не заполнившие форму</a></li>
+              <li><a href="/result_form/with_troubles/{{ year }}/{{ month }}">Региона, имеющие затруднения</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</form>
+</div>
+</div>
+</div> 
+</div>
+</div>
+</body>
+</html>

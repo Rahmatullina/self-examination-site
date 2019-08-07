@@ -1,0 +1,138 @@
+{% load static %}
+<html>
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static "app/start_style.css" %}">
+</header>
+<body>
+<div class=my-menu>
+  <div class=my-header>
+    <ul>
+      <li class=my-logo>logo</li>
+      <li class=my-site-title>site title</li>
+      <li class=my-search-box>search box</li>
+      <li class=my-social>social</li>
+      <span style="margin-left:1%">
+        <img src="{% static "app/user4.png" %}" style="height:40px">
+        <span>{{ username }}</span>
+      </span>
+        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+              <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+</a>
+<div class="background-form">
+<div class="main-form">
+<div class="my-form">
+<div style="margin-top: 50px" align="center" >
+    <p class="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLvmxlpHfOoO1gKFi5h2WF2JOWPrrBuCkOSIvboJiBxwrhWhpZQ" style="width: 25px;margin-right: 5px ;margin-top:7px;">Регионы, не заполнившие форму самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.) за выбранный месяц.</p>
+
+{% for name in objects %}
+    <p align="left" style="margin-left: 10px; margin-top: 10px;">{{ name }}</p>
+{% endfor %}
+<form action="" method="get">
+    {% csrf_token %}
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Меню</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{ month }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/not_sent/{{ year }}/01/">Январь</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/02/">Февраль</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/03/">Март</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/04/">Апрель</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/05/">Май</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/06/">Июнь</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/07/">Июль</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/08/">Август</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/09/">Сентябрь</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/10/">Октябрь</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/11/">Ноябрь</a></li>
+            <li><a href="/result_form/not_sent/{{ year }}/12/">Декабрь</a></li>
+        </ul>
+        </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown"> {{ year }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/not_sent/2017/{{ month }}/">2017</a></li>
+            <li><a href="/result_form/not_sent/2018/{{ month }}/">2018</a></li>
+            <li><a href="/result_form/not_sent/2019/{{ month }}/">2019</a></li>
+        </ul>
+        </li>
+          <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор региона
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+              {% for name in zipped %}
+                <li><a href="/result_form/{{ year }}/{{ month }}/{{ name.1 }}/">{{ name.0 }}</a></li>
+              {%  endfor %}
+
+          </ul>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор услуги
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/residential_premises/{{ year }}/{{ month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a></li>
+            <li><a href="/result_form/housing_transfer/{{ year }}/{{ month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a></li>
+            <li><a href="/result_form/advertising_structures/{{ year }}/{{ month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a></li>
+            <li><a href="/result_form/capital_construction/{{ year }}/{{ month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a></li>
+            <li><a href="/result_form/preschool_education/{{ year }}/{{ month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)</a></li>
+            <li><a href="/result_form/school_education/{{ year }}/{{ month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a></li>
+            <li><a href="/result_form/needing_premises/{{ year }}/{{ month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a></li>
+            <li><a href="/result_form/town_planning/{{ year }}/{{ month }}/">Выдача градостроительных планов земельных участков</a></li>
+            <li><a href="/result_form/archive_reference/{{ year }}/{{ month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a></li>
+            <li><a href="/result_form/land_schemes/{{ year }}/{{ month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a></li>
+          </ul>
+          </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор фильтра
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="/result_form/not_sent/{{ year }}/{{ month }}/">Регионы, не заполнившие форму</a></li>
+              <li><a href="/result_form/with_troubles/{{ year }}/{{ month }}">Региона, имеющие затруднения</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

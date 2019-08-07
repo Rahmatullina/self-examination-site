@@ -1,0 +1,394 @@
+{% load static %}
+<html>
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static "app/start_style.css" %}">
+</header>
+<body>
+<div class=my-menu>
+  <div class=my-header>
+    <ul>
+      <li class=my-logo>logo</li>
+      <li class=my-site-title>site title</li>
+      <li class=my-search-box>search box</li>
+      <li class=my-social>social</li>
+      <span style="margin-left:1%">
+        <img src="{% static "app/user4.png" %}" style="height:40px">
+        <span>{{ username }}</span>
+      </span>
+        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<a class="top-sitename">
+    <img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+    <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+</a>
+<div class="background-form">
+<div class="main-form">
+<div class="my-form">
+<div style="margin-top: 50px" align="center" >
+    <a class="title" href="/self_examination_form"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLvmxlpHfOoO1gKFi5h2WF2JOWPrrBuCkOSIvboJiBxwrhWhpZQ" style="width: 25px;margin-right: 5px ;margin-top:7px;">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</a>
+
+<div>
+<div>
+<p align="center" style="margin-top: 10px;color: #22252d;font-size: 150%;">Наименование  региона: {{ full_region_name }}</div>
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование услуги</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом).</th>
+   <th data-campo='exploring' colspan="13">Обследование действий, реализованных на порталах ЕПГУ/РПГУ<sup>1</sup>, и в АИС СОЗ</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2">Наличие кнопки "Получить услугу"<sup>2</sup></th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+   <th data-campo='isConnected' rowspan="2">Орган власти подключен к  ФГИС ДО<sup>3</sup></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term">Срок рассмотрения заявления (личный кабинет)<sup>4</sup></th>
+   <th data-campo="notification">Уведомление о результате рассмотрения заявления в личном кабинете<sup>5</sup></th>
+   <th data-comp="refusion">Причины отказа (личный кабинет)<sup>6</sup></th>
+   <th data-comp="example">Образец документа<sup>7</sup></th>
+   <th data-comp="template"> Шаблон (форма, бланк) документа <sup>8</sup></th>
+</tr>
+ </thead>
+ <tbody>
+
+
+	<tr><!--1-->
+   <td data-campo='name'>Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</td>
+   <td data-campo='Id'>{{ object.residential_premises_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.residential_premises_statement_amount }}</td>
+   <td data-campo='link'>{{ object.residential_premises_link }}</td>
+   <td data-campo='record'>{{ object.residential_premises_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.residential_premises_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.residential_premises_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.residential_premises_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.residential_premises_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.residential_premises_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.residential_premises_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.residential_premises_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.residential_premises_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.residential_premises_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.residential_premises_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.residential_premises_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--2-->
+   <td data-campo='name'>Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</td>
+   <td data-campo='Id'>{{ object.housing_transfer_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.housing_transfer_statement_amount }}</td>
+   <td data-campo='link'>{{ object.housing_transfer_link }}</td>
+   <td data-campo='record'>{{ object.housing_transfer_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.housing_transfer_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.housing_transfer_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.housing_transfer_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.housing_transfer_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.housing_transfer_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.housing_transfer_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.housing_transfer_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.housing_transfer_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.housing_transfer_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.housing_transfer_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.housing_transfer_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--3-->
+   <td data-campo='name'>Выдача разрешения на установку и эксплуатацию рекламной конструкции</td>
+   <td data-campo='Id'>{{ object.advertising_structures_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.advertising_structures_statement_amount }}</td>
+   <td data-campo='link'>{{ object.advertising_structures_link }}</td>
+   <td data-campo='record'>{{ object.advertising_structures_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.advertising_structures_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.advertising_structures_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.advertising_structures_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.advertising_structures_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.advertising_structures_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.advertising_structures_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.advertising_structures_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.advertising_structures_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.advertising_structures_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.advertising_structures_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.advertising_structures_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--4-->
+   <td data-campo='name'>Выдача разрешения на строительство, реконструкцию объектов капитального строительства</td>
+   <td data-campo='Id'>{{ object.capital_construction_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.capital_construction_statement_amount }}</td>
+   <td data-campo='link'>{{ object.capital_construction_link }}</td>
+   <td data-campo='record'>{{ object.capital_construction_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.capital_construction_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.capital_construction_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.capital_construction_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.capital_construction_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.capital_construction_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.capital_construction_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.capital_construction_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.capital_construction_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.capital_construction_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.capital_construction_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.capital_construction_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--5-->
+   <td data-campo='name'>Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)</td>
+   <td data-campo='Id'>{{ object.preschool_education_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.preschool_education_statement_amount }}</td>
+   <td data-campo='link'>{{ object.preschool_education_link }}</td>
+   <td data-campo='record'>{{ object.preschool_education_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.preschool_education_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.preschool_education_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.preschool_education_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.preschool_education_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.preschool_education_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.preschool_education_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.preschool_education_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.preschool_education_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.preschool_education_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.preschool_education_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.preschool_education_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--6-->
+   <td data-campo='name'>Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</td>
+   <td data-campo='Id'>{{ object.school_education_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.school_education_statement_amount }}</td>
+   <td data-campo='link'>{{ object.school_education_link }}</td>
+   <td data-campo='record'>{{ object.school_education_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.school_education_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.school_education_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.school_education_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.school_education_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.school_education_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.school_education_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.school_education_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.school_education_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.school_education_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.school_education_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.school_education_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--7-->
+   <td data-campo='name'>Принятие на учет граждан в качестве нуждающихся в жилых помещениях</td>
+   <td data-campo='Id'>{{ object.needing_premises_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.needing_premises_statement_amount }}</td>
+   <td data-campo='link'>{{ object.needing_premises_link }}</td>
+   <td data-campo='record'>{{ object.needing_premises_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.needing_premises_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.needing_premises_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.needing_premises_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.needing_premises_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.needing_premises_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.needing_premises_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.needing_premises_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.needing_premises_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.needing_premises_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.needing_premises_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.needing_premises_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--8-->
+   <td data-campo='name'>Выдача градостроительных планов земельных участков</td>
+   <td data-campo='Id'>{{ object.town_planning_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.town_planning_statement_amount }}</td>
+   <td data-campo='link'>{{ object.town_planning_link }}</td>
+   <td data-campo='record'>{{ object.town_planning_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.town_planning_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.town_planning_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.town_planning_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.town_planning_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.town_planning_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.town_planning_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.town_planning_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.town_planning_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.town_planning_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.town_planning_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.town_planning_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--9-->
+   <td data-campo='name'>Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</td>
+   <td data-campo='Id'>{{ object.archive_reference_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.archive_reference_statement_amount }}</td>
+   <td data-campo='link'>{{ object.archive_reference_link }}</td>
+   <td data-campo='record'>{{ object.archive_reference_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.archive_reference_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.archive_reference_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.archive_reference_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.archive_reference_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.archive_reference_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.archive_reference_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.archive_reference_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.archive_reference_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.archive_reference_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.archive_reference_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.archive_reference_has_document_template_comment }}</td>
+	</tr>
+
+ <tr><!--10-->
+   <td data-campo='name'>Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</td>
+   <td data-campo='Id'>{{ object.land_schemes_id_RGMU}}</td>
+   <td data-campo='amount'>{{ object.land_schemes_statement_amount }}</td>
+   <td data-campo='link'>{{ object.land_schemes_link }}</td>
+   <td data-campo='record'>{{ object.land_schemes_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton'>{{ object.land_schemes_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament'>{{ object.land_schemes_has_reglament_comment }}</td>
+   <td data-campo='quality'>{{ object.land_schemes_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected'>{{ object.land_schemes_connected_to_FGIS_DO_comment }}</td>
+   <td data-campo='printing'>{{ object.land_schemes_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition'>{{ object.land_schemes_has_edition_draft_comment }}</td>
+   <td data-campo='term'>{{ object.land_schemes_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification'>{{ object.land_schemes_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion'>{{ object.land_schemes_has_causes_of_failure_comment }}</td>
+   <td data-campo='example'>{{ object.land_schemes_has_sample_document_comment }}</td>
+   <td data-campo='template'>{{ object.land_schemes_has_document_template_comment }}</td>
+	</tr>
+
+  </tbody>
+</table>
+<div class="addition" align="left" >
+<p>Примечание:</p>
+<p><sup>1</sup>ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+<p><sup>2</sup> - в случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+<p><sup>3</sup>- в случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2</p>
+<p><sup>4</sup>- cрок рассмотрения заявления (личный кабинет):</p>
+<p style="margin-left: 10px;">да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления</p>
+<p style="margin-left: 10px;">нет - данная информация отсуствтует</p>
+<p style="margin-left: 10px;">не предусмотрено - данная информация не предусмотрена</p>
+<p><sup>5</sup>- уведомление о результате рассмотрения заявления в личном кабинете:</p>
+<p style="margin-left: 10px;">да - уведомление получено в течение 30 рабочих дней</p>
+<p style="margin-left: 10px;">нет - уведомление не получено, либо получено позднее</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p><sup>6</sup>- причины отказа:</p>
+<p style="margin-left: 10px;">да - уведомление получено в течение 30 рабочих дней</p>
+<p style="margin-left: 10px;">нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p><sup>7</sup>- обазец документа:</p>
+<p style="margin-left: 10px;">да - есть образец документа</p>
+<p style="margin-left: 10px;">нет - нет образца документа</p>
+<p style="margin-left: 10px;">не предусмотрено - образец не предусмотрен</p>
+<p><sup>8</sup>- электронная форма документа:</p>
+<p style="margin-left: 10px;">да - есть возможность заполнить шаблон (бланк) в электронном виде</p>
+<p style="margin-left: 10px;">нет - нет возможности заполнить шаблон (бланк) в электронном виде</p>
+<p style="margin-left: 10px;">не предусмотрено - данная функция не предусмотрена</p>
+<p style="margin-top: 15px;">АИС СОЗ - автоматизированная информационная система "Система обработки запросов"</p>
+<p>ФГИС ДО - Федеральная государственная информационная система досудебного обжалования
+</p>
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам
+</p>
+</div>
+<form action="" method="get">
+    {% csrf_token %}
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Меню</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{ month }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/{{ year }}/01/{{ short_region_name }}/">Январь</a></li>
+            <li><a href="/result_form/{{ year }}/02/{{ short_region_name }}/">Февраль</a></li>
+            <li><a href="/result_form/{{ year }}/03/{{ short_region_name }}/">Март</a></li>
+            <li><a href="/result_form/{{ year }}/04/{{ short_region_name }}/">Апрель</a></li>
+            <li><a href="/result_form/{{ year }}/05/{{ short_region_name }}/">Май</a></li>
+            <li><a href="/result_form/{{ year }}/06/{{ short_region_name }}/">Июнь</a></li>
+            <li><a href="/result_form/{{ year }}/07/{{ short_region_name }}/">Июль</a></li>
+            <li><a href="/result_form/{{ year }}/08/{{ short_region_name }}/">Август</a></li>
+            <li><a href="/result_form/{{ year }}/09/{{ short_region_name }}/">Сентябрь</a></li>
+            <li><a href="/result_form/{{ year }}/10/{{ short_region_name }}/">Октябрь</a></li>
+            <li><a href="/result_form/{{ year }}/11/{{ short_region_name }}/">Ноябрь</a></li>
+            <li><a href="/result_form/{{ year }}/12/{{ short_region_name }}/">Декабрь</a></li>
+        </ul>
+        </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown"> {{ year }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/2017/{{ month }}/{{ short_region_name }}/">2017</a></li>
+            <li><a href="/result_form/2018/{{ month }}/{{ short_region_name }}/">2018</a></li>
+            <li><a href="/result_form/2019/{{ month }}/{{ short_region_name }}/">2019</a></li>
+        </ul>
+        </li>
+        <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор региона
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+              {% for name in zipped %}
+                <li><a href="/result_form/{{ year }}/{{ month }}/{{ name.1 }}/">{{ name.0 }}</a></li>
+              {%  endfor %}
+
+          </ul>
+          </li>
+      <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор услуги
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="/result_form/residential_premises/{{ year }}/{{ month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a></li>
+            <li><a href="/result_form/housing_transfer/{{ year }}/{{ month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a></li>
+            <li><a href="/result_form/advertising_structures/{{ year }}/{{ month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a></li>
+            <li><a href="/result_form/capital_construction/{{ year }}/{{ month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a></li>
+            <li><a href="/result_form/preschool_education/{{ year }}/{{ month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)</a></li>
+            <li><a href="/result_form/school_education/{{ year }}/{{ month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a></li>
+            <li><a href="/result_form/needing_premises/{{ year }}/{{ month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a></li>
+            <li><a href="/result_form/town_planning/{{ year }}/{{ month }}/">Выдача градостроительных планов земельных участков</a></li>
+            <li><a href="/result_form/archive_reference/{{ year }}/{{ month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a></li>
+            <li><a href="/result_form/land_schemes/{{ year }}/{{ month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a></li>
+          </ul>
+          </li>
+      <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown">Выбор фильтра
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="/result_form/not_sent/{{ year }}/{{ month }}/">Регионы, не заполнившие форму</a></li>
+              <li><a href="/result_form/with_troubles/{{ year }}/{{ month }}">Региона, имеющие затруднения</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
