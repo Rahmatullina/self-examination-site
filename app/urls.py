@@ -1,11 +1,18 @@
 from django.urls import re_path
 from django.contrib.auth import views as auth_views
-from . import views,forms
+from . import views, forms
 urlpatterns = [
 
     re_path(r'^login/$', views.login_view, name='login'),
 
     re_path(r'^logout/$', views.logout_view, name='logout'),
+
+    re_path(r'^export/all/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.export_all, name='export_all'),
+
+    re_path(r'export/with_troubles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.export_with_troubles,
+            name='export_with_troubles'),
+
+    re_path(r'export/not_sent/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.export_not_sent, name='export_not_sent'),
 
     re_path(r'^password_reset/$', auth_views.PasswordResetView.as_view(
         template_name='app/registration/password_reset_form.html',
@@ -22,7 +29,7 @@ urlpatterns = [
     re_path(r'^password_reset_complete/$', auth_views.PasswordResetCompleteView.as_view(
         template_name='app/registration/password_reset_complete.html'), name='password_reset_complete'),
 
-    re_path(r'^self_examination_form/$', views.get_self_examination_form, name='self_examination_form'),
+    re_path(r'^form/$', views.get_self_examination_form, name='self_examination_form'),
 
     re_path(r'^result_form/with_troubles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$',
             views.get_result_form_with_troubles, name='with_troubles'),

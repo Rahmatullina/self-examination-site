@@ -1,7 +1,7 @@
-from django.conf import settings
 from django.db import models
 from datetime import datetime
-
+from django.contrib.auth.models import AbstractUser
+from django import forms
 
 SERVICE_CHOICES = [
         ('Да', 'Да'),
@@ -28,9 +28,9 @@ class RegionModel(models.Model):
 
     id = models.AutoField(primary_key=True)
     region_name = models.CharField(max_length=200, choices=REGION_CHOICES, default='Уфа')
-    year = models.CharField(default='2019', max_length=4)
-    month = models.CharField(default='01', max_length=2)
-    day = models.CharField(default='01',max_length=2)
+    year = models.CharField(default=datetime.today().strftime('%Y'), max_length=4)
+    month = models.CharField(default=datetime.today().strftime('%m'), max_length=2)
+    day = models.CharField(default=datetime.today().strftime('%d'),max_length=2)
     time = models.TimeField(default=datetime.today().time())
 
     residential_premises_id_RGMU = models.CharField(max_length=1000,default='111')
@@ -315,3 +315,8 @@ class RegionModel(models.Model):
 
     def __str__(self):
         return self.region_name + self.year + self.month + self.day
+
+
+class CustomUser(AbstractUser):
+    region_name = models.CharField(max_length=500,choices=REGION_CHOICES)
+

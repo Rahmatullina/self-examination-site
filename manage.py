@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'self_examination_site.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SESite.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -2,51 +2,117 @@
 <!doctype html>
 <html>
 <header>
-  <link rel="stylesheet" href="{% static "app/fill_style.css" %}">
-
-    <!-- Required meta tags -->
+  !-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <!-- jQuery library-->
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <!-- jQuery library-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS 3.3.7 and 4.3.1. for top menu -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static "app/fill_style.css" %}">
 
 
 </header>
 <body>
-<div class=my-menu>
-  <div class=my-header>
-    <ul>
-      <li class=my-logo>logo</li>
-      <li class=my-site-title>site title</li>
-      <li class=my-search-box>search box</li>
-      <li class=my-social>social</li>
-      <span style="margin-left:1%">
-        <img src="{% static "app/user4.png" %}" style="height:40px">
-        <span>{{ username }}</span>
-      </span>
-        <a class = "btn btn-primary" style="margin-left:20%" href="/logout/">Выйти</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#"></a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><img src="{% static "app/calendar.png" %}" style="height:37px; margin-left:10%;padding: 10px 5px 0px 0px">
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">{{ num_month }}.{{ year }}</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Фильтр по регионам
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+          <a class="dropdown-item" href="/result_form/not_sent/{{ year }}/{{ num_month }}/">Не заполнившие форму</a>
+            <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/result_form/with_troubles/{{ year }}/{{ num_month }}">Имеющие трудности</a>
+        </div>
       </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Фильтр по услугам
+        </a>
+        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4">
+          <a class="dropdown-item" href="/result_form/residential_premises/{{ year }}/{{ num_month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/housing_transfer/{{ year }}/{{ num_month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/advertising_structures/{{ year }}/{{ num_month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/capital_construction/{{ year }}/{{ num_month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/preschool_education/{{ year }}/{{ num_month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу<br> дошкольного образования (детские сады)</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/school_education/{{ year }}/{{ num_month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/needing_premises/{{ year }}/{{ num_month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/town_planning/{{ year }}/{{ num_month }}/">Выдача градостроительных планов земельных участков</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/archive_reference/{{ year }}/{{ num_month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав <br> и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/result_form/land_schemes/{{ year }}/{{ num_month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a>
+        </div>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Выбор региона
+        </a>
+        <div class="dropdown-menu" style="height:400px;overflow-y: scroll;" aria-labelledby="navbarDropdown5">
+          {% for name in zipped %}
+                <a class="dropdown-item" href="/result_form/{{ year }}/{{ num_month }}/{{ name.1 }}/">{{ name.0 }}</a>
+          {%  endfor %}
+        </div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/form/">Заполнить форму</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Экспортировать данные в Exel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown6">
+            <a class="dropdown-item" href="/export/with_troubles/{{ year }}/{{ num_month }}">Данные районов, имеющих проблемы за выбранный период времени</a>
+            <a class="dropdown-item" href="/export/not_sent/{{ year }}/{{ num_month }}">Районы, не заполнившие форму за выбранный период времени</a>
+            <a class="dropdown-item" href="/export/all/{{ year }}/{{ num_month }}">Все данные районов за выбранный период</a>
+        </div>
+        </li>
+        <li class="nav-item"><img src="{% static "app/user4.png" %}" style="height:40px; margin-left:10%">
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">{{ username }}</a>
+        </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+    <button type="button" class="btn btn-outline-success" onclick="window.location.href='/logout/'">Выйти</button>
+    </form>
   </div>
-</div>
+</nav>
 <a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
-              <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
+<span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
 </a>
 <form action="" method="post">
 {% csrf_token %}
 <div class="background-form">
 <div class="main-form">
     <div class="my-form">
-        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</p>
-        <div>Ваш регион:{{region_form.region_name}}</div>
+        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан). Район: {{region_name}}</p>
 
 <div class="accordion" id="accordionExample">
   <div class="card">

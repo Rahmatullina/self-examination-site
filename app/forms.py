@@ -1,14 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-from app.models import RegionModel
+from .models import RegionModel
 from .models import SERVICE_CHOICES, REGION_CHOICES
 from django.contrib.auth import authenticate
-
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 
 class SE_Form(forms.ModelForm):
-
-    region_name = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),
-                                    choices=REGION_CHOICES)
 
     ###################################### first card #################################################
 
@@ -822,7 +820,7 @@ class SE_Form(forms.ModelForm):
 
     class Meta:
         model = RegionModel
-        exclude = ('id', 'time', 'year', 'month', 'day')
+        exclude = ('id', 'time', 'year', 'month', 'day', 'region_name')
 
 
 class LoginForm(forms.Form):
@@ -843,9 +841,11 @@ class LoginForm(forms.Form):
         user = authenticate(username=username, password=password)
         return user
 
+
 class PassResetForm(PasswordResetForm):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter email',
                                                              'type':'email'}), max_length=100)
+
 
 class PassResetConfirmForm(SetPasswordForm):
     new_password1 = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control',
@@ -854,4 +854,18 @@ class PassResetConfirmForm(SetPasswordForm):
     new_password2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                                  'placeholder': 'Enter new password again',
                                                                  'type': 'password'}), max_length=100)
+
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + ('region_name',)
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('first_name','last_name','region_name',)
 
