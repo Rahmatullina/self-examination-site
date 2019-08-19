@@ -1,1 +1,1 @@
-web: gunicorn self_examination_site.wsgi --log-file -
+web: gunicorn self_examination_site.wsgi --preload
