@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'dejr93536c3haj',
         'USER': 'xfmfyuwzkmvrlt',                     
         'PASSWORD':'0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c',               
-        'HOST': 'postgres://xfmfyuwzkmvrlt:0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c@ec2-184-73-216-48.compute-1.amazonaws.com:5432/dejr93536c3haj',
+        'HOST': 'ec2-184-73-216-48.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
