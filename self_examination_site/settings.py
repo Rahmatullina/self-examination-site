@@ -77,17 +77,6 @@ WSGI_APPLICATION = 'self_examination_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'dejr93536c3haj',
-        'USER': 'xfmfyuwzkmvrlt',                     
-        'PASSWORD':'0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c',               
-        'HOST': 'ec2-184-73-216-48.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -141,3 +130,16 @@ import django_heroku
 django_heroku.settings(locals())
 
 # Heroku: Update database configuration from $DATABASE_URL.
+#import dj_database_url
+#DATABASES = {}
+#DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+DATABASES = {}
+DATABASES['default'] = {
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+'NAME': 'dejr93536c3haj',
+'USER' : 'xfmfyuwzkmvrlt',
+'PASSWORD' : '0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c',
+'HOST' : 'ec2-184-73-216-48.compute-1.amazonaws.com',
+'PORT' : '5432',
+}
+AUTH_USER_MODEL = 'app.CustomUser'
