@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'self_examination_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db.sqlite3',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'dejr93536c3haj',
+        'USER': 'xfmfyuwzkmvrlt',                     
+        'PASSWORD':'0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c',               
+        'HOST': 'postgres://xfmfyuwzkmvrlt:0ab41e08788c52462a39064b377857fba2e95e292b4ab7af3368800bdfe7883c@ec2-184-73-216-48.compute-1.amazonaws.com:5432/dejr93536c3haj',
+        'PORT': '5432',
     }
 }
 
