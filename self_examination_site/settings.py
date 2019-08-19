@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import os
 from datetime import datetime as dt
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi'
+#SECRET_KEY = 'g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['evening-lowlands-62772.herokuapp.com','localhost']
 
 
 # Application definition
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,3 +139,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 django_heroku.settings(locals())
 import django_heroku
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
