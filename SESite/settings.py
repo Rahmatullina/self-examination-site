@@ -117,14 +117,13 @@ USE_TZ = True
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/result_form/residential_premises/' + dt.today().strftime('%Y/%m/')
 
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = 'strongamil1998@gmail.com'
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+EMAIL_HOST= 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 
 #for static files
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
