@@ -80,7 +80,7 @@ def get_with_troubles(month, year):
     objects.update({'land_schemes': []})
     for name in regions_names:
         try:
-            obj = RegionModel.objects.order_by('-year','-month','-day','-time').filter(region_name=name,month=month,year=year)[0]
+            obj = RegionModel.objects.order_by('year','month','day','time').filter(region_name=name,month=month,year=year)[0]
             if (obj.residential_premises_has_advanced_appointment_comment != 'Да' and
                 obj.residential_premises_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.residential_premises_has_btn_get_service_comment != 'Да' and
