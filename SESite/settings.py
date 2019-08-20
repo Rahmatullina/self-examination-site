@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -116,11 +116,14 @@ USE_TZ = True
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/result_form/residential_premises/' + dt.today().strftime('%Y/%m/')
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'strongamil1998@gmail.com'
-EMAIL_HOST_PASSWORD = 'Uk39FQ73'
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'strongamil1998@gmail.com'
 
 #for static files
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
