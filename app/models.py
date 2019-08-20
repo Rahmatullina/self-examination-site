@@ -33,7 +33,7 @@ class RegionModel(models.Model):
     day = models.CharField(default=datetime.today().strftime('%d'),max_length=2)
     time = models.TimeField(default=datetime.today().time())
 
-    residential_premises_id_rgmu = models.CharField(max_length=1000,default='111')
+    residential_premises_id_rgmu = models.CharField(max_length=1000, default='111')
     residential_premises_statement_amount = models.CharField(max_length=100, default='0')
     residential_premises_link = models.CharField(max_length=1000, default='my_link')
     residential_premises_has_advanced_appointment = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
@@ -45,7 +45,7 @@ class RegionModel(models.Model):
     residential_premises_has_estimation_quality = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
     residential_premises_has_estimation_quality_comment = models.TextField(default='',blank=True)
     residential_premises_connected_to_fgis_do = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
-    residential_premises_connected_to_fgis_do_comment = models.TextField(default='',blank=True)
+    residential_premises_connected_to_fgis_do_comment = models.TextField(default='', blank=True)
     residential_premises_has_electronic_form_printing = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
     residential_premises_has_electronic_form_printing_comment = models.TextField(default='',blank=True)
     residential_premises_has_edition_draft = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
@@ -61,7 +61,7 @@ class RegionModel(models.Model):
     residential_premises_has_document_template = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
     residential_premises_has_document_template_comment = models.TextField(default='',blank=True)
 
-    housing_transfer_id_rgmu = models.CharField(max_length=1000,default='111')
+    housing_transfer_id_rgmu = models.CharField(max_length=1000, default='111')
     housing_transfer_statement_amount = models.CharField(max_length=100, default='0')
     housing_transfer_link = models.CharField(max_length=1000, default='my_link')
     housing_transfer_has_advanced_appointment = models.CharField(max_length=20, choices=SERVICE_CHOICES, default='Да')
@@ -315,6 +315,7 @@ class RegionModel(models.Model):
 
     def __str__(self):
         return self.region_name + self.year + self.month + self.day
+
 
 
 class CustomUser(AbstractUser):

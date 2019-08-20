@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','g*3b4px@c^5-d!b93o71@o%-f31pbog37v$cv1_fz(lcmc9$zi')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+#DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['evening-lowlands-62772.herokuapp.com','localhost']
 
@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.MyConfig',
-
+    'app.apps.MyConfig'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'self_examination_site.urls'
+ROOT_URLCONF = 'SESite.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'self_examination_site.wsgi.application'
+WSGI_APPLICATION = 'SESite.wsgi.application'
 
 
 # Database
@@ -123,17 +122,17 @@ EMAIL_HOST_USER = 'strongamil1998@gmail.com'
 EMAIL_HOST_PASSWORD = 'Uk39FQ73'
 EMAIL_PORT = 587
 
+#for static files
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
+#for deploy on heroku
 import django_heroku
 django_heroku.settings(locals())
 
 # Heroku: Update database configuration from $DATABASE_URL.
-#import dj_database_url
-#DATABASES = {}
-#DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+
 DATABASES = {}
 DATABASES['default'] = {
 'ENGINE': 'django.db.backends.postgresql_psycopg2',

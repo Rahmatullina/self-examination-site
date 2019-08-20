@@ -79,25 +79,8 @@ def get_with_troubles(month, year):
     objects.update({'archive_reference': []})
     objects.update({'land_schemes': []})
     for name in regions_names:
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    residential_premises_id_rgmu,
-                    residential_premises_statement_amount,
-                    residential_premises_link,
-                    residential_premises_has_advanced_appointment_comment,
-                    residential_premises_has_btn_get_service_comment,
-                    residential_premises_has_reglament_comment,
-                    residential_premises_has_estimation_quality_comment,
-                    residential_premises_connected_to_fgis_do_comment,
-                    residential_premises_has_electronic_form_printing_comment,
-                    residential_premises_has_edition_draft_comment,
-                    residential_premises_has_term_of_consideration_comment,
-                    residential_premises_has_notif_consider_result_comment,
-                    residential_premises_has_causes_of_failure_comment,
-                    residential_premises_has_sample_document_comment,
-                    residential_premises_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+        try:
+            obj = RegionModel.objects.order_by('-year','-month','-day','-time').filter(region_name=name,month=month,year=year)[0]
             if (obj.residential_premises_has_advanced_appointment_comment != 'Да' and
                 obj.residential_premises_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.residential_premises_has_btn_get_service_comment != 'Да' and
@@ -124,25 +107,6 @@ def get_with_troubles(month, year):
                      obj.residential_premises_has_document_template_comment != 'Не предусмотрено'):
                 objects['residential_premises'].append(obj)
 
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    housing_transfer_id_rgmu,
-                    housing_transfer_statement_amount,
-                    housing_transfer_link,
-                    housing_transfer_has_advanced_appointment_comment,
-                    housing_transfer_has_btn_get_service_comment,
-                    housing_transfer_has_reglament_comment,
-                    housing_transfer_has_estimation_quality_comment,
-                    housing_transfer_connected_to_fgis_do_comment,
-                    housing_transfer_has_electronic_form_printing_comment,
-                    housing_transfer_has_edition_draft_comment,
-                    housing_transfer_has_term_of_consideration_comment,
-                    housing_transfer_has_notif_consider_result_comment,
-                    housing_transfer_has_causes_of_failure_comment,
-                    housing_transfer_has_sample_document_comment,
-                    housing_transfer_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
             if (obj.housing_transfer_has_advanced_appointment_comment != 'Да' and
                 obj.housing_transfer_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.housing_transfer_has_btn_get_service_comment != 'Да' and
@@ -168,25 +132,7 @@ def get_with_troubles(month, year):
                     (obj.housing_transfer_has_document_template_comment != 'Да' and
                      obj.housing_transfer_has_document_template_comment != 'Не предусмотрено'):
                 objects['housing_transfer'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                   advertising_structures_id_rgmu,
-                   advertising_structures_statement_amount,
-                   advertising_structures_link,
-                   advertising_structures_has_advanced_appointment_comment,
-                   advertising_structures_has_btn_get_service_comment,
-                   advertising_structures_has_reglament_comment,
-                   advertising_structures_has_estimation_quality_comment,
-                   advertising_structures_connected_to_fgis_do_comment,
-                   advertising_structures_has_electronic_form_printing_comment,
-                   advertising_structures_has_edition_draft_comment,
-                   advertising_structures_has_term_of_consideration_comment,
-                   advertising_structures_has_notif_consider_result_comment,
-                   advertising_structures_has_causes_of_failure_comment,
-                   advertising_structures_has_sample_document_comment,
-                   advertising_structures_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.advertising_structures_has_advanced_appointment_comment != 'Да' and
                 obj.advertising_structures_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.advertising_structures_has_btn_get_service_comment != 'Да' and
@@ -212,26 +158,7 @@ def get_with_troubles(month, year):
                     (obj.advertising_structures_has_document_template_comment != 'Да' and
                      obj.advertising_structures_has_document_template_comment != 'Не предусмотрено'):
                 objects['advertising_structures'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    capital_construction_id_rgmu,
-                    capital_construction_statement_amount,
-                    capital_construction_link,
-                    capital_construction_has_advanced_appointment_comment,
-                    capital_construction_has_btn_get_service_comment,
-                    capital_construction_has_reglament_comment,
-                    capital_construction_has_estimation_quality_comment,
-                    capital_construction_connected_to_fgis_do_comment,
-                    capital_construction_has_electronic_form_printing_comment,
-                    capital_construction_has_edition_draft_comment,
-                    capital_construction_has_term_of_consideration_comment,
-                    capital_construction_has_notif_consider_result_comment,
-                    capital_construction_has_causes_of_failure_comment,
-                    capital_construction_has_sample_document_comment,
-                    capital_construction_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.capital_construction_has_advanced_appointment_comment != 'Да' and
                 obj.capital_construction_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.capital_construction_has_btn_get_service_comment != 'Да' and
@@ -257,26 +184,7 @@ def get_with_troubles(month, year):
                     (obj.capital_construction_has_document_template_comment != 'Да' and
                      obj.capital_construction_has_document_template_comment != 'Не предусмотрено'):
                 objects['capital_construction'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    preschool_education_id_rgmu,
-                    preschool_education_statement_amount,
-                    preschool_education_link,
-                    preschool_education_has_advanced_appointment_comment,
-                    preschool_education_has_btn_get_service_comment,
-                    preschool_education_has_reglament_comment,
-                    preschool_education_has_estimation_quality_comment,
-                    preschool_education_connected_to_fgis_do_comment,
-                    preschool_education_has_electronic_form_printing_comment,
-                    preschool_education_has_edition_draft_comment,
-                    preschool_education_has_term_of_consideration_comment,
-                    preschool_education_has_notif_consider_result_comment,
-                    preschool_education_has_causes_of_failure_comment,
-                    preschool_education_has_sample_document_comment,
-                    preschool_education_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.preschool_education_has_advanced_appointment_comment != 'Да' and
                 obj.preschool_education_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.preschool_education_has_btn_get_service_comment != 'Да' and
@@ -302,26 +210,7 @@ def get_with_troubles(month, year):
                     (obj.preschool_education_has_document_template_comment != 'Да' and
                      obj.preschool_education_has_document_template_comment != 'Не предусмотрено'):
                 objects['preschool_education'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    residential_premises_id_rgmu,
-                    school_education_statement_amount,
-                    school_education_link,
-                    school_education_has_advanced_appointment_comment,
-                    school_education_has_btn_get_service_comment,
-                    school_education_has_reglament_comment,
-                    school_education_has_estimation_quality_comment,
-                    school_education_connected_to_fgis_do_comment,
-                    school_education_has_electronic_form_printing_comment,
-                    school_education_has_edition_draft_comment,
-                    school_education_has_term_of_consideration_comment,
-                    school_education_has_notif_consider_result_comment,
-                    school_education_has_causes_of_failure_comment,
-                    school_education_has_sample_document_comment,
-                    school_education_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.school_education_has_advanced_appointment_comment != 'Да' and
                 obj.school_education_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.school_education_has_btn_get_service_comment != 'Да' and
@@ -347,26 +236,7 @@ def get_with_troubles(month, year):
                     (obj.school_education_has_document_template_comment != 'Да' and
                      obj.school_education_has_document_template_comment != 'Не предусмотрено'):
                 objects['school_education'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    needing_premises_id_rgmu,
-                    needing_premises_statement_amount,
-                    needing_premises_link,
-                    needing_premises_has_advanced_appointment_comment,
-                    needing_premises_has_btn_get_service_comment,
-                    needing_premises_has_reglament_comment,
-                    needing_premises_has_estimation_quality_comment,
-                    needing_premises_connected_to_fgis_do_comment,
-                    needing_premises_has_electronic_form_printing_comment,
-                    needing_premises_has_edition_draft_comment,
-                    needing_premises_has_term_of_consideration_comment,
-                    needing_premises_has_notif_consider_result_comment,
-                    needing_premises_has_causes_of_failure_comment,
-                    needing_premises_has_sample_document_comment,
-                    needing_premises_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.needing_premises_has_advanced_appointment_comment != 'Да' and
                 obj.needing_premises_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.needing_premises_has_btn_get_service_comment != 'Да' and
@@ -392,26 +262,7 @@ def get_with_troubles(month, year):
                     (obj.needing_premises_has_document_template_comment != 'Да' and
                      obj.needing_premises_has_document_template_comment != 'Не предусмотрено'):
                 objects['needing_premises'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    town_planning_id_rgmu,
-                    town_planning_statement_amount,
-                    town_planning_link,
-                    town_planning_has_advanced_appointment_comment,
-                    town_planning_has_btn_get_service_comment,
-                    town_planning_has_reglament_comment,
-                    town_planning_has_estimation_quality_comment,
-                    town_planning_connected_to_fgis_do_comment,
-                    town_planning_has_electronic_form_printing_comment,
-                    town_planning_has_edition_draft_comment,
-                    town_planning_has_term_of_consideration_comment,
-                    town_planning_has_notif_consider_result_comment,
-                    town_planning_has_causes_of_failure_comment,
-                    town_planning_has_sample_document_comment,
-                    town_planning_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.town_planning_has_advanced_appointment_comment != 'Да' and
                 obj.town_planning_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.town_planning_has_btn_get_service_comment != 'Да' and
@@ -437,26 +288,7 @@ def get_with_troubles(month, year):
                     (obj.town_planning_has_document_template_comment != 'Да' and
                      obj.town_planning_has_document_template_comment != 'Не предусмотрено'):
                 objects['town_planning'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    archive_reference_id_rgmu,
-                    archive_reference_statement_amount,
-                    archive_reference_link,
-                    archive_reference_has_advanced_appointment_comment,
-                    archive_reference_has_btn_get_service_comment,
-                    archive_reference_has_reglament_comment,
-                    archive_reference_has_estimation_quality_comment,
-                    archive_reference_connected_to_fgis_do_comment,
-                    archive_reference_has_electronic_form_printing_comment,
-                    archive_reference_has_edition_draft_comment,
-                    archive_reference_has_term_of_consideration_comment,
-                    archive_reference_has_notif_consider_result_comment,
-                    archive_reference_has_causes_of_failure_comment,
-                    archive_reference_has_sample_document_comment,
-                    archive_reference_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.archive_reference_has_advanced_appointment_comment != 'Да' and
                 obj.archive_reference_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.archive_reference_has_btn_get_service_comment != 'Да' and
@@ -482,26 +314,7 @@ def get_with_troubles(month, year):
                     (obj.archive_reference_has_document_template_comment != 'Да' and
                      obj.archive_reference_has_document_template_comment != 'Не предусмотрено'):
                 objects['archive_reference'].append(obj)
-        for obj in RegionModel.objects.raw(
-                '''SELECT id, region_name,
-                    land_schemes_id_rgmu,
-                    land_schemes_statement_amount,
-                    land_schemes_link,
-                    land_schemes_has_advanced_appointment_comment,
-                    land_schemes_has_btn_get_service_comment,
-                    land_schemes_has_reglament_comment,
-                    land_schemes_has_estimation_quality_comment,
-                    land_schemes_connected_to_fgis_do_comment,
-                    land_schemes_has_electronic_form_printing_comment,
-                    land_schemes_has_edition_draft_comment,
-                    land_schemes_has_term_of_consideration_comment,
-                    land_schemes_has_notif_consider_result_comment,
-                    land_schemes_has_causes_of_failure_comment,
-                    land_schemes_has_sample_document_comment,
-                    land_schemes_has_document_template_comment\
-                    FROM app_regionModel WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) +
-                '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
+
             if (obj.land_schemes_has_advanced_appointment_comment != 'Да' and
                 obj.land_schemes_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.land_schemes_has_btn_get_service_comment != 'Да' and
@@ -527,6 +340,8 @@ def get_with_troubles(month, year):
                     (obj.land_schemes_has_document_template_comment != 'Да' and
                      obj.land_schemes_has_document_template_comment != 'Не предусмотрено'):
                 objects['land_schemes'].append(obj)
+        except IndexError:
+            pass
     return objects
 
 @login_required

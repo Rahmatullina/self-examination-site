@@ -1,1 +1,1 @@
-web: gunicorn self_examination_site.wsgi --preload
+web: gunicorn SESite.wsgi --preload
