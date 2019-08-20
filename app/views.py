@@ -79,8 +79,9 @@ def get_with_troubles(month, year):
     objects.update({'archive_reference': []})
     objects.update({'land_schemes': []})
     for name in regions_names:
-        try:
-            obj = RegionModel.objects.order_by('year','month','day','time').filter(region_name=name,month=month,year=year)[0]
+        for obj in RegionModel.objects.raw('''SELECT * FROM app_regionModel WHERE region_name =\'''' + str(name) +
+                                           '''\' AND month=\'''' + str(month) + '''\' AND year=\'''' + str(year) +
+                                           '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;'''):
             if (obj.residential_premises_has_advanced_appointment_comment != 'Да' and
                 obj.residential_premises_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.residential_premises_has_btn_get_service_comment != 'Да' and
@@ -340,8 +341,6 @@ def get_with_troubles(month, year):
                     (obj.land_schemes_has_document_template_comment != 'Да' and
                      obj.land_schemes_has_document_template_comment != 'Не предусмотрено'):
                 objects['land_schemes'].append(obj)
-        except IndexError:
-            pass
     return objects
 
 @login_required
@@ -450,9 +449,8 @@ def get_result_form(request, service_name, year, month):
                     residential_premises_has_sample_document_comment AS has_sample_document_comment,
                     residential_premises_has_document_template_comment AS has_document_template_comment
                     FROM app_regionModel
-                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
-                    month) + '''\' AND year=\'''' + str(
-                    year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(month) + '''\' AND year=\'''' +
+                    str(year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
                 objects.append(obj)
 
             except IndexError:
