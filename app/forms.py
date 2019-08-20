@@ -10,7 +10,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### first card #################################################
 
-    residential_premises_id_RGMU = \
+    residential_premises_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     residential_premises_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -40,10 +40,10 @@ class SE_Form(forms.ModelForm):
     residential_premises_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea4','rows':'2'}),
                         label='',required=False, initial='Да')
-    residential_premises_connected_to_FGIS_DO = \
+    residential_premises_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk5'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    residential_premises_connected_to_FGIS_DO_comment = \
+    residential_premises_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea5','rows':'2'}),
                         label='',required=False, initial='Да')
     residential_premises_has_electronic_form_printing = \
@@ -91,7 +91,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### second card #################################################
 
-    housing_transfer_id_RGMU = \
+    housing_transfer_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     housing_transfer_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -121,10 +121,10 @@ class SE_Form(forms.ModelForm):
     housing_transfer_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea16', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    housing_transfer_connected_to_FGIS_DO = \
+    housing_transfer_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk17'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    housing_transfer_connected_to_FGIS_DO_comment = \
+    housing_transfer_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea17', 'rows': '2'}),
                         label='', required=False, initial='Да')
     housing_transfer_has_electronic_form_printing = \
@@ -172,7 +172,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### third card #################################################
 
-    advertising_structures_id_RGMU = \
+    advertising_structures_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     advertising_structures_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -202,10 +202,10 @@ class SE_Form(forms.ModelForm):
     advertising_structures_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea28', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    advertising_structures_connected_to_FGIS_DO = \
+    advertising_structures_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk29'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    advertising_structures_connected_to_FGIS_DO_comment = \
+    advertising_structures_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea29', 'rows': '2'}),
                         label='', required=False, initial='Да')
     advertising_structures_has_electronic_form_printing = \
@@ -253,7 +253,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### fourth card #################################################
 
-    capital_construction_id_RGMU = \
+    capital_construction_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     capital_construction_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -283,10 +283,10 @@ class SE_Form(forms.ModelForm):
     capital_construction_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea40', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    capital_construction_connected_to_FGIS_DO = \
+    capital_construction_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk41'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    capital_construction_connected_to_FGIS_DO_comment = \
+    capital_construction_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea41', 'rows': '2'}),
                         label='', required=False, initial='Да')
     capital_construction_has_electronic_form_printing = \
@@ -334,7 +334,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### fifth card #################################################
 
-    preschool_education_id_RGMU = \
+    preschool_education_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     preschool_education_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -364,10 +364,10 @@ class SE_Form(forms.ModelForm):
     preschool_education_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea52', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    preschool_education_connected_to_FGIS_DO = \
+    preschool_education_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk53'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    preschool_education_connected_to_FGIS_DO_comment = \
+    preschool_education_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea53', 'rows': '2'}),
                         label='', required=False, initial='Да')
     preschool_education_has_electronic_form_printing = \
@@ -415,7 +415,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### sixth card #################################################
 
-    school_education_id_RGMU = \
+    school_education_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     school_education_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -445,10 +445,10 @@ class SE_Form(forms.ModelForm):
     school_education_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea64', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    school_education_connected_to_FGIS_DO = \
+    school_education_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk65'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    school_education_connected_to_FGIS_DO_comment = \
+    school_education_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea65', 'rows': '2'}),
                         label='', required=False, initial='Да')
     school_education_has_electronic_form_printing = \
@@ -496,7 +496,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### seventh card #################################################
 
-    needing_premises_id_RGMU = \
+    needing_premises_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     needing_premises_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -526,10 +526,10 @@ class SE_Form(forms.ModelForm):
     needing_premises_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea76', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    needing_premises_connected_to_FGIS_DO = \
+    needing_premises_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk77'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    needing_premises_connected_to_FGIS_DO_comment = \
+    needing_premises_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea77', 'rows': '2'}),
                         label='', required=False, initial='Да')
     needing_premises_has_electronic_form_printing = \
@@ -577,7 +577,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### eighth card #################################################
 
-    town_planning_id_RGMU = \
+    town_planning_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     town_planning_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -607,10 +607,10 @@ class SE_Form(forms.ModelForm):
     town_planning_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea88', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    town_planning_connected_to_FGIS_DO = \
+    town_planning_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk89'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    town_planning_connected_to_FGIS_DO_comment = \
+    town_planning_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea89', 'rows': '2'}),
                         label='', required=False, initial='Да')
     town_planning_has_electronic_form_printing = \
@@ -658,7 +658,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### nineth card #################################################
 
-    archive_reference_id_RGMU = \
+    archive_reference_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     archive_reference_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -688,10 +688,10 @@ class SE_Form(forms.ModelForm):
     archive_reference_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea100', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    archive_reference_connected_to_FGIS_DO = \
+    archive_reference_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk101'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    archive_reference_connected_to_FGIS_DO_comment = \
+    archive_reference_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea101', 'rows': '2'}),
                         label='', required=False, initial='Да')
     archive_reference_has_electronic_form_printing = \
@@ -739,7 +739,7 @@ class SE_Form(forms.ModelForm):
 
     ###################################### tenth card #################################################
 
-    land_schemes_id_RGMU = \
+    land_schemes_id_rgmu = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=1000)
     land_schemes_statement_amount = \
         forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='', max_length=100)
@@ -769,10 +769,10 @@ class SE_Form(forms.ModelForm):
     land_schemes_has_estimation_quality_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea112', 'rows': '2'}),
                         label='', required=False, initial='Да')
-    land_schemes_connected_to_FGIS_DO = \
+    land_schemes_connected_to_fgis_do = \
         forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'form-check-input', 'id': 'chk113'}),
                           choices=SERVICE_CHOICES, label='', initial='Да', required=True)
-    land_schemes_connected_to_FGIS_DO_comment = \
+    land_schemes_connected_to_fgis_do_comment = \
         forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'txtarea113', 'rows': '2'}),
                         label='', required=False, initial='Да')
     land_schemes_has_electronic_form_printing = \
