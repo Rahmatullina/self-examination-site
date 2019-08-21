@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="{% static "app/with_troubles.css" %}">
+    <link rel="stylesheet" href="{% static "app/styles/with_troubles.css" %}">
     <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
 
 </header>
@@ -30,7 +30,7 @@
   <a class="navbar-brand" href="#"></a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><img src="{% static "app/calendar.png" %}" style="height:37px; margin-left:10%;padding: 10px 5px 0px 0px">
+        <li class="nav-item"><img src="{% static "app/images/calendar.png" %}" style="height:37px; margin-left:10%;padding: 10px 5px 0px 0px">
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,12 +64,15 @@
       </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Фильтр по регионам
+         Фильтр по районам
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
           <a class="dropdown-item" href="/result_form/not_sent/{{ year }}/{{ num_month }}/">Не заполнившие форму</a>
             <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/result_form/with_troubles/{{ year }}/{{ num_month }}">Имеющие трудности</a>
+          <a class="dropdown-item" href="/result_form/with_troubles/{{ year }}/{{ num_month }}">Имеющие неполадки в работе электронных услуг</a>
+            <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/result_form/with_no_troubles/{{ year }}/{{ num_month }}">Не имеющие неполадки в работе электронных услуг</a>
+
         </div>
         </li>
         <li class="nav-item dropdown">
@@ -100,7 +103,7 @@
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Выбор региона
+         Выбор района
         </a>
         <div class="dropdown-menu" style="height:400px;overflow-y: scroll;" aria-labelledby="navbarDropdown5">
           {% for name in zipped %}
@@ -121,7 +124,7 @@
             <a class="dropdown-item" href="/export/all/{{ year }}/{{ num_month }}">Все данные районов за выбранный период</a>
         </div>
         </li>
-        <li class="nav-item"><img src="{% static "app/user4.png" %}" style="height:40px; margin-left:10%">
+        <li class="nav-item"><img src="{% static "app/images/user4.png" %}" style="height:40px; margin-left:10%">
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">{{ username }}</a>
@@ -133,7 +136,7 @@
   </div>
 </nav>
 
-<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/inform_logo.jpg" %}">
+<a class="top-sitename"><img class="top-sitename__logo" style="height:80px;margin-top:3%" src="{% static "app/images/inform_logo.jpg" %}">
               <span class="top-sitename__title">Государственный комитет Республики Башкортостан по информатизации и вопросам функционирования системы «Открытая Республика»</span>
 </a>
 <form action="" method="post">
@@ -141,7 +144,7 @@
 <div class="background-form">
 <div class="main-form">
     <div class="my-form">
-        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.)</p>
+        <p class="title" align="center">Форма самообследования предоставления государственных и муниципальных услуг в электронной форме районов, имеющих неполадки в работе электронных услуг(Администрация мунципального района Республики Башкортостан.)</p>
 
 <div class="accordion" id="accordionExample">
   <div class="card">
@@ -157,37 +160,36 @@
       <div class="card-body">
 
   <!--First body start-->
+{% if objects.residential_premises|length > 0 %}
 <table>
-<!--
  <thead>
  <tr>
-     <th data-campo='name' rowspan="3" data-toggle="tooltip" title="Наименование муниципального образования"></th>
-     <th data-campo='Id' rowspan="3" data-toggle="tooltip" title="Идентификатор услуги в РГМУ"></th>
-   <th data-campo='amount' rowspan="3" data-toggle="tooltip" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
-       в период с 01.10.2019 г. по 31.01.2019 г., шт. (количество указывается нарастающим итогом)"></th>
-     <th data-campo='exploring' colspan="13" data-toggle="tooltip" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ"><sup>1</sup></th>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
 </tr>
 <tr>
-    <th data-campo='link' rowspan="2" data-toggle="tooltip" title="Ссылка на услугу *"></th>
-    <th data-campo='record' rowspan="2" data-toggle="tooltip" title="Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме"></th>
-    <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" title="Наличие кнопки 'Получить услугу'"><sup>2</sup></th>
-    <th data-campo='reglament' rowspan="2" data-toggle="tooltip" title="Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ"></th>
-    <th data-campo='quality' rowspan="2" data-toggle="tooltip" title="Возможность оценки качества предоставления услуги"></th>
-    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" title="Орган власти подключен к  ФГИС ДО"><sup>3</sup></th>
-    <th data-campo='printing' rowspan="2" data-toggle="tooltip" title="Возможность печати электронной формы заявления"></th>
-    <th data-campo='edition' rowspan="2" data-toggle="tooltip" title="Возможность редактировать черновик заявления"></th>
-    <th data-campo="warning" colspan="3" data-toggle="tooltip" title="Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля 'коментраии' на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений"></th>
-   <th data-campo="availiblity" colspan="2" data-toggle="tooltip" title="Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и в АИС СОЗ"></th>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
 </tr>
 <tr>
-    <th data-campo="term" data-toggle="tooltip" title="Срок рассмотрения заявления (личный кабинет)"><sup>4</sup></th>
-    <th data-campo="notification" data-toggle="tooltip" title="Уведомление о результате рассмотрения заявления в личном кабинете"><sup>5</sup></th>
-    <th data-comp="refusion" data-toggle="tooltip" title="Причины отказа (личный кабинет)"><sup>6</sup></th>
-    <th data-comp="example" data-toggle="tooltip" title="Образец документа"><sup>7</sup></th>
-    <th data-comp="template" data-toggle="tooltip" title="Шаблон (форма, бланк) документа"><sup>8</sup></th>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
 </tr>
  </thead>
- -->
  <tbody>
  {% for object in objects.residential_premises %}
     <tr>
@@ -211,6 +213,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!--First body end-->
 </div>
     </div>
@@ -226,7 +236,37 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
 <!-- Second body start -->
+      {% if objects.housing_transfer|length > 0 %}
 <table>
+
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.housing_transfer %}
     <tr>
@@ -250,6 +290,15 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+
+{% endif %}
 <!-- Second body end -->
 
       </div>
@@ -266,7 +315,36 @@
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
           <!-- Third body start -->
+{% if objects.advertising_structures|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.advertising_structures %}
    <tr>
@@ -290,6 +368,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Third body end -->
 
 
@@ -308,7 +394,36 @@
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Fourth body start -->
+{% if objects.capital_construction|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.capital_construction %}
     <tr>
@@ -332,6 +447,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Fourth body end -->
 
       </div>
@@ -349,7 +472,36 @@
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Fifth body start -->
+{% if objects.preschool_education|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.preschool_education %}
     <tr>
@@ -373,6 +525,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Fifth body end -->
 
       </div>
@@ -391,7 +551,36 @@
     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Sixth body start -->
+{% if objects.school_education|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.school_education %}
     <tr>
@@ -415,6 +604,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Sixth body end -->
 
       </div>
@@ -433,7 +630,36 @@
       <div class="card-body">
 
                     <!-- Seventh body start -->
+{% if objects.needing_premises|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.needing_premises %}
     <tr>
@@ -457,6 +683,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Seventh body end -->
       </div>
     </div>
@@ -474,7 +708,36 @@
     <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Eighth body start -->
+{% if objects.town_planning|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.town_planning %}
     <tr>
@@ -498,6 +761,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Eighth body end -->
 
       </div>
@@ -517,7 +788,36 @@
     <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Nineth body start -->
+{% if objects.archive_reference|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.archive_reference %}
     <tr>
@@ -541,6 +841,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Nineth body end -->
       </div>
     </div>
@@ -558,7 +866,36 @@
     <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
       <div class="card-body">
                     <!-- Tenth body start -->
+{% if objects.land_schemes|length > 0 %}
 <table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
 <tbody>
  {% for object in objects.land_schemes %}
     <tr>
@@ -582,6 +919,14 @@
 {% endfor %}
   </tbody>
 </table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
 <!-- Tenth body end -->
     </div>
     </div>
@@ -591,7 +936,5 @@
 </div>
 </div>
 </form>
-<!-- functions -->
-
 </body>
 </html>

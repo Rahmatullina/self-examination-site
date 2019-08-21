@@ -12,52 +12,10 @@ html{
   color: #e6eff0;
   min-height: 2000px;
 }
-html, body{
-  font-size: 10.5pt;
-  font-family: 'Trebuchet MS', 'Arial', 'Tahoma', 'Verdana', 'sans-serif';
+html, body {
+    font-size: 10.5pt;
+    font-family: 'Trebuchet MS', 'Arial', 'Tahoma', 'Verdana', 'sans-serif';
 }
-.my-menu {
-  position: fixed;
-  background-color: #21213f;
-  color: #fff;
-  padding: 0.75em;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-width: 600px;
-  margin: 0 auto;
-  width: 100%;
-  height: auto;
-  z-index: 3;
-}
-.my-header ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  list-style-image: none;
-  }
-.my-header li { display: inline; }
-.my-header ul li a {
-    text-decoration: none;
-    margin: 4px;
-	  padding: 5px 20px 5px 20px;
-  }
-.my-logo{ margin-left: 1%; }
-.my-site-title{ margin-left: 10%; }
-.my-search-box{ margin-left: 5%; }
-.my-social{ margin-left: 30%; }
-.my-sign-in{
- margin-left: 5%;
- background-color: #6882db;
- transition: background-color 0.25s ease-out;
- padding: 10px 20px;
- cursor: pointer;
- font-family: 'Trebuchet MS', 'Arial', 'Tahoma', 'Verdana', 'sans-serif';
-}
-.my-sign-in:hover{
- background-color: #2f2f56;
-}
-
 .top-sitename {
    margin-left: 7px;
    margin-top: 50px;
@@ -80,17 +38,19 @@ html, body{
   font-size: 150%;
   text-align: center;
   font-weight: normal;
+  width: 100%;
 }
 .background-form{
-
-    background-image: url(./background.jpg);
+    background-image: url(../images/background.jpg);
     background-size: 100%;
+    width: 100%;
 }
 .my-form{
     margin: 80px 10px;/* сдвиг белого относительно изображения*/
     background: #fff;
     box-shadow: 0 0 25px -10px #000;
     z-index: 1;
+    width: 98%;
 }
 .main-form {
     max-width: 100%;
@@ -99,6 +59,7 @@ html, body{
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 table * {
 height: auto;
@@ -125,10 +86,37 @@ th,td {
 th{
     font-size: 0.9rem;
 }
+th :hover{
+}
 .addition{
     margin-top: 50px;
     color: black;
     line-height: 1.5;
 }
+.navbar-nav {
+    display:inline-block;
+}
+.list_with_red_marker::before{
+    content: "\2585";
+    color: #eb5a21;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+.list_with_gray_marker::before{
+    content: "\2585";
+    color: #9c8880;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
 
-
+.list_with_white_marker::before{
+    content: "\25ad";
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}

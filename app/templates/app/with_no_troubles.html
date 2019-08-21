@@ -66,10 +66,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
           <a class="dropdown-item" href="/result_form/not_sent/{{ year }}/{{ num_month }}/">Не заполнившие форму</a>
             <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/result_form/with_troubles/{{ year }}/{{ num_month }}">Имеющие неполадки в работе электронных услуг</a>
+            <a class="dropdown-item" href="/result_form/with_troubles/{{ year }}/{{ num_month }}">Имеющие неполадки в работе электронных услуг</a>
             <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/result_form/with_no_troubles/{{ year }}/{{ num_month }}">Не имеющие неполадки в работе электронных услуг</a>
-
         </div>
         </li>
         <li class="nav-item dropdown">
@@ -140,7 +139,8 @@
 <div class="main-form">
 <div class="my-form">
 <div style="margin-top: 50px" align="center" >
-    <p class="title">Районы, не заполнившие форму самообследования предоставления государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.) за выбранный месяц.</p>
+    <p class="title">Районы, не имеющие неполадок в работе государственных и муниципальных услуг в электронной форме (Администрация мунципального района Республики Башкортостан.) за выбранный месяц.</p>
+
 {% for name in zipped_names %}
     <a href="/result_form/{{ year }}/{{ num_month }}/{{ name.1 }}" ><p style="margin-left: 10px; margin-top: 10px;" align="left">{{ name.0 }}</p></a>
 {% endfor %}

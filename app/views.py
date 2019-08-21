@@ -344,7 +344,268 @@ def get_with_troubles(month, year):
             pass
     return objects
 
-@login_required
+@login_required(login_url='/login/',
+                redirect_field_name='/result_form/with_no_troubles/' + datetime.today().strftime('%Y/%m/'))
+def get_with_no_troubles(request,month,year):
+    region_full_names = []
+    for name in regions_names:
+        try:
+            obj = RegionModel.objects.order_by('-year','-month','-day','-time').filter(region_name=name,month=month,year=year)[0]
+            if (obj.residential_premises_has_advanced_appointment_comment == 'Да' or
+                obj.residential_premises_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_btn_get_service_comment == 'Да' or
+                     obj.residential_premises_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_reglament_comment == 'Да' or
+                     obj.residential_premises_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_estimation_quality_comment == 'Да' or
+                     obj.residential_premises_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_connected_to_fgis_do_comment == 'Да' or
+                     obj.residential_premises_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_electronic_form_printing_comment == 'Да' or
+                     obj.residential_premises_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_edition_draft_comment == 'Да' or
+                     obj.residential_premises_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_term_of_consideration_comment == 'Да' or
+                     obj.residential_premises_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_notif_consider_result_comment == 'Да' or
+                     obj.residential_premises_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_causes_of_failure_comment == 'Да' or
+                     obj.residential_premises_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_sample_document_comment == 'Да' or
+                     obj.residential_premises_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.residential_premises_has_document_template_comment == 'Да' or
+                     obj.residential_premises_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_advanced_appointment_comment == 'Да' or
+                    obj.housing_transfer_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_btn_get_service_comment == 'Да' or
+                     obj.housing_transfer_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_reglament_comment == 'Да' or
+                     obj.housing_transfer_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_estimation_quality_comment == 'Да' or
+                     obj.housing_transfer_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_connected_to_fgis_do_comment == 'Да' or
+                     obj.housing_transfer_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_electronic_form_printing_comment == 'Да' or
+                     obj.housing_transfer_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_edition_draft_comment == 'Да' or
+                     obj.housing_transfer_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_term_of_consideration_comment == 'Да' or
+                     obj.housing_transfer_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_notif_consider_result_comment == 'Да' or
+                     obj.housing_transfer_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_causes_of_failure_comment == 'Да' or
+                     obj.housing_transfer_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_sample_document_comment == 'Да' or
+                     obj.housing_transfer_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.housing_transfer_has_document_template_comment == 'Да' or
+                     obj.housing_transfer_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_advanced_appointment_comment == 'Да' or
+                    obj.advertising_structures_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_btn_get_service_comment == 'Да' or
+                     obj.advertising_structures_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_reglament_comment == 'Да' or
+                     obj.advertising_structures_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_estimation_quality_comment == 'Да' or
+                     obj.advertising_structures_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_connected_to_fgis_do_comment == 'Да' or
+                     obj.advertising_structures_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_electronic_form_printing_comment == 'Да' or
+                     obj.advertising_structures_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_edition_draft_comment == 'Да' or
+                     obj.advertising_structures_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_term_of_consideration_comment == 'Да' or
+                     obj.advertising_structures_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_notif_consider_result_comment == 'Да' or
+                     obj.advertising_structures_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_causes_of_failure_comment == 'Да' or
+                     obj.advertising_structures_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_sample_document_comment == 'Да' or
+                     obj.advertising_structures_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.advertising_structures_has_document_template_comment == 'Да' or
+                     obj.advertising_structures_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_advanced_appointment_comment == 'Да' or
+                    obj.capital_construction_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_btn_get_service_comment == 'Да' or
+                     obj.capital_construction_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_reglament_comment == 'Да' or
+                     obj.capital_construction_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_estimation_quality_comment == 'Да' or
+                     obj.capital_construction_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_connected_to_fgis_do_comment == 'Да' or
+                     obj.capital_construction_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_electronic_form_printing_comment == 'Да' or
+                     obj.capital_construction_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_edition_draft_comment == 'Да' or
+                     obj.capital_construction_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_term_of_consideration_comment == 'Да' or
+                     obj.capital_construction_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_notif_consider_result_comment == 'Да' or
+                     obj.capital_construction_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_causes_of_failure_comment == 'Да' or
+                     obj.capital_construction_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_sample_document_comment == 'Да' or
+                     obj.capital_construction_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.capital_construction_has_document_template_comment == 'Да' or
+                     obj.capital_construction_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_advanced_appointment_comment == 'Да' or
+                    obj.preschool_education_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_btn_get_service_comment == 'Да' or
+                     obj.preschool_education_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_reglament_comment == 'Да' or
+                     obj.preschool_education_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_estimation_quality_comment == 'Да' or
+                     obj.preschool_education_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_connected_to_fgis_do_comment == 'Да' or
+                     obj.preschool_education_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_electronic_form_printing_comment == 'Да' or
+                     obj.preschool_education_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_edition_draft_comment == 'Да' or
+                     obj.preschool_education_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_term_of_consideration_comment == 'Да' or
+                     obj.preschool_education_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_notif_consider_result_comment == 'Да' or
+                     obj.preschool_education_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_causes_of_failure_comment == 'Да' or
+                     obj.preschool_education_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_sample_document_comment == 'Да' or
+                     obj.preschool_education_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.preschool_education_has_document_template_comment == 'Да' or
+                     obj.preschool_education_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_advanced_appointment_comment == 'Да' or
+                    obj.school_education_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_btn_get_service_comment == 'Да' or
+                     obj.school_education_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_reglament_comment == 'Да' or
+                     obj.school_education_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_estimation_quality_comment == 'Да' or
+                     obj.school_education_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.school_education_connected_to_fgis_do_comment == 'Да' or
+                     obj.school_education_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_electronic_form_printing_comment == 'Да' or
+                     obj.school_education_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_edition_draft_comment == 'Да' or
+                     obj.school_education_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_term_of_consideration_comment == 'Да' or
+                     obj.school_education_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_notif_consider_result_comment == 'Да' or
+                     obj.school_education_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_causes_of_failure_comment == 'Да' or
+                     obj.school_education_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_sample_document_comment == 'Да' or
+                     obj.school_education_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.school_education_has_document_template_comment == 'Да' or
+                     obj.school_education_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_advanced_appointment_comment == 'Да' or
+                    obj.needing_premises_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_btn_get_service_comment == 'Да' or
+                     obj.needing_premises_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_reglament_comment == 'Да' or
+                     obj.needing_premises_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_estimation_quality_comment == 'Да' or
+                     obj.needing_premises_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_connected_to_fgis_do_comment == 'Да' or
+                     obj.needing_premises_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_electronic_form_printing_comment == 'Да' or
+                     obj.needing_premises_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_edition_draft_comment == 'Да' or
+                     obj.needing_premises_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_term_of_consideration_comment == 'Да' or
+                     obj.needing_premises_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_notif_consider_result_comment == 'Да' or
+                     obj.needing_premises_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_causes_of_failure_comment == 'Да' or
+                     obj.needing_premises_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_sample_document_comment == 'Да' or
+                     obj.needing_premises_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.needing_premises_has_document_template_comment == 'Да' or
+                     obj.needing_premises_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_advanced_appointment_comment == 'Да' or
+                    obj.town_planning_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_btn_get_service_comment == 'Да' or
+                     obj.town_planning_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_reglament_comment == 'Да' or
+                     obj.town_planning_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_estimation_quality_comment == 'Да' or
+                     obj.town_planning_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_connected_to_fgis_do_comment == 'Да' or
+                     obj.town_planning_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_electronic_form_printing_comment == 'Да' or
+                     obj.town_planning_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_edition_draft_comment == 'Да' or
+                     obj.town_planning_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_term_of_consideration_comment == 'Да' or
+                     obj.town_planning_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_notif_consider_result_comment == 'Да' or
+                     obj.town_planning_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_causes_of_failure_comment == 'Да' or
+                     obj.town_planning_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_sample_document_comment == 'Да' or
+                     obj.town_planning_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.town_planning_has_document_template_comment == 'Да' or
+                     obj.town_planning_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_advanced_appointment_comment == 'Да' or
+                    obj.archive_reference_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_btn_get_service_comment == 'Да' or
+                     obj.archive_reference_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_reglament_comment == 'Да' or
+                     obj.archive_reference_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_estimation_quality_comment == 'Да' or
+                     obj.archive_reference_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_connected_to_fgis_do_comment == 'Да' or
+                     obj.archive_reference_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_electronic_form_printing_comment == 'Да' or
+                     obj.archive_reference_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_edition_draft_comment == 'Да' or
+                     obj.archive_reference_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_term_of_consideration_comment == 'Да' or
+                     obj.archive_reference_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_notif_consider_result_comment == 'Да' or
+                     obj.archive_reference_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_causes_of_failure_comment == 'Да' or
+                     obj.archive_reference_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_sample_document_comment == 'Да' or
+                     obj.archive_reference_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.archive_reference_has_document_template_comment == 'Да' or
+                     obj.archive_reference_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_advanced_appointment_comment == 'Да' or
+                    obj.land_schemes_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_btn_get_service_comment == 'Да' or
+                     obj.land_schemes_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_reglament_comment == 'Да' or
+                     obj.land_schemes_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_estimation_quality_comment == 'Да' or
+                     obj.land_schemes_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_connected_to_fgis_do_comment == 'Да' or
+                     obj.land_schemes_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_electronic_form_printing_comment == 'Да' or
+                     obj.land_schemes_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_edition_draft_comment == 'Да' or
+                     obj.land_schemes_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_term_of_consideration_comment == 'Да' or
+                     obj.land_schemes_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_notif_consider_result_comment == 'Да' or
+                     obj.land_schemes_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_causes_of_failure_comment == 'Да' or
+                     obj.land_schemes_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_sample_document_comment == 'Да' or
+                     obj.land_schemes_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.land_schemes_has_document_template_comment == 'Да' or
+                     obj.land_schemes_has_document_template_comment == 'Не предусмотрено'):
+                region_full_names.append(obj.region_name)
+        except IndexError:
+            pass
+    indices = [regions_names.index(full_name) for full_name in region_full_names]
+    return render(request, 'app/with_no_troubles.html', {
+                                                    'zipped_names': zip(region_full_names, [short_regions_names[i] for i in indices]),
+                                                     'year': str(year),
+                                                     'month': MONTHS[MONTH_NUMBERS.index(str(month))],
+                                                     'num_month': month,
+                                                     'zipped': zip(regions_names, short_regions_names),
+                                                     'username': request.user.username,
+                                                     'years': [i for i in range(2016, int(datetime.now().year) + 1)]
+                                                     })
+
+@login_required(login_url='/login/', redirect_field_name='/form/')
 def get_self_examination_form(request):
     """
     View function for renewing a specific regionForm by users
@@ -411,7 +672,7 @@ def get_self_examination_form(request):
                                        'year': str(datetime.today().strftime('%Y')),
                                        })
 
-        return render(request, 'app/self_examination_form.html', {
+        return render(request, 'app/form.html', {
             'region_form': region_form,
             'username': request.user.username,
             'region_name': request.user.region_name,
@@ -1152,9 +1413,11 @@ def get_result_form_with_troubles(request, year, month):
 @login_required(login_url='/login/',
                 redirect_field_name='/result_form/not_sent/' + datetime.today().strftime('%Y/%m/'))
 def get_result_form_not_sent(request, year, month):
-    objects = get_not_sent(month,year)
-    return render(request, 'app/not_sent.html', {'objects': objects,
-                                                     'year': str(year),
+    region_full_names = get_not_sent(month,year)
+    indices = [regions_names.index(full_name) for full_name in region_full_names]
+    return render(request, 'app/not_sent.html', {
+                                                    'zipped_names': zip(region_full_names, [short_regions_names[i] for i in indices]),
+                                                    'year': str(year),
                                                      'month': MONTHS[MONTH_NUMBERS.index(str(month))],
                                                      'num_month': month,
                                                      'zipped': zip(regions_names, short_regions_names),

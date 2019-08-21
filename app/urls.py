@@ -34,6 +34,8 @@ urlpatterns = [
 
     re_path(r'^result_form/with_troubles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$',
             views.get_result_form_with_troubles, name='with_troubles'),
+    re_path(r'^result_form/with_no_troubles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$',
+            views.get_with_no_troubles, name='with_no_troubles'),
     re_path(r'^result_form/not_sent/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$',
             views.get_result_form_not_sent, name='not_sent'),
     re_path(r'^result_form/(?P<service_name>[a-z_]{10,30})/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$',
