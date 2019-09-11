@@ -51,27 +51,12 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Фильтр по услугам
         </a>
-        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4">
-          <a class="dropdown-item" href="/result_form/residential_premises/{{ year }}/{{ num_month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/housing_transfer/{{ year }}/{{ num_month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/advertising_structures/{{ year }}/{{ num_month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/capital_construction/{{ year }}/{{ num_month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/preschool_education/{{ year }}/{{ num_month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу<br> дошкольного образования (детские сады)</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/school_education/{{ year }}/{{ num_month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/needing_premises/{{ year }}/{{ num_month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/town_planning/{{ year }}/{{ num_month }}/">Выдача градостроительных планов земельных участков</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/archive_reference/{{ year }}/{{ num_month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав <br> и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/land_schemes/{{ year }}/{{ num_month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a>
-        </div>
+        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4" style="height:400px;width:900px;overflow-y: scroll;">
+            {% for item in zipped_service_names %}
+                <a class="dropdown-item" href="/result_form/{{ item.1}}/{{ year }}/{{ num_month }}/">{{ item.0 }}</a>
+                <div class="dropdown-divider"></div>
+            {% endfor %}
+          </div>
       </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -122,7 +107,7 @@
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения
+         {{ full_service_names.0 }}
         </button>
       </h2>
     </div>
@@ -131,7 +116,7 @@
       <div class="card-body">
         
 <!-- First card body-->   
-      
+
 <div>Идентификатор услуги в РГМУ</div>
 {{ region_form.residential_premises_id_rgmu }}
 <div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
@@ -306,7 +291,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue_1">Сохранить услугу и продолжить</button>
 <!-- First card body end-->
 
       </div>
@@ -316,8 +301,7 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения
-        </button>
+          {{ full_service_names.1 }}</button>
       </h2>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -499,7 +483,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue_2">Сохранить услугу и продолжить</button>
 <!-- Second card body end-->
 
       </div>
@@ -509,8 +493,7 @@
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Выдача разрешения на установку и эксплуатацию рекламной конструкции 
-        </button>
+          {{ full_service_names.2 }}</button>
       </h2>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
@@ -692,7 +675,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
  <!--Third card body end-->
       </div>
@@ -703,8 +686,7 @@
     <div class="card-header" id="headingFour">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Выдача разрешения на строительство, реконструкцию объектов капитального строительства
-        </button>
+          {{ full_service_names.3 }}</button>
       </h2>
     </div>
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
@@ -885,7 +867,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Fourth card body end-->
       </div>
@@ -896,8 +878,7 @@
     <div class="card-header" id="headingFive">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)
-        </button>
+          {{ full_service_names.4 }}</button>
       </h2>
     </div>
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
@@ -1078,7 +1059,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Fifth card body end-->
       </div>
@@ -1090,8 +1071,7 @@
     <div class="card-header" id="headingSix">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения
-        </button>
+          {{ full_service_names.5 }}</button>
       </h2>
     </div>
     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
@@ -1272,7 +1252,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Sixth card body end-->
       </div>
@@ -1283,8 +1263,7 @@
     <div class="card-header" id="headingSeven">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-          Принятие на учет граждан в качестве нуждающихся в жилых помещениях
-        </button>
+          {{ full_service_names.6 }}</button>
       </h2>
     </div>
     <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
@@ -1465,7 +1444,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Seventh card body end-->
       </div>
@@ -1477,8 +1456,7 @@
     <div class="card-header" id="headingEight">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-          Выдача градостроительных планов земельных участков
-        </button>
+          {{ full_service_names.7 }}</button>
       </h2>
     </div>
     <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
@@ -1659,7 +1637,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Eighth card body end-->
       </div>
@@ -1672,8 +1650,7 @@
     <div class="card-header" id="headingNine">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-          Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий
-        </button>
+          {{ full_service_names.8 }}</button>
       </h2>
     </div>
     <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
@@ -1854,7 +1831,7 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Nineth card body end-->
       </div>
@@ -1866,8 +1843,7 @@
     <div class="card-header" id="headingTen">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-          Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории
-        </button>
+          {{ full_service_names.9 }}</button>
       </h2>
     </div>
     <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
@@ -2048,20 +2024,1179 @@
 </div>
 </div>
 <p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
-
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
 
 <!--Tenth card body end-->
         </div>
     </div>
   </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingEleven">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+          {{ full_service_names.10 }}</button>
+      </h2>
+    </div>
+    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Eleventh card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.land_sale_id_rgmu }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).
 </div>
-<button type="submit" class="btn btn-primary">Сохранить и отправить</button>
+{{ region_form.land_sale_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.land_sale_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_sale_has_advanced_appointment }}
+</div>
+
+<div id="heading121" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_sale_has_btn_get_service }}
+</div>
+
+<div id="heading122" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_sale_has_reglament }}
+</div>
+
+<div id="heading123" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_sale_has_estimation_quality }}
+</div>
+
+
+<div id="heading124" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_connected_to_fgis_do }}
+</div>
+
+
+<div id="heading125" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_connected_to_fgis_do_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_electronic_form_printing }}
+</div>
+
+<div id="heading126" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_edition_draft }}
+</div>
+
+<div id="heading127" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_term_of_consideration }}
+</div>
+
+
+<div id="heading128" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_notif_consider_result }}
+</div>
+
+<div id="heading129" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_causes_of_failure }}
+</div>
+
+
+<div id="heading130" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_sample_document }}
+</div>
+
+<div id="heading131" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_sale_has_document_template }}
+</div>
+
+<div id="heading132" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_sale_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
+
+<!--Eleventh card body end-->
+        </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingTwelth">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelth" aria-expanded="false" aria-controls="collapseTwelth">
+          {{ full_service_names.11 }}</button>
+      </h2>
+    </div>
+    <div id="collapseTwelth" class="collapse" aria-labelledby="headingTwelth" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Twelth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.land_lease_id_rgmu }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.land_lease_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.land_lease_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_lease_has_advanced_appointment }}
+</div>
+
+<div id="heading133" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.land_lease_has_btn_get_service }}
+</div>
+
+<div id="heading134" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_lease_has_reglament }}
+</div>
+
+<div id="heading135" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.land_lease_has_estimation_quality }}
+</div>
+
+
+<div id="heading136" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_connected_to_fgis_do }}
+</div>
+
+
+<div id="heading137" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_connected_to_fgis_do_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_electronic_form_printing }}
+</div>
+
+<div id="heading138" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_edition_draft }}
+</div>
+
+<div id="heading139" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_term_of_consideration }}
+</div>
+
+
+<div id="heading140" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_notif_consider_result }}
+</div>
+
+<div id="heading141" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_causes_of_failure }}
+</div>
+
+
+<div id="heading142" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_sample_document }}
+</div>
+
+<div id="heading143" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.land_lease_has_document_template }}
+</div>
+
+<div id="heading144" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.land_lease_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
+
+<!--Twelth card body end-->
+        </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingThirteen">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+          {{ full_service_names.12 }} </button>
+      </h2>
+    </div>
+    <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Thirteenth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.ownership_right_id_rgmu }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.ownership_right_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.ownership_right_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.ownership_right_has_advanced_appointment }}
+</div>
+
+<div id="heading145" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.ownership_right_has_btn_get_service }}
+</div>
+
+<div id="heading146" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.ownership_right_has_reglament }}
+</div>
+
+<div id="heading147" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.ownership_right_has_estimation_quality }}
+</div>
+
+
+<div id="heading148" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_connected_to_fgis_do }}
+</div>
+
+
+<div id="heading149" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_connected_to_fgis_do_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_electronic_form_printing }}
+</div>
+
+<div id="heading150" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_edition_draft }}
+</div>
+
+<div id="heading151" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_term_of_consideration }}
+</div>
+
+
+<div id="heading152" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_notif_consider_result }}
+</div>
+
+<div id="heading153" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_causes_of_failure }}
+</div>
+
+
+<div id="heading154" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_sample_document }}
+</div>
+
+<div id="heading155" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.ownership_right_has_document_template }}
+</div>
+
+<div id="heading156" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.ownership_right_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
+
+<!--Thirteenth card body end-->
+        </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingFourteen">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+         {{ full_service_names.13 }}</button>
+      </h2>
+    </div>
+    <div id="collapseFourteen" class="collapse" aria-labelledby="headingFourteen" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Fourteenth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.municipal_property_lease_id_rgmu }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.municipal_property_lease_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.municipal_property_lease_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.municipal_property_lease_has_advanced_appointment }}
+</div>
+
+<div id="heading157" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.municipal_property_lease_has_btn_get_service }}
+</div>
+
+<div id="heading158" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.municipal_property_lease_has_reglament }}
+</div>
+
+<div id="heading159" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.municipal_property_lease_has_estimation_quality }}
+</div>
+
+
+<div id="heading160" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_connected_to_fgis_do }}
+</div>
+
+
+<div id="heading161" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_connected_to_fgis_do_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_electronic_form_printing }}
+</div>
+
+<div id="heading162" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_edition_draft }}
+</div>
+
+<div id="heading163" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_term_of_consideration }}
+</div>
+
+
+<div id="heading164" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_notif_consider_result }}
+</div>
+
+<div id="heading165" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_causes_of_failure }}
+</div>
+
+
+<div id="heading166" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_sample_document }}
+</div>
+
+<div id="heading167" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.municipal_property_lease_has_document_template }}
+</div>
+
+<div id="heading168" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.municipal_property_lease_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
+
+<!--Fourteenth card body end-->
+        </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingFifteen">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+         {{ full_service_names.14 }} </button>
+      </h2>
+    </div>
+    <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#accordionExample">
+      <div class="card-body">
+<!--Fifteenth card body start-->
+
+<div>Идентификатор услуги в РГМУ</div>
+{{ region_form.free_land_provision_id_rgmu }}
+<div> Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).
+</div>
+{{ region_form.free_land_provision_statement_amount }}
+<div>Ссылка на услугу*</div>
+{{ region_form.free_land_provision_link }}
+<p>* в случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам</p>
+
+<div>Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</div>
+<div class="form-check form-check-inline">
+    {{region_form.free_land_provision_has_advanced_appointment }}
+</div>
+
+<div id="heading169" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_advanced_appointment_comment }}
+</div>
+</div>
+
+<div> Наличие кнопки "Получить услугу"*</div>
+<div class="form-check form-check-inline">
+    {{region_form.free_land_provision_has_btn_get_service }}
+</div>
+
+<div id="heading170" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_btn_get_service_comment }}
+</div>
+</div>
+<p>*В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00</p>
+
+<div> Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ*</div>
+       <div class="form-check form-check-inline">
+    {{region_form.free_land_provision_has_reglament }}
+</div>
+
+<div id="heading171" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_reglament_comment }}
+</div>
+</div>
+<p>*ЕПГУ/РПГУ - Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru)</p>
+
+
+<div> Возможность оценки качества предоставления услуги</div>
+       <div class="form-check form-check-inline">
+    {{region_form.free_land_provision_has_estimation_quality }}
+</div>
+
+
+<div id="heading172" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_estimation_quality_comment }}
+</div>
+</div>
+
+
+<div>Орган власти подключен к ФГИС ДО*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_connected_to_fgis_do }}
+</div>
+
+
+<div id="heading173" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_connected_to_fgis_do_comment }}
+</div>
+</div>
+<p>*ФГИС ДО - Федеральная государственная информационная система досудебного обжалования.</p>
+
+
+<div>Возможность печати электронной формы заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_electronic_form_printing }}
+</div>
+
+<div id="heading174" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_electronic_form_printing_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие кнопки печати в интерфейсе подачи заявления.</p>
+
+
+<div>Возможность редактировать черновик заявления*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_edition_draft }}
+</div>
+
+<div id="heading175" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_edition_draft_comment }}
+</div>
+</div>
+<p>*Подразумевается наличие возможности сохранять незавершенные заявления как черновики и редактировать их в дальнейшем.</p>
+
+
+<div>Срок рассмотрения заявления (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_term_of_consideration }}
+</div>
+
+
+<div id="heading176" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_term_of_consideration_comment }}
+</div>
+</div>
+<p>*Подразумевается, что текст уведомления содержит сведения о нормативных сроках рассмотрения заявления.</p>
+
+
+<div>Уведомление о результате рассмотрения заявления в личном кабинете*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_notif_consider_result }}
+</div>
+
+<div id="heading177" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_notif_consider_result_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.</p>
+
+
+<div>Причины отказа (личный кабинет)*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_causes_of_failure }}
+</div>
+
+
+<div id="heading178" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_causes_of_failure_comment }}
+</div>
+</div>
+<p>*Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом "Отказано") не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).</p>
+
+
+<div>Образец документа</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_sample_document }}
+</div>
+
+<div id="heading179" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_sample_document_comment }}
+</div>
+</div>
+
+<div>Шаблон (форма, бланк) документа*</div>
+<div class="form-check form-check-inline">
+{{region_form.free_land_provision_has_document_template }}
+</div>
+
+<div id="heading180" style="display:none">
+<div class="form-group">
+    <label>Пожалуйста, укажите причичну, по которой не предоставляется данная услуга.</label>
+    {{ region_form.free_land_provision_has_document_template_comment }}
+</div>
+</div>
+<p>*Да - есть возможность заполнить шаблон (бланк) в электронном виде. Нет - нет возможности заполнить шаблон (бланк) в электронном виде.</p>
+<button type="submit" class="btn btn-primary" value="continue" name="btn_action" id="btn_continue">Сохранить услугу и продолжить</button>
+
+<!--Fifteenth card body end-->
+        </div>
+    </div>
+  </div>
+
+
+</div>
+<button type="submit" class="btn btn-primary" value="exit" name="btn_action">Сохранить и завершить</button>
 </div>
 </div>
 </div>
 </form>
     <!-- functions --->
     <!-- for first card-->
+    <script>$( document ).ready(function() {
+        if($('#chk1_2').is(':checked')) { $('#heading1').show();area = $("#txtarea1");area.prop('required',true);}
+        if($('#chk2_2').is(':checked')) { $('#heading2').show();area = $("#txtarea2");area.prop('required',true);}
+        if($('#chk3_2').is(':checked')) { $('#heading3').show();area = $("#txtarea3");area.prop('required',true);}
+        if($('#chk4_2').is(':checked')) { $('#heading4').show();area = $("#txtarea4");area.prop('required',true);}
+        if($('#chk5_2').is(':checked')) { $('#heading5').show();area = $("#txtarea5");area.prop('required',true);}
+        if($('#chk6_2').is(':checked')) { $('#heading6').show();area = $("#txtarea6");area.prop('required',true);}
+        if($('#chk7_2').is(':checked')) { $('#heading7').show();area = $("#txtarea7");area.prop('required',true);}
+        if($('#chk8_2').is(':checked')) { $('#heading8').show();area = $("#txtarea8");area.prop('required',true);}
+        if($('#chk9_2').is(':checked')) { $('#heading9').show();area = $("#txtarea9");area.prop('required',true);}
+        if($('#chk10_2').is(':checked')) { $('#heading10').show();area = $("#txtarea10");area.prop('required',true);}
+        if($('#chk11_2').is(':checked')) { $('#heading11').show();area = $("#txtarea11");area.prop('required',true);}
+        if($('#chk12_2').is(':checked')) { $('#heading12').show();area = $("#txtarea12");area.prop('required',true);}
+        if($('#chk13_2').is(':checked')) { $('#heading13').show();area = $("#txtarea13");area.prop('required',true);}
+        if($('#chk14_2').is(':checked')) { $('#heading14').show();area = $("#txtarea14");area.prop('required',true);}
+        if($('#chk15_2').is(':checked')) { $('#heading15').show();area = $("#txtarea15");area.prop('required',true);}
+        if($('#chk16_2').is(':checked')) { $('#heading16').show();area = $("#txtarea16");area.prop('required',true);}
+        if($('#chk17_2').is(':checked')) { $('#heading17').show();area = $("#txtarea17");area.prop('required',true);}
+        if($('#chk18_2').is(':checked')) { $('#heading18').show();area = $("#txtarea18");area.prop('required',true);}
+        if($('#chk19_2').is(':checked')) { $('#heading19').show();area = $("#txtarea19");area.prop('required',true);}
+        if($('#chk20_2').is(':checked')) { $('#heading20').show();area = $("#txtarea20");area.prop('required',true);}
+        if($('#chk21_2').is(':checked')) { $('#heading21').show();area = $("#txtarea21");area.prop('required',true);}
+        if($('#chk22_2').is(':checked')) { $('#heading22').show();area = $("#txtarea22");area.prop('required',true);}
+        if($('#chk23_2').is(':checked')) { $('#heading23').show();area = $("#txtarea23");area.prop('required',true);}
+        if($('#chk24_2').is(':checked')) { $('#heading24').show();area = $("#txtarea24");area.prop('required',true);}
+        if($('#chk25_2').is(':checked')) { $('#heading25').show();area = $("#txtarea25");area.prop('required',true);}
+        if($('#chk26_2').is(':checked')) { $('#heading26').show();area = $("#txtarea26");area.prop('required',true);}
+        if($('#chk27_2').is(':checked')) { $('#heading27').show();area = $("#txtarea27");area.prop('required',true);}
+        if($('#chk28_2').is(':checked')) { $('#heading28').show();area = $("#txtarea28");area.prop('required',true);}
+        if($('#chk29_2').is(':checked')) { $('#heading29').show();area = $("#txtarea29");area.prop('required',true);}
+        if($('#chk30_2').is(':checked')) { $('#heading30').show();area = $("#txtarea30");area.prop('required',true);}
+        if($('#chk31_2').is(':checked')) { $('#heading31').show();area = $("#txtarea31");area.prop('required',true);}
+        if($('#chk32_2').is(':checked')) { $('#heading32').show();area = $("#txtarea32");area.prop('required',true);}
+        if($('#chk33_2').is(':checked')) { $('#heading33').show();area = $("#txtarea33");area.prop('required',true);}
+        if($('#chk34_2').is(':checked')) { $('#heading34').show();area = $("#txtarea34");area.prop('required',true);}
+        if($('#chk35_2').is(':checked')) { $('#heading35').show();area = $("#txtarea35");area.prop('required',true);}
+        if($('#chk36_2').is(':checked')) { $('#heading36').show();area = $("#txtarea36");area.prop('required',true);}
+        if($('#chk37_2').is(':checked')) { $('#heading37').show();area = $("#txtarea37");area.prop('required',true);}
+        if($('#chk38_2').is(':checked')) { $('#heading38').show();area = $("#txtarea38");area.prop('required',true);}
+        if($('#chk39_2').is(':checked')) { $('#heading39').show();area = $("#txtarea39");area.prop('required',true);}
+        if($('#chk40_2').is(':checked')) { $('#heading40').show();area = $("#txtarea40");area.prop('required',true);}
+        if($('#chk41_2').is(':checked')) { $('#heading41').show();area = $("#txtarea41");area.prop('required',true);}
+        if($('#chk42_2').is(':checked')) { $('#heading42').show();area = $("#txtarea42");area.prop('required',true);}
+        if($('#chk43_2').is(':checked')) { $('#heading43').show();area = $("#txtarea43");area.prop('required',true);}
+        if($('#chk44_2').is(':checked')) { $('#heading44').show();area = $("#txtarea44");area.prop('required',true);}
+        if($('#chk45_2').is(':checked')) { $('#heading45').show();area = $("#txtarea45");area.prop('required',true);}
+        if($('#chk46_2').is(':checked')) { $('#heading46').show();area = $("#txtarea46");area.prop('required',true);}
+        if($('#chk47_2').is(':checked')) { $('#heading47').show();area = $("#txtarea47");area.prop('required',true);}
+        if($('#chk48_2').is(':checked')) { $('#heading48').show();area = $("#txtarea48");area.prop('required',true);}
+        if($('#chk49_2').is(':checked')) { $('#heading49').show();area = $("#txtarea49");area.prop('required',true);}
+        if($('#chk50_2').is(':checked')) { $('#heading50').show();area = $("#txtarea50");area.prop('required',true);}
+        if($('#chk51_2').is(':checked')) { $('#heading51').show();area = $("#txtarea51");area.prop('required',true);}
+        if($('#chk52_2').is(':checked')) { $('#heading52').show();area = $("#txtarea52");area.prop('required',true);}
+        if($('#chk53_2').is(':checked')) { $('#heading53').show();area = $("#txtarea53");area.prop('required',true);}
+        if($('#chk54_2').is(':checked')) { $('#heading54').show();area = $("#txtarea54");area.prop('required',true);}
+        if($('#chk55_2').is(':checked')) { $('#heading55').show();area = $("#txtarea55");area.prop('required',true);}
+        if($('#chk56_2').is(':checked')) { $('#heading56').show();area = $("#txtarea56");area.prop('required',true);}
+        if($('#chk57_2').is(':checked')) { $('#heading57').show();area = $("#txtarea57");area.prop('required',true);}
+        if($('#chk58_2').is(':checked')) { $('#heading58').show();area = $("#txtarea58");area.prop('required',true);}
+        if($('#chk59_2').is(':checked')) { $('#heading59').show();area = $("#txtarea59");area.prop('required',true);}
+        if($('#chk60_2').is(':checked')) { $('#heading60').show();area = $("#txtarea60");area.prop('required',true);}
+        if($('#chk61_2').is(':checked')) { $('#heading61').show();area = $("#txtarea61");area.prop('required',true);}
+        if($('#chk62_2').is(':checked')) { $('#heading62').show();area = $("#txtarea62");area.prop('required',true);}
+        if($('#chk63_2').is(':checked')) { $('#heading63').show();area = $("#txtarea63");area.prop('required',true);}
+        if($('#chk64_2').is(':checked')) { $('#heading64').show();area = $("#txtarea64");area.prop('required',true);}
+        if($('#chk65_2').is(':checked')) { $('#heading65').show();area = $("#txtarea65");area.prop('required',true);}
+        if($('#chk66_2').is(':checked')) { $('#heading66').show();area = $("#txtarea66");area.prop('required',true);}
+        if($('#chk67_2').is(':checked')) { $('#heading67').show();area = $("#txtarea67");area.prop('required',true);}
+        if($('#chk68_2').is(':checked')) { $('#heading68').show();area = $("#txtarea68");area.prop('required',true);}
+        if($('#chk69_2').is(':checked')) { $('#heading69').show();area = $("#txtarea69");area.prop('required',true);}
+        if($('#chk70_2').is(':checked')) { $('#heading70').show();area = $("#txtarea70");area.prop('required',true);}
+        if($('#chk71_2').is(':checked')) { $('#heading71').show();area = $("#txtarea71");area.prop('required',true);}
+        if($('#chk72_2').is(':checked')) { $('#heading72').show();area = $("#txtarea72");area.prop('required',true);}
+        if($('#chk73_2').is(':checked')) { $('#heading73').show();area = $("#txtarea73");area.prop('required',true);}
+        if($('#chk74_2').is(':checked')) { $('#heading74').show();area = $("#txtarea74");area.prop('required',true);}
+        if($('#chk75_2').is(':checked')) { $('#heading75').show();area = $("#txtarea75");area.prop('required',true);}
+        if($('#chk76_2').is(':checked')) { $('#heading76').show();area = $("#txtarea76");area.prop('required',true);}
+        if($('#chk77_2').is(':checked')) { $('#heading77').show();area = $("#txtarea77");area.prop('required',true);}
+        if($('#chk78_2').is(':checked')) { $('#heading78').show();area = $("#txtarea78");area.prop('required',true);}
+        if($('#chk79_2').is(':checked')) { $('#heading79').show();area = $("#txtarea79");area.prop('required',true);}
+        if($('#chk80_2').is(':checked')) { $('#heading80').show();area = $("#txtarea80");area.prop('required',true);}
+        if($('#chk81_2').is(':checked')) { $('#heading81').show();area = $("#txtarea81");area.prop('required',true);}
+        if($('#chk82_2').is(':checked')) { $('#heading82').show();area = $("#txtarea82");area.prop('required',true);}
+        if($('#chk83_2').is(':checked')) { $('#heading83').show();area = $("#txtarea83");area.prop('required',true);}
+        if($('#chk84_2').is(':checked')) { $('#heading84').show();area = $("#txtarea84");area.prop('required',true);}
+        if($('#chk85_2').is(':checked')) { $('#heading85').show();area = $("#txtarea85");area.prop('required',true);}
+        if($('#chk86_2').is(':checked')) { $('#heading86').show();area = $("#txtarea86");area.prop('required',true);}
+        if($('#chk87_2').is(':checked')) { $('#heading87').show();area = $("#txtarea87");area.prop('required',true);}
+        if($('#chk88_2').is(':checked')) { $('#heading88').show();area = $("#txtarea88");area.prop('required',true);}
+        if($('#chk89_2').is(':checked')) { $('#heading89').show();area = $("#txtarea89");area.prop('required',true);}
+        if($('#chk90_2').is(':checked')) { $('#heading90').show();area = $("#txtarea90");area.prop('required',true);}
+        if($('#chk91_2').is(':checked')) { $('#heading91').show();area = $("#txtarea91");area.prop('required',true);}
+        if($('#chk92_2').is(':checked')) { $('#heading92').show();area = $("#txtarea92");area.prop('required',true);}
+        if($('#chk93_2').is(':checked')) { $('#heading93').show();area = $("#txtarea93");area.prop('required',true);}
+        if($('#chk94_2').is(':checked')) { $('#heading94').show();area = $("#txtarea94");area.prop('required',true);}
+        if($('#chk95_2').is(':checked')) { $('#heading95').show();area = $("#txtarea95");area.prop('required',true);}
+        if($('#chk96_2').is(':checked')) { $('#heading96').show();area = $("#txtarea96");area.prop('required',true);}
+        if($('#chk97_2').is(':checked')) { $('#heading97').show();area = $("#txtarea97");area.prop('required',true);}
+        if($('#chk98_2').is(':checked')) { $('#heading98').show();area = $("#txtarea98");area.prop('required',true);}
+        if($('#chk99_2').is(':checked')) { $('#heading99').show();area = $("#txtarea99");area.prop('required',true);}
+        if($('#chk100_2').is(':checked')) { $('#heading100').show();area = $("#txtarea100");area.prop('required',true);}
+        if($('#chk101_2').is(':checked')) { $('#heading101').show();area = $("#txtarea101");area.prop('required',true);}
+        if($('#chk102_2').is(':checked')) { $('#heading102').show();area = $("#txtarea102");area.prop('required',true);}
+        if($('#chk103_2').is(':checked')) { $('#heading103').show();area = $("#txtarea103");area.prop('required',true);}
+        if($('#chk104_2').is(':checked')) { $('#heading104').show();area = $("#txtarea104");area.prop('required',true);}
+        if($('#chk105_2').is(':checked')) { $('#heading105').show();area = $("#txtarea105");area.prop('required',true);}
+        if($('#chk106_2').is(':checked')) { $('#heading106').show();area = $("#txtarea106");area.prop('required',true);}
+        if($('#chk107_2').is(':checked')) { $('#heading107').show();area = $("#txtarea107");area.prop('required',true);}
+        if($('#chk108_2').is(':checked')) { $('#heading108').show();area = $("#txtarea108");area.prop('required',true);}
+        if($('#chk109_2').is(':checked')) { $('#heading109').show();area = $("#txtarea109");area.prop('required',true);}
+        if($('#chk110_2').is(':checked')) { $('#heading110').show();area = $("#txtarea110");area.prop('required',true);}
+        if($('#chk111_2').is(':checked')) { $('#heading111').show();area = $("#txtarea111");area.prop('required',true);}
+        if($('#chk112_2').is(':checked')) { $('#heading112').show();area = $("#txtarea112");area.prop('required',true);}
+        if($('#chk113_2').is(':checked')) { $('#heading113').show();area = $("#txtarea113");area.prop('required',true);}
+        if($('#chk114_2').is(':checked')) { $('#heading114').show();area = $("#txtarea114");area.prop('required',true);}
+        if($('#chk115_2').is(':checked')) { $('#heading115').show();area = $("#txtarea115");area.prop('required',true);}
+        if($('#chk116_2').is(':checked')) { $('#heading116').show();area = $("#txtarea116");area.prop('required',true);}
+        if($('#chk117_2').is(':checked')) { $('#heading117').show();area = $("#txtarea117");area.prop('required',true);}
+        if($('#chk118_2').is(':checked')) { $('#heading118').show();area = $("#txtarea118");area.prop('required',true);}
+        if($('#chk119_2').is(':checked')) { $('#heading119').show();area = $("#txtarea119");area.prop('required',true);}
+        if($('#chk110_2').is(':checked')) { $('#heading110').show();area = $("#txtarea110");area.prop('required',true);}
+        if($('#chk111_2').is(':checked')) { $('#heading111').show();area = $("#txtarea111");area.prop('required',true);}
+        if($('#chk112_2').is(':checked')) { $('#heading112').show();area = $("#txtarea112");area.prop('required',true);}
+        if($('#chk113_2').is(':checked')) { $('#heading113').show();area = $("#txtarea113");area.prop('required',true);}
+        if($('#chk114_2').is(':checked')) { $('#heading114').show();area = $("#txtarea114");area.prop('required',true);}
+        if($('#chk115_2').is(':checked')) { $('#heading115').show();area = $("#txtarea115");area.prop('required',true);}
+        if($('#chk116_2').is(':checked')) { $('#heading116').show();area = $("#txtarea116");area.prop('required',true);}
+        if($('#chk117_2').is(':checked')) { $('#heading117').show();area = $("#txtarea117");area.prop('required',true);}
+        if($('#chk118_2').is(':checked')) { $('#heading118').show();area = $("#txtarea118");area.prop('required',true);}
+        if($('#chk119_2').is(':checked')) { $('#heading119').show();area = $("#txtarea119");area.prop('required',true);}
+        if($('#chk120_2').is(':checked')) { $('#heading120').show();area = $("#txtarea120");area.prop('required',true);}
+        if($('#chk121_2').is(':checked')) { $('#heading121').show();area = $("#txtarea121");area.prop('required',true);}
+        if($('#chk122_2').is(':checked')) { $('#heading122').show();area = $("#txtarea122");area.prop('required',true);}
+        if($('#chk123_2').is(':checked')) { $('#heading123').show();area = $("#txtarea123");area.prop('required',true);}
+        if($('#chk124_2').is(':checked')) { $('#heading124').show();area = $("#txtarea124");area.prop('required',true);}
+        if($('#chk125_2').is(':checked')) { $('#heading125').show();area = $("#txtarea125");area.prop('required',true);}
+        if($('#chk126_2').is(':checked')) { $('#heading126').show();area = $("#txtarea126");area.prop('required',true);}
+        if($('#chk127_2').is(':checked')) { $('#heading127').show();area = $("#txtarea127");area.prop('required',true);}
+        if($('#chk128_2').is(':checked')) { $('#heading128').show();area = $("#txtarea128");area.prop('required',true);}
+        if($('#chk129_2').is(':checked')) { $('#heading129').show();area = $("#txtarea129");area.prop('required',true);}
+        if($('#chk130_2').is(':checked')) { $('#heading130').show();area = $("#txtarea130");area.prop('required',true);}
+        if($('#chk131_2').is(':checked')) { $('#heading131').show();area = $("#txtarea131");area.prop('required',true);}
+        if($('#chk132_2').is(':checked')) { $('#heading132').show();area = $("#txtarea132");area.prop('required',true);}
+        if($('#chk133_2').is(':checked')) { $('#heading133').show();area = $("#txtarea133");area.prop('required',true);}
+        if($('#chk134_2').is(':checked')) { $('#heading134').show();area = $("#txtarea134");area.prop('required',true);}
+        if($('#chk135_2').is(':checked')) { $('#heading135').show();area = $("#txtarea135");area.prop('required',true);}
+        if($('#chk136_2').is(':checked')) { $('#heading136').show();area = $("#txtarea136");area.prop('required',true);}
+        if($('#chk137_2').is(':checked')) { $('#heading137').show();area = $("#txtarea137");area.prop('required',true);}
+        if($('#chk138_2').is(':checked')) { $('#heading138').show();area = $("#txtarea138");area.prop('required',true);}
+        if($('#chk139_2').is(':checked')) { $('#heading139').show();area = $("#txtarea139");area.prop('required',true);}
+        if($('#chk140_2').is(':checked')) { $('#heading140').show();area = $("#txtarea140");area.prop('required',true);}
+        if($('#chk141_2').is(':checked')) { $('#heading141').show();area = $("#txtarea141");area.prop('required',true);}
+        if($('#chk142_2').is(':checked')) { $('#heading142').show();area = $("#txtarea142");area.prop('required',true);}
+        if($('#chk143_2').is(':checked')) { $('#heading143').show();area = $("#txtarea143");area.prop('required',true);}
+        if($('#chk144_2').is(':checked')) { $('#heading144').show();area = $("#txtarea144");area.prop('required',true);}
+        if($('#chk145_2').is(':checked')) { $('#heading145').show();area = $("#txtarea145");area.prop('required',true);}
+        if($('#chk146_2').is(':checked')) { $('#heading146').show();area = $("#txtarea146");area.prop('required',true);}
+        if($('#chk147_2').is(':checked')) { $('#heading147').show();area = $("#txtarea147");area.prop('required',true);}
+        if($('#chk148_2').is(':checked')) { $('#heading148').show();area = $("#txtarea148");area.prop('required',true);}
+        if($('#chk149_2').is(':checked')) { $('#heading149').show();area = $("#txtarea149");area.prop('required',true);}
+        if($('#chk150_2').is(':checked')) { $('#heading150').show();area = $("#txtarea150");area.prop('required',true);}
+        if($('#chk151_2').is(':checked')) { $('#heading151').show();area = $("#txtarea151");area.prop('required',true);}
+        if($('#chk152_2').is(':checked')) { $('#heading152').show();area = $("#txtarea152");area.prop('required',true);}
+        if($('#chk153_2').is(':checked')) { $('#heading153').show();area = $("#txtarea153");area.prop('required',true);}
+        if($('#chk154_2').is(':checked')) { $('#heading154').show();area = $("#txtarea154");area.prop('required',true);}
+        if($('#chk155_2').is(':checked')) { $('#heading155').show();area = $("#txtarea155");area.prop('required',true);}
+        if($('#chk156_2').is(':checked')) { $('#heading156').show();area = $("#txtarea156");area.prop('required',true);}
+        if($('#chk157_2').is(':checked')) { $('#heading157').show();area = $("#txtarea157");area.prop('required',true);}
+        if($('#chk158_2').is(':checked')) { $('#heading158').show();area = $("#txtarea158");area.prop('required',true);}
+        if($('#chk159_2').is(':checked')) { $('#heading159').show();area = $("#txtarea159");area.prop('required',true);}
+        if($('#chk160_2').is(':checked')) { $('#heading160').show();area = $("#txtarea160");area.prop('required',true);}
+        if($('#chk161_2').is(':checked')) { $('#heading161').show();area = $("#txtarea161");area.prop('required',true);}
+        if($('#chk162_2').is(':checked')) { $('#heading162').show();area = $("#txtarea162");area.prop('required',true);}
+        if($('#chk163_2').is(':checked')) { $('#heading163').show();area = $("#txtarea163");area.prop('required',true);}
+        if($('#chk164_2').is(':checked')) { $('#heading164').show();area = $("#txtarea164");area.prop('required',true);}
+        if($('#chk165_2').is(':checked')) { $('#heading165').show();area = $("#txtarea165");area.prop('required',true);}
+        if($('#chk166_2').is(':checked')) { $('#heading166').show();area = $("#txtarea166");area.prop('required',true);}
+        if($('#chk167_2').is(':checked')) { $('#heading167').show();area = $("#txtarea167");area.prop('required',true);}
+        if($('#chk168_2').is(':checked')) { $('#heading168').show();area = $("#txtarea168");area.prop('required',true);}
+        if($('#chk169_2').is(':checked')) { $('#heading169').show();area = $("#txtarea169");area.prop('required',true);}
+        if($('#chk170_2').is(':checked')) { $('#heading170').show();area = $("#txtarea170");area.prop('required',true);}
+        if($('#chk171_2').is(':checked')) { $('#heading171').show();area = $("#txtarea171");area.prop('required',true);}
+        if($('#chk172_2').is(':checked')) { $('#heading172').show();area = $("#txtarea172");area.prop('required',true);}
+        if($('#chk173_2').is(':checked')) { $('#heading173').show();area = $("#txtarea173");area.prop('required',true);}
+        if($('#chk174_2').is(':checked')) { $('#heading174').show();area = $("#txtarea174");area.prop('required',true);}
+        if($('#chk175_2').is(':checked')) { $('#heading175').show();area = $("#txtarea175");area.prop('required',true);}
+        if($('#chk176_2').is(':checked')) { $('#heading176').show();area = $("#txtarea176");area.prop('required',true);}
+        if($('#chk177_2').is(':checked')) { $('#heading177').show();area = $("#txtarea177");area.prop('required',true);}
+        if($('#chk178_2').is(':checked')) { $('#heading178').show();area = $("#txtarea178");area.prop('required',true);}
+        if($('#chk179_2').is(':checked')) { $('#heading179').show();area = $("#txtarea179");area.prop('required',true);}
+        if($('#chk180_2').is(':checked')) { $('#heading180').show();area = $("#txtarea180");area.prop('required',true);}
+    });</script>
     <script>$('#chk1_0').change(function() { $('#heading1').hide();area = $("#txtarea1");area.val('Да');area.prop('required',false); })</script>
     <script>$('#chk1_1').change(function() { $('#heading1').hide();area = $("#txtarea1");area.val('Не предусмотрено');area.prop('required',false); })</script>
     <script>$('#chk1_2').change(function() { $('#heading1').show();area = $("#txtarea1");area.val('');area.prop('required',true);})</script>
@@ -2421,16 +3556,201 @@
     <script>$('#chk116_2').change(function() { $('#heading116').show();area = $("#txtarea116");area.val('');area.prop('required',true);})</script>
     <script>$('#chk117_0').change(function() { $('#heading117').hide();area = $("#txtarea117");area.val('Да');area.prop('required',false); })</script>
     <script>$('#chk117_1').change(function() { $('#heading117').hide();area = $("#txtarea117");area.val('Не предусмотрено');area.prop('required',false); })</script>
-    <script>$('#chk117_2').change(function() { $('#heading117').show();area = $("#txtarea117");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk117_2').change(function() { $('#heading117').show();area = $("#txtarea117");area.val('');area.prop('required',true);})</script>
     <script>$('#chk118_0').change(function() { $('#heading118').hide();area = $("#txtarea118");area.val('Да');area.prop('required',false); })</script>
     <script>$('#chk118_1').change(function() { $('#heading118').hide();area = $("#txtarea118");area.val('Не предусмотрено');area.prop('required',false); })</script>
-    <script>$('#chk118_2').change(function() { $('#heading118').show();area = $("#txtarea118");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk118_2').change(function() { $('#heading118').show();area = $("#txtarea118");area.val('');area.prop('required',true);})</script>
     <script>$('#chk119_0').change(function() { $('#heading119').hide();area = $("#txtarea119");area.val('Да');area.prop('required',false); })</script>
     <script>$('#chk119_1').change(function() { $('#heading119').hide();area = $("#txtarea119");area.val('Не предусмотрено');area.prop('required',false); })</script>
-    <script>$('#chk119_2').change(function() { $('#heading119').show();area = $("#txtarea119");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk119_2').change(function() { $('#heading119').show();area = $("#txtarea119");area.val('');area.prop('required',true);})</script>
     <script>$('#chk120_0').change(function() { $('#heading120').hide();area = $("#txtarea120");area.val('Да');area.prop('required',false); })</script>
     <script>$('#chk120_1').change(function() { $('#heading120').hide();area = $("#txtarea120");area.val('Не предусмотрено');area.prop('required',false); })</script>
-    <script>$('#chk120_2').change(function() { $('#heading120').show();area = $("#txtarea120");area.val('');area.prop('required',true);$("#trouble_choice_0").prop('checked',true)})</script>
+    <script>$('#chk120_2').change(function() { $('#heading120').show();area = $("#txtarea120");area.val('');area.prop('required',true);})</script>
+    <!-- for eleventh card-->
+    <script>$('#chk121_0').change(function() { $('#heading121').hide();area = $("#txtarea121");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk121_1').change(function() { $('#heading121').hide();area = $("#txtarea121");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk121_2').change(function() { $('#heading121').show();area = $("#txtarea121");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk122_0').change(function() { $('#heading122').hide();area = $("#txtarea122");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk122_1').change(function() { $('#heading122').hide();area = $("#txtarea122");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk122_2').change(function() { $('#heading122').show();area = $("#txtarea122");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk123_0').change(function() { $('#heading123').hide();area = $("#txtarea123");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk123_1').change(function() { $('#heading123').hide();area = $("#txtarea123");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk123_2').change(function() { $('#heading123').show();area = $("#txtarea123");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk124_0').change(function() { $('#heading124').hide();area = $("#txtarea124");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk124_1').change(function() { $('#heading124').hide();area = $("#txtarea124");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk124_2').change(function() { $('#heading124').show();area = $("#txtarea124");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk125_0').change(function() { $('#heading125').hide();area = $("#txtarea125");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk125_1').change(function() { $('#heading125').hide();area = $("#txtarea125");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk125_2').change(function() { $('#heading125').show();area = $("#txtarea125");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk126_0').change(function() { $('#heading126').hide();area = $("#txtarea126");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk126_1').change(function() { $('#heading126').hide();area = $("#txtarea126");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk126_2').change(function() { $('#heading126').show();area = $("#txtarea126");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk127_0').change(function() { $('#heading127').hide();area = $("#txtarea127");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk127_1').change(function() { $('#heading127').hide();area = $("#txtarea127");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk127_2').change(function() { $('#heading127').show();area = $("#txtarea127");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk128_0').change(function() { $('#heading128').hide();area = $("#txtarea128");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk128_1').change(function() { $('#heading128').hide();area = $("#txtarea128");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk128_2').change(function() { $('#heading128').show();area = $("#txtarea128");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk129_0').change(function() { $('#heading129').hide();area = $("#txtarea129");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk129_1').change(function() { $('#heading129').hide();area = $("#txtarea129");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk129_2').change(function() { $('#heading129').show();area = $("#txtarea129");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk130_0').change(function() { $('#heading130').hide();area = $("#txtarea130");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk130_1').change(function() { $('#heading130').hide();area = $("#txtarea130");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk130_2').change(function() { $('#heading130').show();area = $("#txtarea130");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk131_0').change(function() { $('#heading131').hide();area = $("#txtarea131");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk131_1').change(function() { $('#heading131').hide();area = $("#txtarea131");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk131_2').change(function() { $('#heading131').show();area = $("#txtarea131");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk132_0').change(function() { $('#heading132').hide();area = $("#txtarea132");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk132_1').change(function() { $('#heading132').hide();area = $("#txtarea132");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk132_2').change(function() { $('#heading132').show();area = $("#txtarea132");area.val('');area.prop('required',true);})</script>
+    <!-- for twelth card-->
+    <script>$('#chk133_0').change(function() { $('#heading133').hide();area = $("#txtarea133");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk133_1').change(function() { $('#heading133').hide();area = $("#txtarea133");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk133_2').change(function() { $('#heading133').show();area = $("#txtarea133");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk134_0').change(function() { $('#heading134').hide();area = $("#txtarea134");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk134_1').change(function() { $('#heading134').hide();area = $("#txtarea134");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk134_2').change(function() { $('#heading134').show();area = $("#txtarea134");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk135_0').change(function() { $('#heading135').hide();area = $("#txtarea135");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk135_1').change(function() { $('#heading135').hide();area = $("#txtarea135");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk135_2').change(function() { $('#heading135').show();area = $("#txtarea135");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk136_0').change(function() { $('#heading136').hide();area = $("#txtarea136");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk136_1').change(function() { $('#heading136').hide();area = $("#txtarea136");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk136_2').change(function() { $('#heading136').show();area = $("#txtarea136");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk137_0').change(function() { $('#heading137').hide();area = $("#txtarea137");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk137_1').change(function() { $('#heading137').hide();area = $("#txtarea137");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk137_2').change(function() { $('#heading137').show();area = $("#txtarea137");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk138_0').change(function() { $('#heading138').hide();area = $("#txtarea138");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk138_1').change(function() { $('#heading138').hide();area = $("#txtarea138");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk138_2').change(function() { $('#heading138').show();area = $("#txtarea138");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk139_0').change(function() { $('#heading139').hide();area = $("#txtarea139");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk139_1').change(function() { $('#heading139').hide();area = $("#txtarea139");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk139_2').change(function() { $('#heading139').show();area = $("#txtarea139");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk140_0').change(function() { $('#heading140').hide();area = $("#txtarea140");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk140_1').change(function() { $('#heading140').hide();area = $("#txtarea140");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk140_2').change(function() { $('#heading140').show();area = $("#txtarea140");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk141_0').change(function() { $('#heading141').hide();area = $("#txtarea141");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk141_1').change(function() { $('#heading141').hide();area = $("#txtarea141");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk141_2').change(function() { $('#heading141').show();area = $("#txtarea141");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk142_0').change(function() { $('#heading142').hide();area = $("#txtarea142");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk142_1').change(function() { $('#heading142').hide();area = $("#txtarea142");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk142_2').change(function() { $('#heading142').show();area = $("#txtarea142");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk143_0').change(function() { $('#heading143').hide();area = $("#txtarea143");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk143_1').change(function() { $('#heading143').hide();area = $("#txtarea143");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk143_2').change(function() { $('#heading143').show();area = $("#txtarea143");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk144_0').change(function() { $('#heading144').hide();area = $("#txtarea144");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk144_1').change(function() { $('#heading144').hide();area = $("#txtarea144");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk144_2').change(function() { $('#heading144').show();area = $("#txtarea144");area.val('');area.prop('required',true);})</script>
+    <!-- for thirteenth card-->
+    <script>$('#chk145_0').change(function() { $('#heading145').hide();area = $("#txtarea145");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk145_1').change(function() { $('#heading145').hide();area = $("#txtarea145");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk145_2').change(function() { $('#heading145').show();area = $("#txtarea145");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk146_0').change(function() { $('#heading146').hide();area = $("#txtarea146");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk146_1').change(function() { $('#heading146').hide();area = $("#txtarea146");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk146_2').change(function() { $('#heading146').show();area = $("#txtarea146");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk147_0').change(function() { $('#heading147').hide();area = $("#txtarea147");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk147_1').change(function() { $('#heading147').hide();area = $("#txtarea147");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk147_2').change(function() { $('#heading147').show();area = $("#txtarea147");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk148_0').change(function() { $('#heading148').hide();area = $("#txtarea148");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk148_1').change(function() { $('#heading148').hide();area = $("#txtarea148");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk148_2').change(function() { $('#heading148').show();area = $("#txtarea148");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk149_0').change(function() { $('#heading149').hide();area = $("#txtarea149");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk149_1').change(function() { $('#heading149').hide();area = $("#txtarea149");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk149_2').change(function() { $('#heading149').show();area = $("#txtarea149");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk150_0').change(function() { $('#heading150').hide();area = $("#txtarea150");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk150_1').change(function() { $('#heading150').hide();area = $("#txtarea150");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk150_2').change(function() { $('#heading150').show();area = $("#txtarea150");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk151_0').change(function() { $('#heading151').hide();area = $("#txtarea151");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk151_1').change(function() { $('#heading151').hide();area = $("#txtarea151");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk151_2').change(function() { $('#heading151').show();area = $("#txtarea151");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk152_0').change(function() { $('#heading152').hide();area = $("#txtarea152");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk152_1').change(function() { $('#heading152').hide();area = $("#txtarea152");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk152_2').change(function() { $('#heading152').show();area = $("#txtarea152");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk153_0').change(function() { $('#heading153').hide();area = $("#txtarea153");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk153_1').change(function() { $('#heading153').hide();area = $("#txtarea153");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk153_2').change(function() { $('#heading153').show();area = $("#txtarea153");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk154_0').change(function() { $('#heading154').hide();area = $("#txtarea154");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk154_1').change(function() { $('#heading154').hide();area = $("#txtarea154");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk154_2').change(function() { $('#heading154').show();area = $("#txtarea154");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk155_0').change(function() { $('#heading155').hide();area = $("#txtarea155");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk155_1').change(function() { $('#heading155').hide();area = $("#txtarea155");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk155_2').change(function() { $('#heading155').show();area = $("#txtarea155");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk156_0').change(function() { $('#heading156').hide();area = $("#txtarea156");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk156_1').change(function() { $('#heading156').hide();area = $("#txtarea156");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk156_2').change(function() { $('#heading156').show();area = $("#txtarea156");area.val('');area.prop('required',true);})</script>
+    <!-- for fourteenth card-->
+    <script>$('#chk157_0').change(function() { $('#heading157').hide();area = $("#txtarea157");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk157_1').change(function() { $('#heading157').hide();area = $("#txtarea157");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk157_2').change(function() { $('#heading157').show();area = $("#txtarea157");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk158_0').change(function() { $('#heading158').hide();area = $("#txtarea158");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk158_1').change(function() { $('#heading158').hide();area = $("#txtarea158");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk158_2').change(function() { $('#heading158').show();area = $("#txtarea158");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk159_0').change(function() { $('#heading159').hide();area = $("#txtarea159");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk159_1').change(function() { $('#heading159').hide();area = $("#txtarea159");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk159_2').change(function() { $('#heading159').show();area = $("#txtarea159");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk160_0').change(function() { $('#heading160').hide();area = $("#txtarea160");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk160_1').change(function() { $('#heading160').hide();area = $("#txtarea160");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk160_2').change(function() { $('#heading160').show();area = $("#txtarea160");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk161_0').change(function() { $('#heading161').hide();area = $("#txtarea161");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk161_1').change(function() { $('#heading161').hide();area = $("#txtarea161");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk161_2').change(function() { $('#heading161').show();area = $("#txtarea161");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk162_0').change(function() { $('#heading162').hide();area = $("#txtarea162");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk162_1').change(function() { $('#heading162').hide();area = $("#txtarea162");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk162_2').change(function() { $('#heading162').show();area = $("#txtarea162");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk163_0').change(function() { $('#heading163').hide();area = $("#txtarea163");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk163_1').change(function() { $('#heading163').hide();area = $("#txtarea163");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk163_2').change(function() { $('#heading163').show();area = $("#txtarea163");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk164_0').change(function() { $('#heading164').hide();area = $("#txtarea164");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk164_1').change(function() { $('#heading164').hide();area = $("#txtarea164");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk164_2').change(function() { $('#heading164').show();area = $("#txtarea164");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk165_0').change(function() { $('#heading165').hide();area = $("#txtarea165");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk165_1').change(function() { $('#heading165').hide();area = $("#txtarea165");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk165_2').change(function() { $('#heading165').show();area = $("#txtarea165");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk166_0').change(function() { $('#heading166').hide();area = $("#txtarea166");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk166_1').change(function() { $('#heading166').hide();area = $("#txtarea166");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk166_2').change(function() { $('#heading166').show();area = $("#txtarea166");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk167_0').change(function() { $('#heading167').hide();area = $("#txtarea167");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk167_1').change(function() { $('#heading167').hide();area = $("#txtarea167");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk167_2').change(function() { $('#heading167').show();area = $("#txtarea167");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk168_0').change(function() { $('#heading168').hide();area = $("#txtarea168");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk168_1').change(function() { $('#heading168').hide();area = $("#txtarea168");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk168_2').change(function() { $('#heading168').show();area = $("#txtarea168");area.val('');area.prop('required',true);})</script>
+    <!-- for fifteenth card-->
+    <script>$('#chk169_0').change(function() { $('#heading169').hide();area = $("#txtarea169");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk169_1').change(function() { $('#heading169').hide();area = $("#txtarea169");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk169_2').change(function() { $('#heading169').show();area = $("#txtarea169");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk170_0').change(function() { $('#heading170').hide();area = $("#txtarea170");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk170_1').change(function() { $('#heading170').hide();area = $("#txtarea170");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk170_2').change(function() { $('#heading170').show();area = $("#txtarea170");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk171_0').change(function() { $('#heading171').hide();area = $("#txtarea171");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk171_1').change(function() { $('#heading171').hide();area = $("#txtarea171");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk171_2').change(function() { $('#heading171').show();area = $("#txtarea171");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk172_0').change(function() { $('#heading172').hide();area = $("#txtarea172");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk172_1').change(function() { $('#heading172').hide();area = $("#txtarea172");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk172_2').change(function() { $('#heading172').show();area = $("#txtarea172");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk173_0').change(function() { $('#heading173').hide();area = $("#txtarea173");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk173_1').change(function() { $('#heading173').hide();area = $("#txtarea173");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk173_2').change(function() { $('#heading173').show();area = $("#txtarea173");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk174_0').change(function() { $('#heading174').hide();area = $("#txtarea174");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk174_1').change(function() { $('#heading174').hide();area = $("#txtarea174");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk174_2').change(function() { $('#heading174').show();area = $("#txtarea174");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk175_0').change(function() { $('#heading175').hide();area = $("#txtarea175");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk175_1').change(function() { $('#heading175').hide();area = $("#txtarea175");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk175_2').change(function() { $('#heading175').show();area = $("#txtarea175");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk176_0').change(function() { $('#heading176').hide();area = $("#txtarea176");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk176_1').change(function() { $('#heading176').hide();area = $("#txtarea176");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk176_2').change(function() { $('#heading176').show();area = $("#txtarea176");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk177_0').change(function() { $('#heading177').hide();area = $("#txtarea177");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk177_1').change(function() { $('#heading177').hide();area = $("#txtarea177");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk177_2').change(function() { $('#heading177').show();area = $("#txtarea177");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk178_0').change(function() { $('#heading178').hide();area = $("#txtarea178");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk178_1').change(function() { $('#heading178').hide();area = $("#txtarea178");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk178_2').change(function() { $('#heading178').show();area = $("#txtarea178");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk179_0').change(function() { $('#heading179').hide();area = $("#txtarea179");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk179_1').change(function() { $('#heading179').hide();area = $("#txtarea179");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk179_2').change(function() { $('#heading179').show();area = $("#txtarea179");area.val('');area.prop('required',true);})</script>
+    <script>$('#chk180_0').change(function() { $('#heading180').hide();area = $("#txtarea180");area.val('Да');area.prop('required',false); })</script>
+    <script>$('#chk180_1').change(function() { $('#heading180').hide();area = $("#txtarea180");area.val('Не предусмотрено');area.prop('required',false); })</script>
+    <script>$('#chk180_2').change(function() { $('#heading180').show();area = $("#txtarea180");area.val('');area.prop('required',true);})</script>
 
 </body>
 </html>

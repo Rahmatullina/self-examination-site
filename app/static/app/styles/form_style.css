@@ -61,3 +61,6 @@ html, body{
 .form-check-input {
     font-weight: medium;
 }
+label{
+    font-weight: normal;
+}

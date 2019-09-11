@@ -76,26 +76,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Фильтр по услугам
         </a>
-        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4">
-          <a class="dropdown-item" href="/result_form/residential_premises/{{ year }}/{{ num_month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/housing_transfer/{{ year }}/{{ num_month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/advertising_structures/{{ year }}/{{ num_month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/capital_construction/{{ year }}/{{ num_month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/preschool_education/{{ year }}/{{ num_month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу<br> дошкольного образования (детские сады)</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/school_education/{{ year }}/{{ num_month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/needing_premises/{{ year }}/{{ num_month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/town_planning/{{ year }}/{{ num_month }}/">Выдача градостроительных планов земельных участков</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/archive_reference/{{ year }}/{{ num_month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав <br> и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/land_schemes/{{ year }}/{{ num_month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a>
+        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4" style="height:400px;width:900px;overflow-y: scroll;">
+            {% for item in zipped_service_names %}
+                <a class="dropdown-item" href="/result_form/{{ item.1}}/{{ year }}/{{ num_month }}/">{{ item.0 }}</a>
+                <div class="dropdown-divider"></div>
+            {% endfor %}
         </div>
       </li>
         <li class="nav-item dropdown">

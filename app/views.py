@@ -10,6 +10,7 @@ from .forms import SE_Form, LoginForm
 from .models import RegionModel
 from openpyxl.styles.borders import Border, Side
 from openpyxl.styles import Alignment
+from django.shortcuts import get_object_or_404
 
 regions_names = ['Абзелиловский район РБ', 'Агидель РБ', 'Альшеевский район РБ', 'Архангельский район РБ',
                  'Аскинский район РБ', 'Аургазинский район РБ', 'Баймакский район РБ', 'Бакалинский район РБ',
@@ -38,8 +39,37 @@ short_regions_names = ['abzelil', 'agidel', 'alsheev', 'archang', 'askinsk', 'au
                        'tatyshlin', 'tuymazin', 'ufa', 'ufimsk', 'uchalinsk', 'fedorovsk', 'haybullinsk',
                        'chekmagush', 'chishminsk', 'sharanck', 'yanaulsk']
 
-short_service_names = ['residential_premises','housing_transfer','advertising_structures','capital_construction',
-                       'preschool_education','school_education','needing_premises','town_planning','archive_reference','land_schemes']
+
+short_service_names = ['residential_premises', 'housing_transfer', 'advertising_structures', 'capital_construction',
+                       'preschool_education', 'school_education', 'needing_premises', 'town_planning',
+                       'archive_reference', 'land_schemes', 'land_sale', 'land_lease', 'ownership_right',
+                       'municipal_property_lease', 'free_land_provision']
+
+full_service_names = ['Согласование проведения переустройства и (или) перепланировки помещения в многоквартирном доме',
+                      'Выдача решения о переводе или об отказе в переводе жилого помещения в нежилое помещение или \
+                      нежилого помещения в жилое помещение',
+                      'Выдача разрешения на установку и эксплуатацию рекламной конструкции ',
+                      'Выдача разрешения на строительство объекта капитального строительства',
+                      'Постановка на учет и зачисление детей в образовательные учреждения, реализующие образовательную \
+                      программу дошкольного образования (детские сады)',
+                      'Зачисление детей в муниципальные общеобразовательные учреждения',
+                      'Принятие на учет граждан в качестве нуждающихся в жилых помещениях',
+                      'Выдача градостроительных планов земельных участков',
+                      'Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, \
+                      связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и \
+                      органами местного самоуправления своих полномочий',
+                      'Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории',
+                      'Продажа земельных участков, находящихся в муниципальной собственности муниципального образования \
+                       или государственная собственность на которые не разграничена, на которых расположены здания, \
+                       сооружения, собственникам таких зданий, сооружений либо помещений в них',
+                      'Предоставление в аренду земельных участков, находящихся в муниципальной собственности муниципального \
+                      образования или государственная собственность на которые не разграничена, без проведения торгов',
+                      'Выдача копий архивных документов, подтверждающих право на владение землей',
+                      'Предоставление муниципального имущества (за исключением земельных участков) в аренду, \
+                      безвозмездное пользование, доверительное управление без проведения конкурсов или аукционов',
+                      'Предоставление земельного участка, находящегося в муниципальной собственности муниципального \
+                      образования или государственная собственность на который не разграничена, гражданам в собственность \
+                      бесплатно для индивидуального жилищного строительства']
 
 MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
 
@@ -55,12 +85,9 @@ def get_not_sent(month,year):
     objects = []
     for name in regions_names:
         try:
-            obj = RegionModel.objects.raw('''
-                    SELECT id
-                    FROM app_regionModel 
-                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' +
-                                          str(month) + '''\' AND year=\'''' + str(year) + '''\'''')[0]
-        except IndexError:
+            get_object_or_404(RegionModel, region_name=name, month=month, year=year)
+
+        except Http404:
             objects.append(name)
 
     return objects
@@ -78,9 +105,14 @@ def get_with_troubles(month, year):
     objects.update({'town_planning': []})
     objects.update({'archive_reference': []})
     objects.update({'land_schemes': []})
+    objects.update({'land_sale': []})
+    objects.update({'land_lease': []})
+    objects.update({'ownership_right': []})
+    objects.update({'municipal_property_lease': []})
+    objects.update({'free_land_provision': []})
     for name in regions_names:
         try:
-            obj = RegionModel.objects.order_by('-year','-month','-day','-time').filter(region_name=name,month=month,year=year)[0]
+            obj = get_object_or_404(RegionModel, region_name=name,month=month,year=year)
             if (obj.residential_premises_has_advanced_appointment_comment != 'Да' and
                 obj.residential_premises_has_advanced_appointment_comment != 'Не предусмотрено') or \
                     (obj.residential_premises_has_btn_get_service_comment != 'Да' and
@@ -340,17 +372,143 @@ def get_with_troubles(month, year):
                     (obj.land_schemes_has_document_template_comment != 'Да' and
                      obj.land_schemes_has_document_template_comment != 'Не предусмотрено'):
                 objects['land_schemes'].append(obj)
-        except IndexError:
+
+            if (obj.land_sale_has_advanced_appointment_comment != 'Да' and
+                obj.land_sale_has_advanced_appointment_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_btn_get_service_comment != 'Да' and
+                     obj.land_sale_has_btn_get_service_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_reglament_comment != 'Да' and
+                     obj.land_sale_has_reglament_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_estimation_quality_comment != 'Да' and
+                     obj.land_sale_has_estimation_quality_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_connected_to_fgis_do_comment != 'Да' and
+                     obj.land_sale_connected_to_fgis_do_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_electronic_form_printing_comment != 'Да' and
+                     obj.land_sale_has_electronic_form_printing_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_edition_draft_comment != 'Да' and
+                     obj.land_sale_has_edition_draft_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_term_of_consideration_comment != 'Да' and
+                     obj.land_sale_has_term_of_consideration_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_notif_consider_result_comment != 'Да' and
+                     obj.land_sale_has_notif_consider_result_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_causes_of_failure_comment != 'Да' and
+                     obj.land_sale_has_causes_of_failure_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_sample_document_comment != 'Да' and
+                     obj.land_sale_has_sample_document_comment != 'Не предусмотрено') or \
+                    (obj.land_sale_has_document_template_comment != 'Да' and
+                     obj.land_sale_has_document_template_comment != 'Не предусмотрено'):
+                objects['land_sale'].append(obj)
+            if (obj.land_lease_has_advanced_appointment_comment != 'Да' and
+                obj.land_lease_has_advanced_appointment_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_btn_get_service_comment != 'Да' and
+                     obj.land_lease_has_btn_get_service_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_reglament_comment != 'Да' and
+                     obj.land_lease_has_reglament_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_estimation_quality_comment != 'Да' and
+                     obj.land_lease_has_estimation_quality_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_connected_to_fgis_do_comment != 'Да' and
+                     obj.land_lease_connected_to_fgis_do_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_electronic_form_printing_comment != 'Да' and
+                     obj.land_lease_has_electronic_form_printing_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_edition_draft_comment != 'Да' and
+                     obj.land_lease_has_edition_draft_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_term_of_consideration_comment != 'Да' and
+                     obj.land_lease_has_term_of_consideration_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_notif_consider_result_comment != 'Да' and
+                     obj.land_lease_has_notif_consider_result_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_causes_of_failure_comment != 'Да' and
+                     obj.land_lease_has_causes_of_failure_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_sample_document_comment != 'Да' and
+                     obj.land_lease_has_sample_document_comment != 'Не предусмотрено') or \
+                    (obj.land_lease_has_document_template_comment != 'Да' and
+                     obj.land_lease_has_document_template_comment != 'Не предусмотрено'):
+                objects['land_lease'].append(obj)
+            if (obj.ownership_right_has_advanced_appointment_comment != 'Да' and
+                obj.ownership_right_has_advanced_appointment_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_btn_get_service_comment != 'Да' and
+                     obj.ownership_right_has_btn_get_service_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_reglament_comment != 'Да' and
+                     obj.ownership_right_has_reglament_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_estimation_quality_comment != 'Да' and
+                     obj.ownership_right_has_estimation_quality_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_connected_to_fgis_do_comment != 'Да' and
+                     obj.ownership_right_connected_to_fgis_do_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_electronic_form_printing_comment != 'Да' and
+                     obj.ownership_right_has_electronic_form_printing_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_edition_draft_comment != 'Да' and
+                     obj.ownership_right_has_edition_draft_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_term_of_consideration_comment != 'Да' and
+                     obj.ownership_right_has_term_of_consideration_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_notif_consider_result_comment != 'Да' and
+                     obj.ownership_right_has_notif_consider_result_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_causes_of_failure_comment != 'Да' and
+                     obj.ownership_right_has_causes_of_failure_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_sample_document_comment != 'Да' and
+                     obj.ownership_right_has_sample_document_comment != 'Не предусмотрено') or \
+                    (obj.ownership_right_has_document_template_comment != 'Да' and
+                     obj.ownership_right_has_document_template_comment != 'Не предусмотрено'):
+                objects['ownership_right'].append(obj)
+            if (obj.municipal_property_lease_has_advanced_appointment_comment != 'Да' and
+                obj.municipal_property_lease_has_advanced_appointment_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_btn_get_service_comment != 'Да' and
+                     obj.municipal_property_lease_has_btn_get_service_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_reglament_comment != 'Да' and
+                     obj.municipal_property_lease_has_reglament_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_estimation_quality_comment != 'Да' and
+                     obj.municipal_property_lease_has_estimation_quality_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_connected_to_fgis_do_comment != 'Да' and
+                     obj.municipal_property_lease_connected_to_fgis_do_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_electronic_form_printing_comment != 'Да' and
+                     obj.municipal_property_lease_has_electronic_form_printing_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_edition_draft_comment != 'Да' and
+                     obj.municipal_property_lease_has_edition_draft_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_term_of_consideration_comment != 'Да' and
+                     obj.municipal_property_lease_has_term_of_consideration_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_notif_consider_result_comment != 'Да' and
+                     obj.municipal_property_lease_has_notif_consider_result_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_causes_of_failure_comment != 'Да' and
+                     obj.municipal_property_lease_has_causes_of_failure_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_sample_document_comment != 'Да' and
+                     obj.municipal_property_lease_has_sample_document_comment != 'Не предусмотрено') or \
+                    (obj.municipal_property_lease_has_document_template_comment != 'Да' and
+                     obj.municipal_property_lease_has_document_template_comment != 'Не предусмотрено'):
+                objects['municipal_property_lease'].append(obj)
+            if (obj.free_land_provision_has_advanced_appointment_comment != 'Да' and
+                obj.free_land_provision_has_advanced_appointment_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_btn_get_service_comment != 'Да' and
+                     obj.free_land_provision_has_btn_get_service_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_reglament_comment != 'Да' and
+                     obj.free_land_provision_has_reglament_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_estimation_quality_comment != 'Да' and
+                     obj.free_land_provision_has_estimation_quality_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_connected_to_fgis_do_comment != 'Да' and
+                     obj.free_land_provision_connected_to_fgis_do_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_electronic_form_printing_comment != 'Да' and
+                     obj.free_land_provision_has_electronic_form_printing_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_edition_draft_comment != 'Да' and
+                     obj.free_land_provision_has_edition_draft_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_term_of_consideration_comment != 'Да' and
+                     obj.free_land_provision_has_term_of_consideration_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_notif_consider_result_comment != 'Да' and
+                     obj.free_land_provision_has_notif_consider_result_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_causes_of_failure_comment != 'Да' and
+                     obj.free_land_provision_has_causes_of_failure_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_sample_document_comment != 'Да' and
+                     obj.free_land_provision_has_sample_document_comment != 'Не предусмотрено') or \
+                    (obj.free_land_provision_has_document_template_comment != 'Да' and
+                     obj.free_land_provision_has_document_template_comment != 'Не предусмотрено'):
+                objects['free_land_provision'].append(obj)
+        except Http404:
             pass
     return objects
 
 @login_required(login_url='/login/',
                 redirect_field_name='/result_form/with_no_troubles/' + datetime.today().strftime('%Y/%m/'))
-def get_with_no_troubles(request,month,year):
+def get_with_no_troubles(request, month, year):
     region_full_names = []
     for name in regions_names:
         try:
-            obj = RegionModel.objects.order_by('-year','-month','-day','-time').filter(region_name=name,month=month,year=year)[0]
+            obj = get_object_or_404(RegionModel, region_name=name, month=month, year=year)
             if (obj.residential_premises_has_advanced_appointment_comment == 'Да' or
                 obj.residential_premises_has_advanced_appointment_comment == 'Не предусмотрено') and \
                     (obj.residential_premises_has_btn_get_service_comment == 'Да' or
@@ -590,9 +748,129 @@ def get_with_no_troubles(request,month,year):
                     (obj.land_schemes_has_sample_document_comment == 'Да' or
                      obj.land_schemes_has_sample_document_comment == 'Не предусмотрено') and \
                     (obj.land_schemes_has_document_template_comment == 'Да' or
-                     obj.land_schemes_has_document_template_comment == 'Не предусмотрено'):
+                     obj.land_schemes_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_advanced_appointment_comment == 'Да' or
+                     obj.land_sale_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_btn_get_service_comment == 'Да' or
+                     obj.land_sale_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_reglament_comment == 'Да' or
+                     obj.land_sale_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_estimation_quality_comment == 'Да' or
+                     obj.land_sale_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_connected_to_fgis_do_comment == 'Да' or
+                     obj.land_sale_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_electronic_form_printing_comment == 'Да' or
+                     obj.land_sale_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_edition_draft_comment == 'Да' or
+                     obj.land_sale_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_term_of_consideration_comment == 'Да' or
+                     obj.land_sale_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_notif_consider_result_comment == 'Да' or
+                     obj.land_sale_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_causes_of_failure_comment == 'Да' or
+                     obj.land_sale_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_sample_document_comment == 'Да' or
+                     obj.land_sale_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.land_sale_has_document_template_comment == 'Да' or
+                     obj.land_sale_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_advanced_appointment_comment == 'Да' or
+                     obj.land_lease_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_btn_get_service_comment == 'Да' or
+                     obj.land_lease_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_reglament_comment == 'Да' or
+                     obj.land_lease_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_estimation_quality_comment == 'Да' or
+                     obj.land_lease_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_connected_to_fgis_do_comment == 'Да' or
+                     obj.land_lease_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_electronic_form_printing_comment == 'Да' or
+                     obj.land_lease_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_edition_draft_comment == 'Да' or
+                     obj.land_lease_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_term_of_consideration_comment == 'Да' or
+                     obj.land_lease_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_notif_consider_result_comment == 'Да' or
+                     obj.land_lease_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_causes_of_failure_comment == 'Да' or
+                     obj.land_lease_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_sample_document_comment == 'Да' or
+                     obj.land_lease_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.land_lease_has_document_template_comment == 'Да' or
+                     obj.land_lease_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_advanced_appointment_comment == 'Да' or
+                     obj.ownership_right_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_btn_get_service_comment == 'Да' or
+                     obj.ownership_right_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_reglament_comment == 'Да' or
+                     obj.ownership_right_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_estimation_quality_comment == 'Да' or
+                     obj.ownership_right_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_connected_to_fgis_do_comment == 'Да' or
+                     obj.ownership_right_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_electronic_form_printing_comment == 'Да' or
+                     obj.ownership_right_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_edition_draft_comment == 'Да' or
+                     obj.ownership_right_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_term_of_consideration_comment == 'Да' or
+                     obj.ownership_right_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_notif_consider_result_comment == 'Да' or
+                     obj.ownership_right_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_causes_of_failure_comment == 'Да' or
+                     obj.ownership_right_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_sample_document_comment == 'Да' or
+                     obj.ownership_right_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.ownership_right_has_document_template_comment == 'Да' or
+                     obj.ownership_right_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_advanced_appointment_comment == 'Да' or
+                     obj.municipal_property_lease_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_btn_get_service_comment == 'Да' or
+                     obj.municipal_property_lease_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_reglament_comment == 'Да' or
+                     obj.municipal_property_lease_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_estimation_quality_comment == 'Да' or
+                     obj.municipal_property_lease_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_connected_to_fgis_do_comment == 'Да' or
+                     obj.municipal_property_lease_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_electronic_form_printing_comment == 'Да' or
+                     obj.municipal_property_lease_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_edition_draft_comment == 'Да' or
+                     obj.municipal_property_lease_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_term_of_consideration_comment == 'Да' or
+                     obj.municipal_property_lease_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_notif_consider_result_comment == 'Да' or
+                     obj.municipal_property_lease_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_causes_of_failure_comment == 'Да' or
+                     obj.municipal_property_lease_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_sample_document_comment == 'Да' or
+                     obj.municipal_property_lease_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.municipal_property_lease_has_document_template_comment == 'Да' or
+                     obj.municipal_property_lease_has_document_template_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_advanced_appointment_comment == 'Да' or
+                     obj.free_land_provision_has_advanced_appointment_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_btn_get_service_comment == 'Да' or
+                     obj.free_land_provision_has_btn_get_service_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_reglament_comment == 'Да' or
+                     obj.free_land_provision_has_reglament_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_estimation_quality_comment == 'Да' or
+                     obj.free_land_provision_has_estimation_quality_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_connected_to_fgis_do_comment == 'Да' or
+                     obj.free_land_provision_connected_to_fgis_do_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_electronic_form_printing_comment == 'Да' or
+                     obj.free_land_provision_has_electronic_form_printing_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_edition_draft_comment == 'Да' or
+                     obj.free_land_provision_has_edition_draft_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_term_of_consideration_comment == 'Да' or
+                     obj.free_land_provision_has_term_of_consideration_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_notif_consider_result_comment == 'Да' or
+                     obj.free_land_provision_has_notif_consider_result_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_causes_of_failure_comment == 'Да' or
+                     obj.free_land_provision_has_causes_of_failure_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_sample_document_comment == 'Да' or
+                     obj.free_land_provision_has_sample_document_comment == 'Не предусмотрено') and \
+                    (obj.free_land_provision_has_document_template_comment == 'Да' or
+                     obj.free_land_provision_has_document_template_comment == 'Не предусмотрено'):
                 region_full_names.append(obj.region_name)
-        except IndexError:
+        except Http404:
             pass
     indices = [regions_names.index(full_name) for full_name in region_full_names]
     return render(request, 'app/with_no_troubles.html', {
@@ -608,36 +886,51 @@ def get_with_no_troubles(request,month,year):
 @login_required(login_url='/login/', redirect_field_name='/form/')
 def get_self_examination_form(request):
     """
-    View function for renewing a specific regionForm by users
+    View function for renewing a specific SE_Form by users
     """
     if request.user.is_authenticated:
-        print(request.user.username)
+
         if request.method == 'POST':
-
-            # Create a form instance and populate it with data from the request (binding):
             region_form = SE_Form(request.POST)
+            try:
+                #trying to find existing form of current month to fill it with new information
+                instance = get_object_or_404(RegionModel, region_name=request.user.region_name, month=datetime.today().strftime('%m'), year=datetime.today().strftime('%Y'))
+                form_to_save = SE_Form(request.POST, instance=instance)
+                if form_to_save.is_valid():
+                    form_to_save.save(commit=False)
+                    form_to_save.time = datetime.today().time()
+                    form_to_save.day = datetime.today().strftime('%d')
+                    form_to_save.save()
+            except Http404:
+                #else creating a new one, validationg and save
 
-            # Check if the form is valid:
-            if region_form.is_valid():
+                if region_form.is_valid():
+                    form_to_save = region_form.save(commit=False)
+                    form_to_save.time = datetime.today().time()
+                    form_to_save.day = datetime.today().strftime('%d')
+                    form_to_save.year = datetime.today().strftime('%Y')
+                    form_to_save.month = datetime.today().strftime('%m')
+                    form_to_save.region_name = request.user.region_name
+                    form_to_save.save()
 
-                form_to_save = region_form.save(commit=False)
-                form_to_save.time = datetime.today().time()
-                form_to_save.day = datetime.today().strftime('%d')
-                form_to_save.year = datetime.today().strftime('%Y')
-                form_to_save.month = datetime.today().strftime('%m')
-                form_to_save.region_name = request.user.region_name
-                form_to_save.save()
-
-                # redirect to a new URL:
-                return HttpResponseRedirect(reverse('result_form', kwargs={
+            if request.POST['btn_action'] == 'exit':
+                    # redirect to a new URL:
+                    return HttpResponseRedirect(reverse('result_form', kwargs={
                     'service_name': 'residential_premises',
                     'year': datetime.today().strftime('%Y'),
-                    'month': datetime.today().strftime('%m'),
-                }))
+                    'month': datetime.today().strftime('%m')
+                    }))
+
 
         # If this is a GET (or any other method) create the default form.
         else:
-            region_form = SE_Form(initial={
+            try:
+                #trying to find existing form of current month for further user editition
+                instance = get_object_or_404(RegionModel, month=datetime.today().strftime('%m'), year=datetime.today().strftime('%Y'))
+                region_form = SE_Form(instance=instance)
+            except Http404:
+                #else creating a new empty one
+                region_form = SE_Form(initial={
                                        'residential_premises_id_rgmu': 'id_GRMU_redevelop1',
                                        'residential_premises_statement_amount': '555',
                                        'residential_premises_link': 'http:\\my_link_1.com',
@@ -668,6 +961,21 @@ def get_self_examination_form(request):
                                        'land_schemes_id_rgmu': 'id_GRMU_land1',
                                        'land_schemes_statement_amount': '55566788',
                                        'land_schemes_link': 'http:\\my_link_1234.com',
+                                        'land_sale_id_rgmu': 'id_GRMU_land1',
+                                        'land_sale_statement_amount': '55566788',
+                                        'land_sale_link': 'http:\\my_link_1234.com',
+                                        'land_lease_id_rgmu': 'id_GRMU_land1',
+                                        'land_lease_statement_amount': '55566788',
+                                        'land_lease_link': 'http:\\my_link_1234.com',
+                                        'ownership_right_id_rgmu': 'id_GRMU_land1',
+                                        'ownership_right_statement_amount': '55566788',
+                                        'ownership_right_link': 'http:\\my_link_1234.com',
+                                        'municipal_property_lease_id_rgmu': 'id_GRMU_land1',
+                                        'municipal_property_lease_statement_amount': '55566788',
+                                        'municipal_property_lease_link': 'http:\\my_link_1234.com',
+                                        'free_land_provision_id_rgmu': 'id_GRMU_land1',
+                                        'free_land_provision_statement_amount': '55566788',
+                                        'free_land_provision_link': 'http:\\my_link_1234.com',
                                        'month': str(datetime.today().strftime('%m')),
                                        'year': str(datetime.today().strftime('%Y')),
                                        })
@@ -679,6 +987,8 @@ def get_self_examination_form(request):
             'year':datetime.today().strftime('%Y'),
             'num_month':datetime.today().strftime('%m'),
             'zipped': zip(regions_names, short_regions_names),
+            'full_service_names': full_service_names,
+            'zipped_service_names': zip(full_service_names, short_service_names)
         })
     else:
         return HttpResponseRedirect(reverse('login'))
@@ -690,8 +1000,6 @@ def get_result_form(request, service_name, year, month):
     objects = list()
 
     if service_name == 'residential_premises':
-        full_service_name = 'Прием заявлений и выдача документов о согласовании проведения переустройства и (или) ' \
-                            'перепланировки жилого помещения '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw('''SELECT id, region_name,
@@ -727,8 +1035,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'housing_transfer':
-        full_service_name = 'Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в ' \
-                            'жилые помещения '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -764,7 +1070,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'advertising_structures':
-        full_service_name = 'Выдача разрешения на установку и эксплуатацию рекламной конструкции'
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -800,7 +1105,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'capital_construction':
-        full_service_name = 'Выдача разрешения на строительство, реконструкцию объектов капитального строительства'
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -836,8 +1140,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'preschool_education':
-        full_service_name = 'Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, ' \
-                            'реализующие основную образовательную программу дошкольного образования (детские сады) '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -873,8 +1175,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'school_education':
-        full_service_name = 'Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или ' \
-                            'муниципальные общеобразовательные учреждения '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -910,7 +1210,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'needing_premises':
-        full_service_name = 'Принятие на учет граждан в качестве нуждающихся в жилых помещениях'
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -946,7 +1245,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'town_planning':
-        full_service_name = 'Выдача градостроительных планов земельных участков'
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -982,9 +1280,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'archive_reference':
-        full_service_name = 'Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, ' \
-                            'связанных с реализацией законных прав и свобод граждан и исполнением государственными ' \
-                            'органами и органами местного самоуправления своих полномочий '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -1020,8 +1315,6 @@ def get_result_form(request, service_name, year, month):
                 objects.append(dotDict(obj))
 
     elif service_name == 'land_schemes':
-        full_service_name = 'Утверждение схемы расположения земельного участка или земельных участков на кадастровом ' \
-                            'плане территории '
         for name in regions_names:
             try:
                 obj = RegionModel.objects.raw(
@@ -1056,6 +1349,181 @@ def get_result_form(request, service_name, year, month):
                        'has_sample_document_comment': "", 'has_document_template_comment': ""}
                 objects.append(dotDict(obj))
 
+    elif service_name == 'land_sale':
+        for name in regions_names:
+            try:
+                obj = RegionModel.objects.raw(
+                    '''SELECT id, region_name,
+                    land_sale_id_rgmu AS id_rgmu,
+                    land_sale_statement_amount AS statement_amount,
+                    land_sale_link AS link,
+                    land_sale_has_advanced_appointment_comment AS has_advanced_appointment_comment,
+                    land_sale_has_btn_get_service_comment AS has_btn_get_service_comment,
+                    land_sale_has_reglament_comment AS has_reglament_comment,
+                    land_sale_has_estimation_quality_comment AS has_estimation_quality_comment,
+                    land_sale_connected_to_fgis_do_comment AS connected_to_fgis_do_comment,
+                    land_sale_has_electronic_form_printing_comment AS has_electronic_form_printing_comment,
+                    land_sale_has_edition_draft_comment AS has_edition_draft_comment,
+                    land_sale_has_term_of_consideration_comment AS has_term_of_consideration_comment,
+                    land_sale_has_notif_consider_result_comment AS has_notif_consider_result_comment,
+                    land_sale_has_causes_of_failure_comment AS has_causes_of_failure_comment,
+                    land_sale_has_sample_document_comment AS has_sample_document_comment,
+                    land_sale_has_document_template_comment AS has_document_template_comment
+                    FROM app_regionModel
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
+                        month) + '''\' AND year=\'''' + str(
+                        year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                objects.append(obj)
+            except IndexError:
+                obj = {'region_name': name, 'id_rgmu': "", 'statement_amount': "", 'link': "",
+                       'has_advanced_appointment_comment': "", 'has_btn_get_service_comment': "",
+                       'has_reglament_comment': "", 'has_estimation_quality_comment': "",
+                       'connected_to_fgis_do_comment': "", 'has_electronic_form_printing_comment': "",
+                       'has_edition_draft_comment': "", 'has_term_of_consideration_comment': "",
+                       'has_notif_consider_result_comment': "", 'has_causes_of_failure_comment': "",
+                       'has_sample_document_comment': "", 'has_document_template_comment': ""}
+                objects.append(dotDict(obj))
+
+    elif service_name == 'land_lease':
+        for name in regions_names:
+            try:
+                obj = RegionModel.objects.raw(
+                    '''SELECT id, region_name,
+                    land_lease_id_rgmu AS id_rgmu,
+                    land_lease_statement_amount AS statement_amount,
+                    land_lease_link AS link,
+                    land_lease_has_advanced_appointment_comment AS has_advanced_appointment_comment,
+                    land_lease_has_btn_get_service_comment AS has_btn_get_service_comment,
+                    land_lease_has_reglament_comment AS has_reglament_comment,
+                    land_lease_has_estimation_quality_comment AS has_estimation_quality_comment,
+                    land_lease_connected_to_fgis_do_comment AS connected_to_fgis_do_comment,
+                    land_lease_has_electronic_form_printing_comment AS has_electronic_form_printing_comment,
+                    land_lease_has_edition_draft_comment AS has_edition_draft_comment,
+                    land_lease_has_term_of_consideration_comment AS has_term_of_consideration_comment,
+                    land_lease_has_notif_consider_result_comment AS has_notif_consider_result_comment,
+                    land_lease_has_causes_of_failure_comment AS has_causes_of_failure_comment,
+                    land_lease_has_sample_document_comment AS has_sample_document_comment,
+                    land_lease_has_document_template_comment AS has_document_template_comment
+                    FROM app_regionModel
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
+                        month) + '''\' AND year=\'''' + str(
+                        year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                objects.append(obj)
+            except IndexError:
+                obj = {'region_name': name, 'id_rgmu': "", 'statement_amount': "", 'link': "",
+                       'has_advanced_appointment_comment': "", 'has_btn_get_service_comment': "",
+                       'has_reglament_comment': "", 'has_estimation_quality_comment': "",
+                       'connected_to_fgis_do_comment': "", 'has_electronic_form_printing_comment': "",
+                       'has_edition_draft_comment': "", 'has_term_of_consideration_comment': "",
+                       'has_notif_consider_result_comment': "", 'has_causes_of_failure_comment': "",
+                       'has_sample_document_comment': "", 'has_document_template_comment': ""}
+                objects.append(dotDict(obj))
+
+    elif service_name == 'ownership_right':
+        for name in regions_names:
+            try:
+                obj = RegionModel.objects.raw(
+                    '''SELECT id, region_name,
+                    ownership_right_id_rgmu AS id_rgmu,
+                    ownership_right_statement_amount AS statement_amount,
+                    ownership_right_link AS link,
+                    ownership_right_has_advanced_appointment_comment AS has_advanced_appointment_comment,
+                    ownership_right_has_btn_get_service_comment AS has_btn_get_service_comment,
+                    ownership_right_has_reglament_comment AS has_reglament_comment,
+                    ownership_right_has_estimation_quality_comment AS has_estimation_quality_comment,
+                    ownership_right_connected_to_fgis_do_comment AS connected_to_fgis_do_comment,
+                    ownership_right_has_electronic_form_printing_comment AS has_electronic_form_printing_comment,
+                    ownership_right_has_edition_draft_comment AS has_edition_draft_comment,
+                    ownership_right_has_term_of_consideration_comment AS has_term_of_consideration_comment,
+                    ownership_right_has_notif_consider_result_comment AS has_notif_consider_result_comment,
+                    ownership_right_has_causes_of_failure_comment AS has_causes_of_failure_comment,
+                    ownership_right_has_sample_document_comment AS has_sample_document_comment,
+                    ownership_right_has_document_template_comment AS has_document_template_comment
+                    FROM app_regionModel
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
+                        month) + '''\' AND year=\'''' + str(
+                        year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                objects.append(obj)
+            except IndexError:
+                obj = {'region_name': name, 'id_rgmu': "", 'statement_amount': "", 'link': "",
+                       'has_advanced_appointment_comment': "", 'has_btn_get_service_comment': "",
+                       'has_reglament_comment': "", 'has_estimation_quality_comment': "",
+                       'connected_to_fgis_do_comment': "", 'has_electronic_form_printing_comment': "",
+                       'has_edition_draft_comment': "", 'has_term_of_consideration_comment': "",
+                       'has_notif_consider_result_comment': "", 'has_causes_of_failure_comment': "",
+                       'has_sample_document_comment': "", 'has_document_template_comment': ""}
+                objects.append(dotDict(obj))
+
+    elif service_name == 'municipal_property_lease':
+        for name in regions_names:
+            try:
+                obj = RegionModel.objects.raw(
+                    '''SELECT id, region_name,
+                    municipal_property_lease_id_rgmu AS id_rgmu,
+                    municipal_property_lease_statement_amount AS statement_amount,
+                    municipal_property_lease_link AS link,
+                    municipal_property_lease_has_advanced_appointment_comment AS has_advanced_appointment_comment,
+                    municipal_property_lease_has_btn_get_service_comment AS has_btn_get_service_comment,
+                    municipal_property_lease_has_reglament_comment AS has_reglament_comment,
+                    municipal_property_lease_has_estimation_quality_comment AS has_estimation_quality_comment,
+                    municipal_property_lease_connected_to_fgis_do_comment AS connected_to_fgis_do_comment,
+                    municipal_property_lease_has_electronic_form_printing_comment AS has_electronic_form_printing_comment,
+                    municipal_property_lease_has_edition_draft_comment AS has_edition_draft_comment,
+                    municipal_property_lease_has_term_of_consideration_comment AS has_term_of_consideration_comment,
+                    municipal_property_lease_has_notif_consider_result_comment AS has_notif_consider_result_comment,
+                    municipal_property_lease_has_causes_of_failure_comment AS has_causes_of_failure_comment,
+                    municipal_property_lease_has_sample_document_comment AS has_sample_document_comment,
+                    municipal_property_lease_has_document_template_comment AS has_document_template_comment
+                    FROM app_regionModel
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
+                        month) + '''\' AND year=\'''' + str(
+                        year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                objects.append(obj)
+            except IndexError:
+                obj = {'region_name': name, 'id_rgmu': "", 'statement_amount': "", 'link': "",
+                       'has_advanced_appointment_comment': "", 'has_btn_get_service_comment': "",
+                       'has_reglament_comment': "", 'has_estimation_quality_comment': "",
+                       'connected_to_fgis_do_comment': "", 'has_electronic_form_printing_comment': "",
+                       'has_edition_draft_comment': "", 'has_term_of_consideration_comment': "",
+                       'has_notif_consider_result_comment': "", 'has_causes_of_failure_comment': "",
+                       'has_sample_document_comment': "", 'has_document_template_comment': ""}
+                objects.append(dotDict(obj))
+
+    elif service_name == 'free_land_provision':
+        for name in regions_names:
+            try:
+                obj = RegionModel.objects.raw(
+                    '''SELECT id, region_name,
+                    free_land_provision_id_rgmu AS id_rgmu,
+                    free_land_provision_statement_amount AS statement_amount,
+                    free_land_provision_link AS link,
+                    free_land_provision_has_advanced_appointment_comment AS has_advanced_appointment_comment,
+                    free_land_provision_has_btn_get_service_comment AS has_btn_get_service_comment,
+                    free_land_provision_has_reglament_comment AS has_reglament_comment,
+                    free_land_provision_has_estimation_quality_comment AS has_estimation_quality_comment,
+                    free_land_provision_connected_to_fgis_do_comment AS connected_to_fgis_do_comment,
+                    free_land_provision_has_electronic_form_printing_comment AS has_electronic_form_printing_comment,
+                    free_land_provision_has_edition_draft_comment AS has_edition_draft_comment,
+                    free_land_provision_has_term_of_consideration_comment AS has_term_of_consideration_comment,
+                    free_land_provision_has_notif_consider_result_comment AS has_notif_consider_result_comment,
+                    free_land_provision_has_causes_of_failure_comment AS has_causes_of_failure_comment,
+                    free_land_provision_has_sample_document_comment AS has_sample_document_comment,
+                    free_land_provision_has_document_template_comment AS has_document_template_comment
+                    FROM app_regionModel
+                    WHERE region_name =\'''' + str(name) + '''\' AND month=\'''' + str(
+                        month) + '''\' AND year=\'''' + str(
+                        year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+                objects.append(obj)
+            except IndexError:
+                obj = {'region_name': name, 'id_rgmu': "", 'statement_amount': "", 'link': "",
+                       'has_advanced_appointment_comment': "", 'has_btn_get_service_comment': "",
+                       'has_reglament_comment': "", 'has_estimation_quality_comment': "",
+                       'connected_to_fgis_do_comment': "", 'has_electronic_form_printing_comment': "",
+                       'has_edition_draft_comment': "", 'has_term_of_consideration_comment': "",
+                       'has_notif_consider_result_comment': "", 'has_causes_of_failure_comment': "",
+                       'has_sample_document_comment': "", 'has_document_template_comment': ""}
+                objects.append(dotDict(obj))
+
     else:
         return HttpResponseNotFound('')
 
@@ -1063,11 +1531,12 @@ def get_result_form(request, service_name, year, month):
                                                         'year': str(year),
                                                         'month': MONTHS[MONTH_NUMBERS.index(str(month))],
                                                         'num_month': month,
-                                                        'full_service_name': full_service_name,
+                                                        'full_service_name': full_service_names[short_service_names.index(service_name)],
                                                         'service_name': service_name,
                                                         'zipped': zip(regions_names, short_regions_names),
                                                         'username': request.user.username,
-                                                        'years': [i for i in range(2016, int(datetime.now().year)+1)]})
+                                                        'years': [i for i in range(2016, int(datetime.now().year)+1)],
+                                                        'zipped_service_names': zip(full_service_names, short_service_names)})
 
 
 @login_required(login_url='/login/',
@@ -1075,164 +1544,9 @@ def get_result_form(request, service_name, year, month):
 def get_region_form(request, year, month, short_region_name):
     full_region_name = regions_names[short_regions_names.index(short_region_name)]
     try:
-        object = RegionModel.objects.raw(
-            '''SELECT id,
-            residential_premises_id_rgmu,
-            residential_premises_statement_amount, 
-            residential_premises_link,
-            residential_premises_has_advanced_appointment_comment,
-            residential_premises_has_btn_get_service_comment,
-            residential_premises_has_reglament_comment,
-            residential_premises_has_estimation_quality_comment,
-            residential_premises_connected_to_fgis_do_comment,
-            residential_premises_has_electronic_form_printing_comment,
-            residential_premises_has_edition_draft_comment,
-            residential_premises_has_term_of_consideration_comment,
-            residential_premises_has_notif_consider_result_comment,
-            residential_premises_has_causes_of_failure_comment,
-            residential_premises_has_sample_document_comment,
-            residential_premises_has_document_template_comment,
-            housing_transfer_id_rgmu,
-            housing_transfer_statement_amount, 
-            housing_transfer_link,
-            housing_transfer_has_advanced_appointment_comment,
-            housing_transfer_has_btn_get_service_comment,
-            housing_transfer_has_reglament_comment,
-            housing_transfer_has_estimation_quality_comment,
-            housing_transfer_connected_to_fgis_do_comment,
-            housing_transfer_has_electronic_form_printing_comment,
-            housing_transfer_has_edition_draft_comment,
-            housing_transfer_has_term_of_consideration_comment,
-            housing_transfer_has_notif_consider_result_comment,
-            housing_transfer_has_causes_of_failure_comment,
-            housing_transfer_has_sample_document_comment,
-            housing_transfer_has_document_template_comment,
-            advertising_structures_id_rgmu,
-            advertising_structures_statement_amount, 
-            advertising_structures_link,
-            advertising_structures_has_advanced_appointment_comment,
-            advertising_structures_has_btn_get_service_comment,
-            advertising_structures_has_reglament_comment,
-            advertising_structures_has_estimation_quality_comment,
-            advertising_structures_connected_to_fgis_do_comment,
-            advertising_structures_has_electronic_form_printing_comment,
-            advertising_structures_has_edition_draft_comment,
-            advertising_structures_has_term_of_consideration_comment,
-            advertising_structures_has_notif_consider_result_comment,
-            advertising_structures_has_causes_of_failure_comment,
-            advertising_structures_has_sample_document_comment,
-            advertising_structures_has_document_template_comment,
-            capital_construction_id_rgmu,
-            capital_construction_statement_amount, 
-            capital_construction_link,
-            capital_construction_has_advanced_appointment_comment,
-            capital_construction_has_btn_get_service_comment,
-            capital_construction_has_reglament_comment,
-            capital_construction_has_estimation_quality_comment,
-            capital_construction_connected_to_fgis_do_comment,
-            capital_construction_has_electronic_form_printing_comment,
-            capital_construction_has_edition_draft_comment,
-            capital_construction_has_term_of_consideration_comment,
-            capital_construction_has_notif_consider_result_comment,
-            capital_construction_has_causes_of_failure_comment,
-            capital_construction_has_sample_document_comment,
-            capital_construction_has_document_template_comment,
-            preschool_education_id_rgmu,
-            preschool_education_statement_amount, 
-            preschool_education_link,
-            preschool_education_has_advanced_appointment_comment,
-            preschool_education_has_btn_get_service_comment,
-            preschool_education_has_reglament_comment,
-            preschool_education_has_estimation_quality_comment,
-            preschool_education_connected_to_fgis_do_comment,
-            preschool_education_has_electronic_form_printing_comment,
-            preschool_education_has_edition_draft_comment,
-            preschool_education_has_term_of_consideration_comment,
-            preschool_education_has_notif_consider_result_comment,
-            preschool_education_has_causes_of_failure_comment,
-            preschool_education_has_sample_document_comment,
-            preschool_education_has_document_template_comment,
-            school_education_id_rgmu,
-            school_education_statement_amount, 
-            school_education_link,
-            school_education_has_advanced_appointment_comment,
-            school_education_has_btn_get_service_comment,
-            school_education_has_reglament_comment,
-            school_education_has_estimation_quality_comment,
-            school_education_connected_to_fgis_do_comment,
-            school_education_has_electronic_form_printing_comment,
-            school_education_has_edition_draft_comment,
-            school_education_has_term_of_consideration_comment,
-            school_education_has_notif_consider_result_comment,
-            school_education_has_causes_of_failure_comment,
-            school_education_has_sample_document_comment,
-            school_education_has_document_template_comment,
-            needing_premises_id_rgmu,
-            needing_premises_statement_amount, 
-            needing_premises_link,
-            needing_premises_has_advanced_appointment_comment,
-            needing_premises_has_btn_get_service_comment,
-            needing_premises_has_reglament_comment,
-            needing_premises_has_estimation_quality_comment,
-            needing_premises_connected_to_fgis_do_comment,
-            needing_premises_has_electronic_form_printing_comment,
-            needing_premises_has_edition_draft_comment,
-            needing_premises_has_term_of_consideration_comment,
-            needing_premises_has_notif_consider_result_comment,
-            needing_premises_has_causes_of_failure_comment,
-            needing_premises_has_sample_document_comment,
-            needing_premises_has_document_template_comment,
-            town_planning_id_rgmu,
-            town_planning_statement_amount, 
-            town_planning_link,
-            town_planning_has_advanced_appointment_comment,
-            town_planning_has_btn_get_service_comment,
-            town_planning_has_reglament_comment,
-            town_planning_has_estimation_quality_comment,
-            town_planning_connected_to_fgis_do_comment,
-            town_planning_has_electronic_form_printing_comment,
-            town_planning_has_edition_draft_comment,
-            town_planning_has_term_of_consideration_comment,
-            town_planning_has_notif_consider_result_comment,
-            town_planning_has_causes_of_failure_comment,
-            town_planning_has_sample_document_comment,
-            town_planning_has_document_template_comment,
-            archive_reference_id_rgmu,
-            archive_reference_statement_amount, 
-            archive_reference_link,
-            archive_reference_has_advanced_appointment_comment,
-            archive_reference_has_btn_get_service_comment,
-            archive_reference_has_reglament_comment,
-            archive_reference_has_estimation_quality_comment,
-            archive_reference_connected_to_fgis_do_comment,
-            archive_reference_has_electronic_form_printing_comment,
-            archive_reference_has_edition_draft_comment,
-            archive_reference_has_term_of_consideration_comment,
-            archive_reference_has_notif_consider_result_comment,
-            archive_reference_has_causes_of_failure_comment,
-            archive_reference_has_sample_document_comment,
-            archive_reference_has_document_template_comment,
-            land_schemes_id_rgmu,
-            land_schemes_statement_amount, 
-            land_schemes_link,
-            land_schemes_has_advanced_appointment_comment,
-            land_schemes_has_btn_get_service_comment,
-            land_schemes_has_reglament_comment,
-            land_schemes_has_estimation_quality_comment,
-            land_schemes_connected_to_fgis_do_comment,
-            land_schemes_has_electronic_form_printing_comment,
-            land_schemes_has_edition_draft_comment,
-            land_schemes_has_term_of_consideration_comment,
-            land_schemes_has_notif_consider_result_comment,
-            land_schemes_has_causes_of_failure_comment,
-            land_schemes_has_sample_document_comment,
-            land_schemes_has_document_template_comment
-            FROM app_regionModel
-            WHERE region_name =\'''' + str(full_region_name) + '''\' AND month=\'''' + str(
-                month) + '''\' AND year=\'''' + str(
-                year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1;''')[0]
+        object = get_object_or_404(RegionModel, region_name=full_region_name, month=month, year=year)
 
-    except IndexError:
+    except Http404:
         object = {'short_region_name': short_region_name,
                   'residential_premises_id_rgmu': "",
                   'residential_premises_statement_amount': "",
@@ -1383,7 +1697,82 @@ def get_region_form(request, year, month, short_region_name):
                   'land_schemes_has_notif_consider_result_comment': "",
                   'land_schemes_has_causes_of_failure_comment': "",
                   'land_schemes_has_sample_document_comment': "",
-                  'land_schemes_has_document_template_comment': ""
+                  'land_schemes_has_document_template_comment': "",
+                  'land_sale_id_rgmu': "",
+                  'land_sale_statement_amount': "",
+                  'land_sale_link': "",
+                  'land_sale_has_advanced_appointment_comment': "",
+                  'land_sale_has_btn_get_service_comment': "",
+                  'land_sale_has_reglament_comment': "",
+                  'land_sale_has_estimation_quality_comment': "",
+                  'land_sale_connected_to_fgis_do_comment': "",
+                  'land_sale_has_electronic_form_printing_comment': "",
+                  'land_sale_has_edition_draft_comment': "",
+                  'land_sale_has_term_of_consideration_comment': "",
+                  'land_sale_has_notif_consider_result_comment': "",
+                  'land_sale_has_causes_of_failure_comment': "",
+                  'land_sale_has_sample_document_comment': "",
+                  'land_sale_has_document_template_comment': "",
+                  'land_lease_id_rgmu': "",
+                  'land_lease_statement_amount': "",
+                  'land_lease_link': "",
+                  'land_lease_has_advanced_appointment_comment': "",
+                  'land_lease_has_btn_get_service_comment': "",
+                  'land_lease_has_reglament_comment': "",
+                  'land_lease_has_estimation_quality_comment': "",
+                  'land_lease_connected_to_fgis_do_comment': "",
+                  'land_lease_has_electronic_form_printing_comment': "",
+                  'land_lease_has_edition_draft_comment': "",
+                  'land_lease_has_term_of_consideration_comment': "",
+                  'land_lease_has_notif_consider_result_comment': "",
+                  'land_lease_has_causes_of_failure_comment': "",
+                  'land_lease_has_sample_document_comment': "",
+                  'land_lease_has_document_template_comment': "",
+                  'ownership_right_id_rgmu': "",
+                  'ownership_right_statement_amount': "",
+                  'ownership_right_link': "",
+                  'ownership_right_has_advanced_appointment_comment': "",
+                  'ownership_right_has_btn_get_service_comment': "",
+                  'ownership_right_has_reglament_comment': "",
+                  'ownership_right_has_estimation_quality_comment': "",
+                  'ownership_right_connected_to_fgis_do_comment': "",
+                  'ownership_right_has_electronic_form_printing_comment': "",
+                  'ownership_right_has_edition_draft_comment': "",
+                  'ownership_right_has_term_of_consideration_comment': "",
+                  'ownership_right_has_notif_consider_result_comment': "",
+                  'ownership_right_has_causes_of_failure_comment': "",
+                  'ownership_right_has_sample_document_comment': "",
+                  'ownership_right_has_document_template_comment': "",
+                  'municipal_property_lease_id_rgmu': "",
+                  'municipal_property_lease_statement_amount': "",
+                  'municipal_property_lease_link': "",
+                  'municipal_property_lease_has_advanced_appointment_comment': "",
+                  'municipal_property_lease_has_btn_get_service_comment': "",
+                  'municipal_property_lease_has_reglament_comment': "",
+                  'municipal_property_lease_has_estimation_quality_comment': "",
+                  'municipal_property_lease_connected_to_fgis_do_comment': "",
+                  'municipal_property_lease_has_electronic_form_printing_comment': "",
+                  'municipal_property_lease_has_edition_draft_comment': "",
+                  'municipal_property_lease_has_term_of_consideration_comment': "",
+                  'municipal_property_lease_has_notif_consider_result_comment': "",
+                  'municipal_property_lease_has_causes_of_failure_comment': "",
+                  'municipal_property_lease_has_sample_document_comment': "",
+                  'municipal_property_lease_has_document_template_comment': "",
+                  'free_land_provision_id_rgmu': "",
+                  'free_land_provision_statement_amount': "",
+                  'free_land_provision_link': "",
+                  'free_land_provision_has_advanced_appointment_comment': "",
+                  'free_land_provision_has_btn_get_service_comment': "",
+                  'free_land_provision_has_reglament_comment': "",
+                  'free_land_provision_has_estimation_quality_comment': "",
+                  'free_land_provision_connected_to_fgis_do_comment': "",
+                  'free_land_provision_has_electronic_form_printing_comment': "",
+                  'free_land_provision_has_edition_draft_comment': "",
+                  'free_land_provision_has_term_of_consideration_comment': "",
+                  'free_land_provision_has_notif_consider_result_comment': "",
+                  'free_land_provision_has_causes_of_failure_comment': "",
+                  'free_land_provision_has_sample_document_comment': "",
+                  'free_land_provision_has_document_template_comment': "",
                   }
     return render(request, 'app/region_form.html', {'object': object,
                                                         'year': str(year),
@@ -1393,7 +1782,8 @@ def get_region_form(request, year, month, short_region_name):
                                                         'full_region_name': full_region_name,
                                                         'short_region_name': short_region_name,
                                                         'username': request.user.username,
-                                                        'years': [i for i in range(2016, int(datetime.now().year) + 1)]
+                                                        'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                                        'zipped_service_names': zip(full_service_names, short_service_names)
                                                         })
 
 
@@ -1407,7 +1797,9 @@ def get_result_form_with_troubles(request, year, month):
                                                         'num_month': month,
                                                         'zipped': zip(regions_names, short_regions_names),
                                                         'username': request.user.username,
-                                                        'years': [i for i in range(2016, int(datetime.now().year) + 1)]})
+                                                        'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                                        'zipped_service_names': zip(full_service_names,
+                                                                                  short_service_names)})
 
 
 @login_required(login_url='/login/',
@@ -1422,7 +1814,8 @@ def get_result_form_not_sent(request, year, month):
                                                      'num_month': month,
                                                      'zipped': zip(regions_names, short_regions_names),
                                                      'username': request.user.username,
-                                                     'years': [i for i in range(2016, int(datetime.now().year) + 1)]
+                                                     'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                                    'zipped_service_names': zip(full_service_names, short_service_names)
                                                      })
 
 

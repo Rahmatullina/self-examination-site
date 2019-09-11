@@ -79,26 +79,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Фильтр по услугам
         </a>
-        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4">
-          <a class="dropdown-item" href="/result_form/residential_premises/{{ year }}/{{ num_month }}/">Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/housing_transfer/{{ year }}/{{ num_month }}/">Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/advertising_structures/{{ year }}/{{ num_month }}/">Выдача разрешения на установку и эксплуатацию рекламной конструкции </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/capital_construction/{{ year }}/{{ num_month }}/">Выдача разрешения на строительство, реконструкцию объектов капитального строительства</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/preschool_education/{{ year }}/{{ num_month }}/">Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу<br> дошкольного образования (детские сады)</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/school_education/{{ year }}/{{ num_month }}/">Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/needing_premises/{{ year }}/{{ num_month }}/">Принятие на учет граждан в качестве нуждающихся в жилых помещениях</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/town_planning/{{ year }}/{{ num_month }}/">Выдача градостроительных планов земельных участков</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/archive_reference/{{ year }}/{{ num_month }}/">Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав <br> и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/result_form/land_schemes/{{ year }}/{{ num_month }}/">Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории</a>
+        <div class="dropdown-menu"  aria-labelledby="navbarDropdown4" style="height:400px;width:900px;overflow-y: scroll;">
+            {% for item in zipped_service_names %}
+                <a class="dropdown-item" href="/result_form/{{ item.1}}/{{ year }}/{{ num_month }}/">{{ item.0 }}</a>
+                <div class="dropdown-divider"></div>
+            {% endfor %}
         </div>
         </li>
         <li class="nav-item dropdown">
@@ -151,7 +136,7 @@
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button  class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения
+          Согласование проведения переустройства и (или) перепланировки помещения в многоквартирном доме
         </button>
       </h2>
     </div>
@@ -229,7 +214,7 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения
+          Выдача решения о переводе или об отказе в переводе жилого помещения в нежилое помещение или нежилого помещения в жилое помещение
         </button>
       </h2>
     </div>
@@ -387,7 +372,7 @@
     <div class="card-header" id="headingFour">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Выдача разрешения на строительство, реконструкцию объектов капитального строительства
+          Выдача разрешения на строительство объекта капитального строительства
         </button>
       </h2>
     </div>
@@ -465,7 +450,7 @@
     <div class="card-header" id="headingFive">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)
+          Постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)
         </button>
       </h2>
     </div>
@@ -544,7 +529,7 @@
     <div class="card-header" id="headingSix">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения
+          Зачисление детей в муниципальные общеобразовательные учреждения
         </button>
       </h2>
     </div>
@@ -865,7 +850,7 @@
     </div>
     <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
       <div class="card-body">
-                    <!-- Tenth body start -->
+<!-- Tenth body start -->
 {% if objects.land_schemes|length > 0 %}
 <table>
  <thead>
@@ -928,6 +913,391 @@
     </div>
 {% endif %}
 <!-- Tenth body end -->
+    </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingEleventh">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEleventh" aria-expanded="false" aria-controls="collapseEleventh">
+          Продажа земельных участков, находящихся в муниципальной собственности муниципального образования или государственная собственность на которые не разграничена, на которых расположены здания, сооружения, собственникам таких зданий, сооружений либо помещений в них
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEleventh" class="collapse" aria-labelledby="headingEleventh" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Eleventh body start -->
+{% if objects.land_sale|length > 0 %}
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
+<tbody>
+ {% for object in objects.land_sale %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.land_sale_id_rgmu}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.land_sale_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.land_sale_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме" {% if  object.land_sale_has_advanced_appointment_comment != 'Да' and object.land_sale_has_advanced_appointment_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'" {% if  object.land_sale_has_btn_get_service_comment != 'Да' and object.land_sale_has_btn_get_service_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ" {% if  object.land_sale_has_reglament_comment != 'Да' and object.land_sale_has_reglament_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги" {% if  object.land_sale_has_estimation_quality_comment != 'Да' and object.land_sale_has_estimation_quality_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО" {% if  object.land_sale_connected_to_fgis_do_comment != 'Да' and object.land_sale_connected_to_fgis_do_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_connected_to_fgis_do_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)" {% if  object.land_sale_has_electronic_form_printing_comment != 'Да' and object.land_sale_has_electronic_form_printing_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)" {% if  object.land_sale_has_edition_draft_comment != 'Да' and object.land_sale_has_edition_draft_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)" {% if  object.land_sale_has_term_of_consideration_comment != 'Да' and object.land_sale_has_term_of_consideration_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)" {% if  object.land_sale_has_notif_consider_result_comment != 'Да' and object.land_sale_has_notif_consider_result_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)" {% if  object.land_sale_has_causes_of_failure_comment != 'Да' and object.land_sale_has_causes_of_failure_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа" {% if  object.land_sale_has_sample_document_comment != 'Да' and object.land_sale_has_sample_document_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)" {% if  object.land_sale_has_document_template_comment != 'Да' and object.land_sale_has_document_template_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_sale_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
+<!-- Eleventh body end -->
+    </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwelth">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelth" aria-expanded="false" aria-controls="collapseTwelth">
+          Предоставление в аренду земельных участков, находящихся в муниципальной собственности муниципального образования или государственная собственность на которые не разграничена, без проведения торгов
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwelth" class="collapse" aria-labelledby="headingTwelth" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Twelth body start -->
+{% if objects.land_lease|length > 0 %}
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
+<tbody>
+ {% for object in objects.land_lease %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.land_lease_id_rgmu}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.land_lease_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.land_lease_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме" {% if  object.land_lease_has_advanced_appointment_comment != 'Да' and object.land_lease_has_advanced_appointment_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'" {% if  object.land_lease_has_btn_get_service_comment != 'Да' and object.land_lease_has_btn_get_service_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ" {% if  object.land_lease_has_reglament_comment != 'Да' and object.land_lease_has_reglament_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги" {% if  object.land_lease_has_estimation_quality_comment != 'Да' and object.land_lease_has_estimation_quality_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО" {% if  object.land_lease_connected_to_fgis_do_comment != 'Да' and object.land_lease_connected_to_fgis_do_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_connected_to_fgis_do_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)" {% if  object.land_lease_has_electronic_form_printing_comment != 'Да' and object.land_lease_has_electronic_form_printing_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)" {% if  object.land_lease_has_edition_draft_comment != 'Да' and object.land_lease_has_edition_draft_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)" {% if  object.land_lease_has_term_of_consideration_comment != 'Да' and object.land_lease_has_term_of_consideration_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)" {% if  object.land_lease_has_notif_consider_result_comment != 'Да' and object.land_lease_has_notif_consider_result_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)" {% if  object.land_lease_has_causes_of_failure_comment != 'Да' and object.land_lease_has_causes_of_failure_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа" {% if  object.land_lease_has_sample_document_comment != 'Да' and object.land_lease_has_sample_document_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)" {% if  object.land_lease_has_document_template_comment != 'Да' and object.land_lease_has_document_template_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.land_lease_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
+<!-- Twelth body end -->
+    </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingThirteenth">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteenth" aria-expanded="false" aria-controls="collapseThirteenth">
+          Выдача копий архивных документов, подтверждающих право на владение землей
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThirteenth" class="collapse" aria-labelledby="headingThirteenth" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Thiteenth body start -->
+{% if objects.ownership_right|length > 0 %}
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
+<tbody>
+ {% for object in objects.ownership_right %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.ownership_right_id_rgmu}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.ownership_right_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.ownership_right_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме" {% if  object.ownership_right_has_advanced_appointment_comment != 'Да' and object.ownership_right_has_advanced_appointment_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'" {% if  object.ownership_right_has_btn_get_service_comment != 'Да' and object.ownership_right_has_btn_get_service_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ" {% if  object.ownership_right_has_reglament_comment != 'Да' and object.ownership_right_has_reglament_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги" {% if  object.ownership_right_has_estimation_quality_comment != 'Да' and object.ownership_right_has_estimation_quality_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО" {% if  object.ownership_right_connected_to_fgis_do_comment != 'Да' and object.ownership_right_connected_to_fgis_do_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_connected_to_fgis_do_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)" {% if  object.ownership_right_has_electronic_form_printing_comment != 'Да' and object.ownership_right_has_electronic_form_printing_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)" {% if  object.ownership_right_has_edition_draft_comment != 'Да' and object.ownership_right_has_edition_draft_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)" {% if  object.ownership_right_has_term_of_consideration_comment != 'Да' and object.ownership_right_has_term_of_consideration_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)" {% if  object.ownership_right_has_notif_consider_result_comment != 'Да' and object.ownership_right_has_notif_consider_result_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)" {% if  object.ownership_right_has_causes_of_failure_comment != 'Да' and object.ownership_right_has_causes_of_failure_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа" {% if  object.ownership_right_has_sample_document_comment != 'Да' and object.ownership_right_has_sample_document_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)" {% if  object.ownership_right_has_document_template_comment != 'Да' and object.ownership_right_has_document_template_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.ownership_right_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
+<!-- Thirteenth body end -->
+    </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFourteenth">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFourteenth" aria-expanded="false" aria-controls="collapseFourteenth">
+          Предоставление муниципального имущества (за исключением земельных участков) в аренду, безвозмездное пользование, доверительное управление без проведения конкурсов или аукционов
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFourteenth" class="collapse" aria-labelledby="headingFourteenth" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Fourteenth body start -->
+{% if objects.municipal_property_lease|length > 0 %}
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
+<tbody>
+ {% for object in objects.municipal_property_lease %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.municipal_property_lease_id_rgmu}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.municipal_property_lease_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.municipal_property_lease_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме" {% if  object.municipal_property_lease_has_advanced_appointment_comment != 'Да' and object.municipal_property_lease_has_advanced_appointment_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'" {% if  object.municipal_property_lease_has_btn_get_service_comment != 'Да' and object.municipal_property_lease_has_btn_get_service_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ" {% if  object.municipal_property_lease_has_reglament_comment != 'Да' and object.municipal_property_lease_has_reglament_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги" {% if  object.municipal_property_lease_has_estimation_quality_comment != 'Да' and object.municipal_property_lease_has_estimation_quality_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО" {% if  object.municipal_property_lease_connected_to_fgis_do_comment != 'Да' and object.municipal_property_lease_connected_to_fgis_do_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_connected_to_fgis_do_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)" {% if  object.municipal_property_lease_has_electronic_form_printing_comment != 'Да' and object.municipal_property_lease_has_electronic_form_printing_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)" {% if  object.municipal_property_lease_has_edition_draft_comment != 'Да' and object.municipal_property_lease_has_edition_draft_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)" {% if  object.municipal_property_lease_has_term_of_consideration_comment != 'Да' and object.municipal_property_lease_has_term_of_consideration_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)" {% if  object.municipal_property_lease_has_notif_consider_result_comment != 'Да' and object.municipal_property_lease_has_notif_consider_result_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)" {% if  object.municipal_property_lease_has_causes_of_failure_comment != 'Да' and object.municipal_property_lease_has_causes_of_failure_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа" {% if  object.municipal_property_lease_has_sample_document_comment != 'Да' and object.municipal_property_lease_has_sample_document_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)" {% if  object.municipal_property_lease_has_document_template_comment != 'Да' and object.municipal_property_lease_has_document_template_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.municipal_property_lease_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
+<!-- Fourteenth body end -->
+    </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFifteenth">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFifteenth" aria-expanded="false" aria-controls="collapseFifteenth">
+          Предоставление земельного участка, находящегося в муниципальной собственности муниципального образования или государственная собственность на который не разграничена, гражданам в собственность бесплатно для индивидуального жилищного строительства
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFifteenth" class="collapse" aria-labelledby="headingFifteenth" data-parent="#accordionExample">
+      <div class="card-body">
+<!-- Fifteenth body start -->
+{% if objects.free_land_provision|length > 0 %}
+<table>
+ <thead>
+ <tr>
+   <th data-campo='name' rowspan="3">Наименование муниципального образования</th>
+	 <th data-campo='Id' rowspan="3">Идентификатор услуги в РГМУ</th>
+   <th data-campo='amount' rowspan="3">Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)
+в течение {{ num_month }}.{{ year }} г., шт. (количество указывается нарастающим итогом).</th>
+     <th data-campo='exploring' colspan="13" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Единый портал государственных и муниципальных услуг (www.gosuslugi.ru)/Региональный портал государственных и муниципальных услуг (www.gosuslugi.bashkortostan.ru).АИС СОЗ - автоматизированная информационная система 'Система обработки запросов'">Обследование действий, реализованных на порталах ЕПГУ/РПГУ,и в АИС СОЗ*</th>
+</tr>
+<tr>
+   <th data-campo='link' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае изменения ссылка будет актуализирована. Подать заявление в электронном виде можно перейдя по следующей(им) ссылкам.">Ссылка на услугу *</th>
+   <th data-campo='record' rowspan="2">Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме</th>
+   <th data-campo='hasButton' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title="В случае отрицательного ответа необходимо принять меры по устранению и направить соответствующую заявку в техподдержку на адрес электронной почты support@bashkortostan.ru, тел. (347) 218-00-00">Наличие кнопки "Получить услугу"*</th>
+   <th data-campo='reglament' rowspan="2">Актуальный администра<wbr>-тивный регламент предоставления услуги размещен, и доступен для просмотра на РПГУи ЕПГУ</th>
+   <th data-campo='quality' rowspan="2">Возможность оценки качества предоставления услуги</th>
+    <th data-campo='isConnected' rowspan="2" data-toggle="tooltip" data-placement="bottom" data-container="body" title='В случае, если РОИВ и ОМСУ не отображается на интерактивной карте ФГИС ДО, необходимо подключиться к системе в соответствии с постановлением Правительства РФ от 20.11.2012 года № 1198 и протоколом РКАР от 26.05.2017 года № 2'>Орган власти подключен к  <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="ФГИС ДО - Федеральная государственная информационная система досудебного обжалования">ФГИС ДО*</span></th>
+   <th data-campo='printing' rowspan="2">Возможность печати электронной формы заявления</th>
+   <th data-campo='edition' rowspan="2">Возможность редактировать черновик заявления</th>
+   <th data-campo="warning" colspan="3">Для положительного заполнения данного поля сотрудником, который исполняет заявку в электронном виде необходимо заполнять поля "коментраии" на этапах обработки заявления в АИС СОЗ/АИС Реестр сведений</th>
+   <th data-campo="availiblity" colspan="2">Доступность документов для скачивания: документы, которые сотрудник Администрации загружает через РГМУ (http://rgmu.bashkortostan.ru/<wbr>RGU_WAR_2/RGU2Auth.html;<wbr>jsessionid=05485FA39FE0E5668<wbr>7E14B716FA87C27) должны быть доступны для скачивания гражданами на соответствующей карточке услуги на ЕПГУ и РПГУ</th>
+</tr>
+<tr>
+   <th data-campo="term" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - текст уведомления содержит сведения о нормативных сроках рассмотрения заявления. Нет - данная информация отсуствтует.">Срок рассмотрения заявления (личный кабинет)*</th>
+   <th data-campo="notification" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление не получено, либо получено позднее.">Уведомление о результате рассмотрения заявления в личном кабинете*</th>
+   <th data-comp="refusion" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - уведомление получено в течение 30 рабочих дней. Нет - уведомление (не путать со статусом 'Отказано') не получено, либо получено позднее (уведомление: отказано в предоставлении услуги в связи с ....).">Причины отказа (личный кабинет)*</th>
+   <th data-comp="example" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть образец документа. Нет - иначе.">Образец документа*</th>
+   <th data-comp="template" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Да - есть возможность заполнить шаблон (бланк) в электронном виде.Нет - иначе."> Шаблон (форма, бланк) документа*</th>
+</tr>
+ </thead>
+<tbody>
+ {% for object in objects.free_land_provision %}
+    <tr>
+   <td data-campo='name' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Наименование муниципального образования">{{ object.region_name }}</td>
+   <td data-campo='Id' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Идентификатор услуги в РГМУ">{{ object.free_land_provision_id_rgmu}}</td>
+   <td data-campo='amount' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство)за прошедший месяц, шт. (количество указывается нарастающим итогом)">{{ object.free_land_provision_statement_amount }}</td>
+   <td data-campo='link' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Ссылка на услугу *">{{ object.free_land_provision_link }}</td>
+   <td data-campo='record' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность предварительной записи на прием в орган власти для подачи заявления при личном приеме" {% if  object.free_land_provision_has_advanced_appointment_comment != 'Да' and object.free_land_provision_has_advanced_appointment_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_advanced_appointment_comment}}</td>
+   <td data-campo='hasButton' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие кнопки 'Получить услугу'" {% if  object.free_land_provision_has_btn_get_service_comment != 'Да' and object.free_land_provision_has_btn_get_service_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_btn_get_service_comment }}</td>
+   <td data-campo='reglament' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Актуальный административный регламент предоставления услуги размещен, и доступен для просмотра на РПГУ и ЕПГУ" {% if  object.free_land_provision_has_reglament_comment != 'Да' and object.free_land_provision_has_reglament_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_reglament_comment }}</td>
+   <td data-campo='quality' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность оценки качества предоставления услуги" {% if  object.free_land_provision_has_estimation_quality_comment != 'Да' and object.free_land_provision_has_estimation_quality_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_estimation_quality_comment }}</td>
+   <td data-campo='isConnected' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Орган власти подключен к  ФГИС ДО" {% if  object.free_land_provision_connected_to_fgis_do_comment != 'Да' and object.free_land_provision_connected_to_fgis_do_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_connected_to_fgis_do_comment }}</td>
+   <td data-campo='printing' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность печати электронной формы заявления (в интерфейсе подачи заявления есть кнопка печати)" {% if  object.free_land_provision_has_electronic_form_printing_comment != 'Да' and object.free_land_provision_has_electronic_form_printing_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_electronic_form_printing_comment }}</td>
+	 <td data-campo='edition' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Возможность редактировать черновик заявления(сохранять незавершенные заявления как черновики и редактировать их в дальнейшем)" {% if  object.free_land_provision_has_edition_draft_comment != 'Да' and object.free_land_provision_has_edition_draft_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_edition_draft_comment }}</td>
+   <td data-campo='term' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие в тексте уведомления сведений о нормативных сроках рассмотрения заявления (личный кабинет)" {% if  object.free_land_provision_has_term_of_consideration_comment != 'Да' and object.free_land_provision_has_term_of_consideration_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_term_of_consideration_comment }}</td>
+   <td data-campo='notification' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о результате рассмотрения заявления в личном кабинете ( уведомление получено в течение 30 рабочих дней)" {% if  object.free_land_provision_has_notif_consider_result_comment != 'Да' and object.free_land_provision_has_notif_consider_result_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_notif_consider_result_comment }}</td>
+   <td data-campo='refusion' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Уведомление о причинах отказа ( уведомление получено в течение 30 рабочих дней)" {% if  object.free_land_provision_has_causes_of_failure_comment != 'Да' and object.free_land_provision_has_causes_of_failure_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_causes_of_failure_comment }}</td>
+   <td data-campo='example' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие образца документа" {% if  object.free_land_provision_has_sample_document_comment != 'Да' and object.free_land_provision_has_sample_document_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_sample_document_comment }}</td>
+   <td data-campo='template' data-toggle="tooltip" data-placement="bottom" data-container="body" title="Обследование действий, реализованных на порталах ЕПГУ/РПГУ и в АИС СОЗ. Наличие шаблона (формы, бланка) документа (возможность заполнить шаблон (бланк) в электронном виде)" {% if  object.free_land_provision_has_document_template_comment != 'Да' and object.free_land_provision_has_document_template_comment != 'Не предусмотрено'%} bgcolor="#9c8880" {% endif %}>{{ object.free_land_provision_has_document_template_comment }}</td>
+	</tr>
+{% endfor %}
+  </tbody>
+</table>
+      <div style="margin-left: 40px;margin-top: 10px">
+        <p align="left">Примечание:</p>
+        <ul style="list-style: none;text-align: left;">
+            <li class="list_with_gray_marker"><span> - Неполадка в функционале предоставления электронной улуги</span></li>
+            <li class="list_with_white_marker"><span> - Нет неполадок в функционале предоставления электронной улуги</span></li>
+        </ul>
+    </div>
+{% endif %}
+<!-- Fifteenth body end -->
     </div>
     </div>
   </div>
