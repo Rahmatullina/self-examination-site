@@ -46,30 +46,20 @@ short_service_names = ['residential_premises', 'housing_transfer', 'advertising_
                        'municipal_property_lease', 'free_land_provision']
 
 full_service_names = ['Согласование проведения переустройства и (или) перепланировки помещения в многоквартирном доме',
-                      'Выдача решения о переводе или об отказе в переводе жилого помещения в нежилое помещение или \
-                      нежилого помещения в жилое помещение',
+                      'Выдача решения о переводе или об отказе в переводе жилого помещения в нежилое помещение или нежилого помещения в жилое помещение',
                       'Выдача разрешения на установку и эксплуатацию рекламной конструкции ',
                       'Выдача разрешения на строительство объекта капитального строительства',
-                      'Постановка на учет и зачисление детей в образовательные учреждения, реализующие образовательную \
-                      программу дошкольного образования (детские сады)',
+                      'Постановка на учет и зачисление детей в образовательные учреждения, реализующие образовательную программу дошкольного образования (детские сады)',
                       'Зачисление детей в муниципальные общеобразовательные учреждения',
                       'Принятие на учет граждан в качестве нуждающихся в жилых помещениях',
                       'Выдача градостроительных планов земельных участков',
-                      'Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, \
-                      связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и \
-                      органами местного самоуправления своих полномочий',
+                      'Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий',
                       'Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории',
-                      'Продажа земельных участков, находящихся в муниципальной собственности муниципального образования \
-                       или государственная собственность на которые не разграничена, на которых расположены здания, \
-                       сооружения, собственникам таких зданий, сооружений либо помещений в них',
-                      'Предоставление в аренду земельных участков, находящихся в муниципальной собственности муниципального \
-                      образования или государственная собственность на которые не разграничена, без проведения торгов',
+                      'Продажа земельных участков, находящихся в муниципальной собственности муниципального образования или государственная собственность на которые не разграничена, на которых расположены здания, сооружения, собственникам таких зданий, сооружений либо помещений в них',
+                      'Предоставление в аренду земельных участков, находящихся в муниципальной собственности муниципального образования или государственная собственность на которые не разграничена, без проведения торгов',
                       'Выдача копий архивных документов, подтверждающих право на владение землей',
-                      'Предоставление муниципального имущества (за исключением земельных участков) в аренду, \
-                      безвозмездное пользование, доверительное управление без проведения конкурсов или аукционов',
-                      'Предоставление земельного участка, находящегося в муниципальной собственности муниципального \
-                      образования или государственная собственность на который не разграничена, гражданам в собственность \
-                      бесплатно для индивидуального жилищного строительства']
+                      'Предоставление муниципального имущества (за исключением земельных участков) в аренду, безвозмездное пользование, доверительное управление без проведения конкурсов или аукционов',
+                      'Предоставление земельного участка, находящегося в муниципальной собственности муниципального образования или государственная собственность на который не разграничена, гражданам в собственность бесплатно для индивидуального жилищного строительства']
 
 MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
 
@@ -1842,7 +1832,7 @@ def logout_view(request):
                 redirect_field_name='/result_form/residential_premises/' + datetime.today().strftime('%Y/%m/'))
 def export_all(request,year,month):
     if request.method == 'GET':
-        wb = load_workbook('./app/static/app/all_data.xlsx')
+        wb = load_workbook('./app/static/app/xlsx_templates/all_data.xlsx')
 
         ws1 = wb["Лист 1"]
         ws2 = wb["Лист 2"]
@@ -1854,14 +1844,106 @@ def export_all(request,year,month):
         ws8 = wb["Лист 8"]
         ws9 = wb["Лист 9"]
         ws10 = wb["Лист 10"]
+        ws11 = wb["Лист 11"]
+        ws12 = wb["Лист 12"]
+        ws13 = wb["Лист 13"]
+        ws14 = wb["Лист 14"]
+        ws15 = wb["Лист 15"]
+        ws1[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws1['A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[0], month, year)
+        ws2['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws2[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[1], month, year)
+        ws3[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws3[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[2], month, year)
+        ws4[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws4[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[3], month, year)
+        ws5[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws5[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[4], month, year)
+        ws6[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws6[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[5], month, year)
+        ws7[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws7[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[6], month, year)
+        ws8[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws8[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[7], month, year)
+        ws9[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws9[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[8], month, year)
+        ws10[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws10[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[9], month, year)
+        ws11[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws11[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[10], month, year)
+        ws12[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws12[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[11], month, year)
+        ws13[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws13[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[12], month, year)
+        ws14[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws14[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[13], month, year)
+        ws15[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws15[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(
+            full_service_names[14], month, year)
+
         objects = []
         for name in regions_names:
             try:
-                object = RegionModel.objects.raw('''SELECT * FROM app_regionModel WHERE region_name =\'''' +
-                                                 str(name) + '''\' AND month=\'''' + str(month) + '''\' AND year=\'''' +
-                                                 str(year) + '''\' ORDER BY year DESC, month DESC, day DESC, time DESC LIMIT 1''')[0]
+                object = get_object_or_404(RegionModel,region_name=name, year=year, month=month)
                 objects.append(object)
-            except IndexError:
+            except Http404:
                 object = {'region_name': name,
                           'residential_premises_id_rgmu': "",
                           'residential_premises_statement_amount': "",
@@ -2012,13 +2094,86 @@ def export_all(request,year,month):
                           'land_schemes_has_notif_consider_result_comment': "",
                           'land_schemes_has_causes_of_failure_comment': "",
                           'land_schemes_has_sample_document_comment': "",
-                          'land_schemes_has_document_template_comment': ""
+                          'land_schemes_has_document_template_comment': "",
+                          'land_sale_id_rgmu': "",
+                          'land_sale_statement_amount': "",
+                          'land_sale_link': "",
+                          'land_sale_has_advanced_appointment_comment': "",
+                          'land_sale_has_btn_get_service_comment': "",
+                          'land_sale_has_reglament_comment': "",
+                          'land_sale_has_estimation_quality_comment': "",
+                          'land_sale_connected_to_fgis_do_comment': "",
+                          'land_sale_has_electronic_form_printing_comment': "",
+                          'land_sale_has_edition_draft_comment': "",
+                          'land_sale_has_term_of_consideration_comment': "",
+                          'land_sale_has_notif_consider_result_comment': "",
+                          'land_sale_has_causes_of_failure_comment': "",
+                          'land_sale_has_sample_document_comment': "",
+                          'land_sale_has_document_template_comment': "",
+                          'housing_transfer_id_rgmu': "",
+                          'land_lease_statement_amount': "",
+                          'land_lease_link': "",
+                          'land_lease_has_advanced_appointment_comment': "",
+                          'land_lease_has_btn_get_service_comment': "",
+                          'land_lease_has_reglament_comment': "",
+                          'land_lease_has_estimation_quality_comment': "",
+                          'land_lease_connected_to_fgis_do_comment': "",
+                          'land_lease_has_electronic_form_printing_comment': "",
+                          'land_lease_has_edition_draft_comment': "",
+                          'land_lease_has_term_of_consideration_comment': "",
+                          'land_lease_has_notif_consider_result_comment': "",
+                          'land_lease_has_causes_of_failure_comment': "",
+                          'land_lease_has_sample_document_comment': "",
+                          'land_lease_has_document_template_comment': "",
+                          'ownership_right_id_rgmu': "",
+                          'ownership_right_statement_amount': "",
+                          'ownership_right_link': "",
+                          'ownership_right_has_advanced_appointment_comment': "",
+                          'ownership_right_has_btn_get_service_comment': "",
+                          'ownership_right_has_reglament_comment': "",
+                          'ownership_right_has_estimation_quality_comment': "",
+                          'ownership_right_connected_to_fgis_do_comment': "",
+                          'ownership_right_has_electronic_form_printing_comment': "",
+                          'ownership_right_has_edition_draft_comment': "",
+                          'ownership_right_has_term_of_consideration_comment': "",
+                          'ownership_right_has_notif_consider_result_comment': "",
+                          'ownership_right_has_causes_of_failure_comment': "",
+                          'ownership_right_has_sample_document_comment': "",
+                          'ownership_right_has_document_template_comment': "",
+                          'municipal_property_lease_id_rgmu': "",
+                          'municipal_property_lease_statement_amount': "",
+                          'municipal_property_lease_link': "",
+                          'municipal_property_lease_has_advanced_appointment_comment': "",
+                          'municipal_property_lease_has_btn_get_service_comment': "",
+                          'municipal_property_lease_has_reglament_comment': "",
+                          'municipal_property_lease_has_estimation_quality_comment': "",
+                          'municipal_property_lease_connected_to_fgis_do_comment': "",
+                          'municipal_property_lease_has_electronic_form_printing_comment': "",
+                          'municipal_property_lease_has_edition_draft_comment': "",
+                          'municipal_property_lease_has_term_of_consideration_comment': "",
+                          'municipal_property_lease_has_notif_consider_result_comment': "",
+                          'municipal_property_lease_has_causes_of_failure_comment': "",
+                          'municipal_property_lease_has_sample_document_comment': "",
+                          'municipal_property_lease_has_document_template_comment': "",
+                          'free_land_provision_id_rgmu': "",
+                          'free_land_provision_statement_amount': "",
+                          'free_land_provision_link': "",
+                          'free_land_provision_has_advanced_appointment_comment': "",
+                          'free_land_provision_has_btn_get_service_comment': "",
+                          'free_land_provision_has_reglament_comment': "",
+                          'free_land_provision_has_estimation_quality_comment': "",
+                          'free_land_provision_connected_to_fgis_do_comment': "",
+                          'free_land_provision_has_electronic_form_printing_comment': "",
+                          'free_land_provision_has_edition_draft_comment': "",
+                          'free_land_provision_has_term_of_consideration_comment': "",
+                          'free_land_provision_has_notif_consider_result_comment': "",
+                          'free_land_provision_has_causes_of_failure_comment': "",
+                          'free_land_provision_has_sample_document_comment': "",
+                          'free_land_provision_has_document_template_comment': "",
                           }
                 objects.append(dotDict(object))
         for i in range(len(objects)):
                 object = objects[i]
-                ws1['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(month, year)
-                ws1['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения " в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month,year)
                 ws1['C' + str(7+i)] = object.residential_premises_id_rgmu
                 ws1['D' + str(7+i)] = object.residential_premises_statement_amount
                 ws1['E' + str(7+i)] = object.residential_premises_link
@@ -2034,8 +2189,6 @@ def export_all(request,year,month):
                 ws1['O' + str(7+i)] = object.residential_premises_has_causes_of_failure_comment
                 ws1['P' + str(7+i)] = object.residential_premises_has_sample_document_comment
                 ws1['Q' + str(7+i)] = object.residential_premises_has_document_template_comment
-                ws2['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(month, year)
-                ws2['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws2['C' + str(7 + i)] = object.housing_transfer_id_rgmu
                 ws2['D' + str(7 + i)] = object.housing_transfer_statement_amount
                 ws2['E' + str(7 + i)] = object.housing_transfer_link
@@ -2051,8 +2204,6 @@ def export_all(request,year,month):
                 ws2['O' + str(7 + i)] = object.housing_transfer_has_causes_of_failure_comment
                 ws2['P' + str(7 + i)] = object.housing_transfer_has_sample_document_comment
                 ws2['Q' + str(7 + i)] = object.housing_transfer_has_document_template_comment
-                ws3['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(month, year)
-                ws3['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача разрешения на установку и эксплуатацию рекламной конструкции" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws3['C' + str(7 + i)] = object.advertising_structures_id_rgmu
                 ws3['D' + str(7 + i)] = object.advertising_structures_statement_amount
                 ws3['E' + str(7 + i)] = object.advertising_structures_link
@@ -2068,8 +2219,6 @@ def export_all(request,year,month):
                 ws3['O' + str(7 + i)] = object.advertising_structures_has_causes_of_failure_comment
                 ws3['P' + str(7 + i)] = object.advertising_structures_has_sample_document_comment
                 ws3['Q' + str(7 + i)] = object.advertising_structures_has_document_template_comment
-                ws4['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(month, year)
-                ws4['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача разрешения на строительство, реконструкцию объектов капитального строительства" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws4['C' + str(7 + i)] = object.capital_construction_id_rgmu
                 ws4['D' + str(7 + i)] = object.capital_construction_statement_amount
                 ws4['E' + str(7 + i)] = object.capital_construction_link
@@ -2085,8 +2234,6 @@ def export_all(request,year,month):
                 ws4['O' + str(7 + i)] = object.capital_construction_has_causes_of_failure_comment
                 ws4['P' + str(7 + i)] = object.capital_construction_has_sample_document_comment
                 ws4['Q' + str(7 + i)] = object.capital_construction_has_document_template_comment
-                ws5['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(month, year)
-                ws5['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws5['C' + str(7 + i)] = object.preschool_education_id_rgmu
                 ws5['D' + str(7 + i)] = object.preschool_education_statement_amount
                 ws5['E' + str(7 + i)] = object.preschool_education_link
@@ -2102,8 +2249,6 @@ def export_all(request,year,month):
                 ws5['O' + str(7 + i)] = object.preschool_education_has_causes_of_failure_comment
                 ws5['P' + str(7 + i)] = object.preschool_education_has_sample_document_comment
                 ws5['Q' + str(7 + i)] = object.preschool_education_has_document_template_comment
-                ws6['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(month, year)
-                ws6['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws6['C' + str(7 + i)] = object.school_education_id_rgmu
                 ws6['D' + str(7 + i)] = object.school_education_statement_amount
                 ws6['E' + str(7 + i)] = object.school_education_link
@@ -2119,8 +2264,6 @@ def export_all(request,year,month):
                 ws6['O' + str(7 + i)] = object.school_education_has_causes_of_failure_comment
                 ws6['P' + str(7 + i)] = object.school_education_has_sample_document_comment
                 ws6['Q' + str(7 + i)] = object.school_education_has_document_template_comment
-                ws7['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(month, year)
-                ws7['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Принятие на учет граждан в качестве нуждающихся в жилых помещениях" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws7['C' + str(7 + i)] = object.needing_premises_id_rgmu
                 ws7['D' + str(7 + i)] = object.needing_premises_statement_amount
                 ws7['E' + str(7 + i)] = object.needing_premises_link
@@ -2136,8 +2279,6 @@ def export_all(request,year,month):
                 ws7['O' + str(7 + i)] = object.needing_premises_has_causes_of_failure_comment
                 ws7['P' + str(7 + i)] = object.needing_premises_has_sample_document_comment
                 ws7['Q' + str(7 + i)] = object.needing_premises_has_document_template_comment
-                ws8['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(month, year)
-                ws8['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача градостроительных планов земельных участков" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws8['C' + str(7 + i)] = object.town_planning_id_rgmu
                 ws8['D' + str(7 + i)] = object.town_planning_statement_amount
                 ws8['E' + str(7 + i)] = object.town_planning_link
@@ -2153,8 +2294,6 @@ def export_all(request,year,month):
                 ws8['O' + str(7 + i)] = object.town_planning_has_causes_of_failure_comment
                 ws8['P' + str(7 + i)] = object.town_planning_has_sample_document_comment
                 ws8['Q' + str(7 + i)] = object.town_planning_has_document_template_comment
-                ws9['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в (количество указывается нарастающим итогом)'.format(month, year)
-                ws9['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws9['C' + str(7 + i)] = object.archive_reference_id_rgmu
                 ws9['D' + str(7 + i)] = object.archive_reference_statement_amount
                 ws9['E' + str(7 + i)] = object.archive_reference_link
@@ -2170,8 +2309,6 @@ def export_all(request,year,month):
                 ws9['O' + str(7 + i)] = object.archive_reference_has_causes_of_failure_comment
                 ws9['P' + str(7 + i)] = object.archive_reference_has_sample_document_comment
                 ws9['Q' + str(7 + i)] = object.archive_reference_has_document_template_comment
-                ws10['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(month, year)
-                ws10['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории" в электронной форме во всех районах Республики Башкортостан за {}.{}г.'.format(month, year)
                 ws10['C' + str(7 + i)] = object.land_schemes_id_rgmu
                 ws10['D' + str(7 + i)] = object.land_schemes_statement_amount
                 ws10['E' + str(7 + i)] = object.land_schemes_link
@@ -2187,6 +2324,81 @@ def export_all(request,year,month):
                 ws10['O' + str(7 + i)] = object.land_schemes_has_causes_of_failure_comment
                 ws10['P' + str(7 + i)] = object.land_schemes_has_sample_document_comment
                 ws10['Q' + str(7 + i)] = object.land_schemes_has_document_template_comment
+                ws11['C' + str(7 + i)] = object.land_sale_id_rgmu
+                ws11['D' + str(7 + i)] = object.land_sale_statement_amount
+                ws11['E' + str(7 + i)] = object.land_sale_link
+                ws11['F' + str(7 + i)] = object.land_sale_has_advanced_appointment_comment
+                ws11['G' + str(7 + i)] = object.land_sale_has_btn_get_service_comment
+                ws11['H' + str(7 + i)] = object.land_sale_has_reglament_comment
+                ws11['I' + str(7 + i)] = object.land_sale_has_estimation_quality_comment
+                ws11['J' + str(7 + i)] = object.land_sale_connected_to_fgis_do_comment
+                ws11['K' + str(7 + i)] = object.land_sale_has_electronic_form_printing_comment
+                ws11['L' + str(7 + i)] = object.land_sale_has_edition_draft_comment
+                ws11['M' + str(7 + i)] = object.land_sale_has_term_of_consideration_comment
+                ws11['N' + str(7 + i)] = object.land_sale_has_notif_consider_result_comment
+                ws11['O' + str(7 + i)] = object.land_sale_has_causes_of_failure_comment
+                ws11['P' + str(7 + i)] = object.land_sale_has_sample_document_comment
+                ws11['Q' + str(7 + i)] = object.land_sale_has_document_template_comment
+                ws12['C' + str(7 + i)] = object.land_lease_id_rgmu
+                ws12['D' + str(7 + i)] = object.land_lease_statement_amount
+                ws12['E' + str(7 + i)] = object.land_lease_link
+                ws12['F' + str(7 + i)] = object.land_lease_has_advanced_appointment_comment
+                ws12['G' + str(7 + i)] = object.land_lease_has_btn_get_service_comment
+                ws12['H' + str(7 + i)] = object.land_lease_has_reglament_comment
+                ws12['I' + str(7 + i)] = object.land_lease_has_estimation_quality_comment
+                ws12['J' + str(7 + i)] = object.land_lease_connected_to_fgis_do_comment
+                ws12['K' + str(7 + i)] = object.land_lease_has_electronic_form_printing_comment
+                ws12['L' + str(7 + i)] = object.land_lease_has_edition_draft_comment
+                ws12['M' + str(7 + i)] = object.land_lease_has_term_of_consideration_comment
+                ws12['N' + str(7 + i)] = object.land_lease_has_notif_consider_result_comment
+                ws12['O' + str(7 + i)] = object.land_lease_has_causes_of_failure_comment
+                ws12['P' + str(7 + i)] = object.land_lease_has_sample_document_comment
+                ws12['Q' + str(7 + i)] = object.land_lease_has_document_template_comment
+                ws13['C' + str(7 + i)] = object.ownership_right_id_rgmu
+                ws13['D' + str(7 + i)] = object.ownership_right_statement_amount
+                ws13['E' + str(7 + i)] = object.ownership_right_link
+                ws13['F' + str(7 + i)] = object.ownership_right_has_advanced_appointment_comment
+                ws13['G' + str(7 + i)] = object.ownership_right_has_btn_get_service_comment
+                ws13['H' + str(7 + i)] = object.ownership_right_has_reglament_comment
+                ws13['I' + str(7 + i)] = object.ownership_right_has_estimation_quality_comment
+                ws13['J' + str(7 + i)] = object.ownership_right_connected_to_fgis_do_comment
+                ws13['K' + str(7 + i)] = object.ownership_right_has_electronic_form_printing_comment
+                ws13['L' + str(7 + i)] = object.ownership_right_has_edition_draft_comment
+                ws13['M' + str(7 + i)] = object.ownership_right_has_term_of_consideration_comment
+                ws13['N' + str(7 + i)] = object.ownership_right_has_notif_consider_result_comment
+                ws13['O' + str(7 + i)] = object.ownership_right_has_causes_of_failure_comment
+                ws13['P' + str(7 + i)] = object.ownership_right_has_sample_document_comment
+                ws13['Q' + str(7 + i)] = object.ownership_right_has_document_template_comment
+                ws14['C' + str(7 + i)] = object.municipal_property_lease_id_rgmu
+                ws14['D' + str(7 + i)] = object.municipal_property_lease_statement_amount
+                ws14['E' + str(7 + i)] = object.municipal_property_lease_link
+                ws14['F' + str(7 + i)] = object.municipal_property_lease_has_advanced_appointment_comment
+                ws14['G' + str(7 + i)] = object.municipal_property_lease_has_btn_get_service_comment
+                ws14['H' + str(7 + i)] = object.municipal_property_lease_has_reglament_comment
+                ws14['I' + str(7 + i)] = object.municipal_property_lease_has_estimation_quality_comment
+                ws14['J' + str(7 + i)] = object.municipal_property_lease_connected_to_fgis_do_comment
+                ws14['K' + str(7 + i)] = object.municipal_property_lease_has_electronic_form_printing_comment
+                ws14['L' + str(7 + i)] = object.municipal_property_lease_has_edition_draft_comment
+                ws14['M' + str(7 + i)] = object.municipal_property_lease_has_term_of_consideration_comment
+                ws14['N' + str(7 + i)] = object.municipal_property_lease_has_notif_consider_result_comment
+                ws14['O' + str(7 + i)] = object.municipal_property_lease_has_causes_of_failure_comment
+                ws14['P' + str(7 + i)] = object.municipal_property_lease_has_sample_document_comment
+                ws14['Q' + str(7 + i)] = object.municipal_property_lease_has_document_template_comment
+                ws15['C' + str(7 + i)] = object.free_land_provision_id_rgmu
+                ws15['D' + str(7 + i)] = object.free_land_provision_statement_amount
+                ws15['E' + str(7 + i)] = object.free_land_provision_link
+                ws15['F' + str(7 + i)] = object.free_land_provision_has_advanced_appointment_comment
+                ws15['G' + str(7 + i)] = object.free_land_provision_has_btn_get_service_comment
+                ws15['H' + str(7 + i)] = object.free_land_provision_has_reglament_comment
+                ws15['I' + str(7 + i)] = object.free_land_provision_has_estimation_quality_comment
+                ws15['J' + str(7 + i)] = object.free_land_provision_connected_to_fgis_do_comment
+                ws15['K' + str(7 + i)] = object.free_land_provision_has_electronic_form_printing_comment
+                ws15['L' + str(7 + i)] = object.free_land_provision_has_edition_draft_comment
+                ws15['M' + str(7 + i)] = object.free_land_provision_has_term_of_consideration_comment
+                ws15['N' + str(7 + i)] = object.free_land_provision_has_notif_consider_result_comment
+                ws15['O' + str(7 + i)] = object.free_land_provision_has_causes_of_failure_comment
+                ws15['P' + str(7 + i)] = object.free_land_provision_has_sample_document_comment
+                ws15['Q' + str(7 + i)] = object.free_land_provision_has_document_template_comment
 
         response = HttpResponse(save_virtual_workbook(wb),content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="{}-{}_Examination_Form.xlsx"'.format(year,month)
@@ -2196,7 +2408,7 @@ def export_all(request,year,month):
                 redirect_field_name='/result_form/residential_premises/' + datetime.today().strftime('%Y/%m/'))
 def export_with_troubles(request,year,month):
     if request.method == 'GET':
-        wb = load_workbook('./app/static/app/with_troubles.xlsx')
+        wb = load_workbook('./app/static/app/xlsx_templates/with_troubles.xlsx')
         thin_border = Border(left=Side(style='thin'),
                               right=Side(style='thin'),
                               top=Side(style='thin'),
@@ -2212,9 +2424,105 @@ def export_with_troubles(request,year,month):
         ws8 = wb["Лист 8"]
         ws9 = wb["Лист 9"]
         ws10 = wb["Лист 10"]
+        ws11 = wb["Лист 11"]
+        ws12 = wb["Лист 12"]
+        ws13 = wb["Лист 13"]
+        ws14 = wb["Лист 14"]
+        ws15 = wb["Лист 15"]
+        ws1[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws1[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[0], month, year)
+        ws2[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws2[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[1], month, year)
+        ws3[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws3[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[2], month, year)
+        ws4[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws4[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[3], month, year)
+        ws5[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws5[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[4], month, year)
+        ws6[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws6[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[5], month, year)
+        ws7[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws7[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[6], month, year)
+        ws8[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws8[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[7], month, year)
+        ws9[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws9[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[8], month, year)
+        ws10[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws10[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[9], month, year)
+        ws11[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws11[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[10], month, year)
+        ws12[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws12[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[11], month, year)
+        ws13[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws13[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[12], month, year)
+        ws14[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт. (количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws14[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[13], month, year)
+        ws15[
+            'D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{}г.,шт.(количество указывается нарастающим итогом)'.format(
+            month, year)
+        ws15[
+            'A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "{}" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{}г.'.format(
+            full_service_names[14], month, year)
+
         for i in range(len(objects['residential_premises'])):
             object = objects['residential_premises'][i]
-            ws1['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения " в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
+            ws1['A1'] = 'Форма самообследования предоставления государственной и муниципальной услуги "Прием заявлений и выдача документов о согласовании проведения переустройства и (или) перепланировки жилого помещения " в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
             ws1['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws1['A' + str(7 + i)] = i + 1
             ws1['B' + str(7 + i)] = object.region_name
@@ -2235,8 +2543,6 @@ def export_with_troubles(request,year,month):
             ws1['Q' + str(7 + i)] = object.residential_premises_has_document_template_comment
         for i in range(len(objects['housing_transfer'])):
             object = objects['housing_transfer'][i]
-            ws2['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Принятие решений о переводе жилых помещений в нежилые помещения и нежилых помещений в жилые помещения" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month,year)
-            ws2['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws2['A' + str(7+i)] = i+1
             ws2['B' + str(7+i)] = object.region_name
             ws2['C' + str(7 + i)] = object.housing_transfer_id_rgmu
@@ -2256,8 +2562,6 @@ def export_with_troubles(request,year,month):
             ws2['Q' + str(7 + i)] = object.housing_transfer_has_document_template_comment
         for i in range(len(objects['advertising_structures'])):
             object = objects['advertising_structures'][i]
-            ws3['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача разрешения на установку и эксплуатацию рекламной конструкции " в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format( month, year)
-            ws3['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws3['A' + str(7 + i)] = i + 1
             ws3['B' + str(7 + i)] = object.region_name
             ws3['C' + str(7 + i)] = object.advertising_structures_id_rgmu
@@ -2277,8 +2581,6 @@ def export_with_troubles(request,year,month):
             ws3['Q' + str(7 + i)] = object.advertising_structures_has_document_template_comment
         for i in range(len(objects['capital_construction'])):
             object = objects['capital_construction'][i]
-            ws4['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача разрешения на строительство, реконструкцию объектов капитального строительства" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws4['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws4['A' + str(7 + i)] = i + 1
             ws4['B' + str(7 + i)] = object.region_name
             ws4['C' + str(7 + i)] = object.capital_construction_id_rgmu
@@ -2298,8 +2600,6 @@ def export_with_troubles(request,year,month):
             ws4['Q' + str(7 + i)] = object.capital_construction_has_document_template_comment
         for i in range(len(objects['preschool_education'])):
             object = objects['preschool_education'][i]
-            ws5['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Прием заявлений, постановка на учет и зачисление детей в образовательные учреждения, реализующие основную образовательную программу дошкольного образования (детские сады)" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws5['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws5['A' + str(7 + i)] = i + 1
             ws5['B' + str(7 + i)] = object.region_name
             ws5['C' + str(7 + i)] = object.preschool_education_id_rgmu
@@ -2319,8 +2619,6 @@ def export_with_troubles(request,year,month):
             ws5['Q' + str(7 + i)] = object.preschool_education_has_document_template_comment
         for i in range(len(objects['school_education'])):
             object = objects['school_education'][i]
-            ws6['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Зачисление детей в общеобразовательные учреждения субъектов Российской Федерации или муниципальные общеобразовательные учреждения" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws6['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws6['A' + str(7 + i)] = i + 1
             ws6['B' + str(7 + i)] = object.region_name
             ws6['C' + str(7 + i)] = object.school_education_id_rgmu
@@ -2340,8 +2638,6 @@ def export_with_troubles(request,year,month):
             ws6['Q' + str(7 + i)] = object.school_education_has_document_template_comment
         for i in range(len(objects['needing_premises'])):
             object = objects['needing_premises'][i]
-            ws7['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Принятие на учет граждан в качестве нуждающихся в жилых помещениях" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws7['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws7['A' + str(7 + i)] = i + 1
             ws7['B' + str(7 + i)] = object.region_name
             ws7['C' + str(7 + i)] = object.needing_premises_id_rgmu
@@ -2361,8 +2657,6 @@ def export_with_troubles(request,year,month):
             ws7['Q' + str(7 + i)] = object.needing_premises_has_document_template_comment
         for i in range(len(objects['town_planning'])):
             object = objects['town_planning'][i]
-            ws8['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Выдача градостроительных планов земельных участков" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws8['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws8['A' + str(7 + i)] = i + 1
             ws8['B' + str(7 + i)] = object.region_name
             ws8['C' + str(7 + i)] = object.town_planning_id_rgmu
@@ -2382,8 +2676,6 @@ def export_with_troubles(request,year,month):
             ws8['Q' + str(7 + i)] = object.town_planning_has_document_template_comment
         for i in range(len(objects['archive_reference'])):
             object = objects['archive_reference'][i]
-            ws9['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Предоставление архивных справок, архивных копий, архивных выписок, информационных писем, связанных с реализацией законных прав и свобод граждан и исполнением государственными органами и органами местного самоуправления своих полномочий" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws9['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws9['A' + str(7 + i)] = i + 1
             ws9['B' + str(7 + i)] = object.region_name
             ws9['C' + str(7 + i)] = object.archive_reference_id_rgmu
@@ -2403,8 +2695,6 @@ def export_with_troubles(request,year,month):
             ws9['Q' + str(7 + i)] = object.archive_reference_has_document_template_comment
         for i in range(len(objects['land_schemes'])):
             object = objects['land_schemes'][i]
-            ws10['A1'] = 'Форма самообследования предоставления государственных и муниципальных услуги "Утверждение схемы расположения земельного участка или земельных участков на кадастровом плане территории" в электронной форме тех районов Республики Башкортостан, для которых ответ "нет" присутствует в одной из колонок за {}.{} .'.format(month, year)
-            ws10['D4'] = 'Количество заявлений поданных на получение государственных/муниципальных услуг в традиционной форме (при личной явке в ведомство) за {}.{} г. ,шт. (количество указывается нарастающим итогом).'
             ws10['A' + str(7 + i)] = i + 1
             ws10['B' + str(7 + i)] = object.region_name
             ws10['C' + str(7 + i)] = object.land_schemes_id_rgmu
@@ -2422,6 +2712,101 @@ def export_with_troubles(request,year,month):
             ws10['O' + str(7 + i)] = object.land_schemes_has_causes_of_failure_comment
             ws10['P' + str(7 + i)] = object.land_schemes_has_sample_document_comment
             ws10['Q' + str(7 + i)] = object.land_schemes_has_document_template_comment
+        for i in range(len(objects['land_sale'])):
+            object = objects['land_sale'][i]
+            ws11['A' + str(7 + i)] = i + 1
+            ws11['B' + str(7 + i)] = object.region_name
+            ws11['C' + str(7 + i)] = object.land_sale_id_rgmu
+            ws11['D' + str(7 + i)] = object.land_sale_statement_amount
+            ws11['E' + str(7 + i)] = object.land_sale_link
+            ws11['F' + str(7 + i)] = object.land_sale_has_advanced_appointment_comment
+            ws11['G' + str(7 + i)] = object.land_sale_has_btn_get_service_comment
+            ws11['H' + str(7 + i)] = object.land_sale_has_reglament_comment
+            ws11['I' + str(7 + i)] = object.land_sale_has_estimation_quality_comment
+            ws11['J' + str(7 + i)] = object.land_sale_connected_to_fgis_do_comment
+            ws11['K' + str(7 + i)] = object.land_sale_has_electronic_form_printing_comment
+            ws11['L' + str(7 + i)] = object.land_sale_has_edition_draft_comment
+            ws11['M' + str(7 + i)] = object.land_sale_has_term_of_consideration_comment
+            ws11['N' + str(7 + i)] = object.land_sale_has_notif_consider_result_comment
+            ws11['O' + str(7 + i)] = object.land_sale_has_causes_of_failure_comment
+            ws11['P' + str(7 + i)] = object.land_sale_has_sample_document_comment
+            ws11['Q' + str(7 + i)] = object.land_sale_has_document_template_comment
+        for i in range(len(objects['land_lease'])):
+            object = objects['land_lease'][i]
+            ws12['A' + str(7+i)] = i+1
+            ws12['B' + str(7+i)] = object.region_name
+            ws12['C' + str(7 + i)] = object.land_lease_id_rgmu
+            ws12['D' + str(7 + i)] = object.land_lease_statement_amount
+            ws12['E' + str(7 + i)] = object.land_lease_link
+            ws12['F' + str(7 + i)] = object.land_lease_has_advanced_appointment_comment
+            ws12['G' + str(7 + i)] = object.land_lease_has_btn_get_service_comment
+            ws12['H' + str(7 + i)] = object.land_lease_has_reglament_comment
+            ws12['I' + str(7 + i)] = object.land_lease_has_estimation_quality_comment
+            ws12['J' + str(7 + i)] = object.land_lease_connected_to_fgis_do_comment
+            ws12['K' + str(7 + i)] = object.land_lease_has_electronic_form_printing_comment
+            ws12['L' + str(7 + i)] = object.land_lease_has_edition_draft_comment
+            ws12['M' + str(7 + i)] = object.land_lease_has_term_of_consideration_comment
+            ws12['N' + str(7 + i)] = object.land_lease_has_notif_consider_result_comment
+            ws12['O' + str(7 + i)] = object.land_lease_has_causes_of_failure_comment
+            ws12['P' + str(7 + i)] = object.land_lease_has_sample_document_comment
+            ws12['Q' + str(7 + i)] = object.land_lease_has_document_template_comment
+        for i in range(len(objects['ownership_right'])):
+            object = objects['ownership_right'][i]
+            ws13['A' + str(7 + i)] = i + 1
+            ws13['B' + str(7 + i)] = object.region_name
+            ws13['C' + str(7 + i)] = object.ownership_right_id_rgmu
+            ws13['D' + str(7 + i)] = object.ownership_right_statement_amount
+            ws13['E' + str(7 + i)] = object.ownership_right_link
+            ws13['F' + str(7 + i)] = object.ownership_right_has_advanced_appointment_comment
+            ws13['G' + str(7 + i)] = object.ownership_right_has_btn_get_service_comment
+            ws13['H' + str(7 + i)] = object.ownership_right_has_reglament_comment
+            ws13['I' + str(7 + i)] = object.ownership_right_has_estimation_quality_comment
+            ws13['J' + str(7 + i)] = object.ownership_right_connected_to_fgis_do_comment
+            ws13['K' + str(7 + i)] = object.ownership_right_has_electronic_form_printing_comment
+            ws13['L' + str(7 + i)] = object.ownership_right_has_edition_draft_comment
+            ws13['M' + str(7 + i)] = object.ownership_right_has_term_of_consideration_comment
+            ws13['N' + str(7 + i)] = object.ownership_right_has_notif_consider_result_comment
+            ws13['O' + str(7 + i)] = object.ownership_right_has_causes_of_failure_comment
+            ws13['P' + str(7 + i)] = object.ownership_right_has_sample_document_comment
+            ws13['Q' + str(7 + i)] = object.ownership_right_has_document_template_comment
+        for i in range(len(objects['municipal_property_lease'])):
+            object = objects['municipal_property_lease'][i]
+            ws14['A' + str(7 + i)] = i + 1
+            ws14['B' + str(7 + i)] = object.region_name
+            ws14['C' + str(7 + i)] = object.municipal_property_lease_id_rgmu
+            ws14['D' + str(7 + i)] = object.municipal_property_lease_statement_amount
+            ws14['E' + str(7 + i)] = object.municipal_property_lease_link
+            ws14['F' + str(7 + i)] = object.municipal_property_lease_has_advanced_appointment_comment
+            ws14['G' + str(7 + i)] = object.municipal_property_lease_has_btn_get_service_comment
+            ws14['H' + str(7 + i)] = object.municipal_property_lease_has_reglament_comment
+            ws14['I' + str(7 + i)] = object.municipal_property_lease_has_estimation_quality_comment
+            ws14['J' + str(7 + i)] = object.municipal_property_lease_connected_to_fgis_do_comment
+            ws14['K' + str(7 + i)] = object.municipal_property_lease_has_electronic_form_printing_comment
+            ws14['L' + str(7 + i)] = object.municipal_property_lease_has_edition_draft_comment
+            ws14['M' + str(7 + i)] = object.municipal_property_lease_has_term_of_consideration_comment
+            ws14['N' + str(7 + i)] = object.municipal_property_lease_has_notif_consider_result_comment
+            ws14['O' + str(7 + i)] = object.municipal_property_lease_has_causes_of_failure_comment
+            ws14['P' + str(7 + i)] = object.municipal_property_lease_has_sample_document_comment
+            ws14['Q' + str(7 + i)] = object.municipal_property_lease_has_document_template_comment
+        for i in range(len(objects['free_land_provision'])):
+            object = objects['free_land_provision'][i]
+            ws15['A' + str(7 + i)] = i + 1
+            ws15['B' + str(7 + i)] = object.region_name
+            ws15['C' + str(7 + i)] = object.free_land_provision_id_rgmu
+            ws15['D' + str(7 + i)] = object.free_land_provision_statement_amount
+            ws15['E' + str(7 + i)] = object.free_land_provision_link
+            ws15['F' + str(7 + i)] = object.free_land_provision_has_advanced_appointment_comment
+            ws15['G' + str(7 + i)] = object.free_land_provision_has_btn_get_service_comment
+            ws15['H' + str(7 + i)] = object.free_land_provision_has_reglament_comment
+            ws15['I' + str(7 + i)] = object.free_land_provision_has_estimation_quality_comment
+            ws15['J' + str(7 + i)] = object.free_land_provision_connected_to_fgis_do_comment
+            ws15['K' + str(7 + i)] = object.free_land_provision_has_electronic_form_printing_comment
+            ws15['L' + str(7 + i)] = object.free_land_provision_has_edition_draft_comment
+            ws15['M' + str(7 + i)] = object.free_land_provision_has_term_of_consideration_comment
+            ws15['N' + str(7 + i)] = object.free_land_provision_has_notif_consider_result_comment
+            ws15['O' + str(7 + i)] = object.free_land_provision_has_causes_of_failure_comment
+            ws15['P' + str(7 + i)] = object.free_land_provision_has_sample_document_comment
+            ws15['Q' + str(7 + i)] = object.free_land_provision_has_document_template_comment
         for _row in ws1.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws1.max_row):
             for _cell in _row:
                 _cell.border = thin_border
@@ -2462,6 +2847,26 @@ def export_with_troubles(request,year,month):
             for _cell in _row:
                 _cell.border = thin_border
                 _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
+        for _row in ws11.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws11.max_row):
+            for _cell in _row:
+                _cell.border = thin_border
+                _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
+        for _row in ws12.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws12.max_row):
+            for _cell in _row:
+                _cell.border = thin_border
+                _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
+        for _row in ws13.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws13.max_row):
+            for _cell in _row:
+                _cell.border = thin_border
+                _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
+        for _row in ws14.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws14.max_row):
+            for _cell in _row:
+                _cell.border = thin_border
+                _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
+        for _row in ws15.iter_rows(min_row=7,min_col=1,max_col=17,max_row=ws15.max_row):
+            for _cell in _row:
+                _cell.border = thin_border
+                _cell.alignment = Alignment(wrap_text=True,horizontal='center',vertical='center')
         response = HttpResponse(save_virtual_workbook(wb),
                                 content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="{}-{}_With_Troubles_Form.xlsx"'.format(year, month)
@@ -2471,7 +2876,7 @@ def export_with_troubles(request,year,month):
                 redirect_field_name='/result_form/residential_premises/' + datetime.today().strftime('%Y/%m/'))
 def export_not_sent(request,year,month):
     if request.method == 'GET':
-        wb = load_workbook('./app/static/app/not_sent.xlsx')
+        wb = load_workbook('./app/static/app/xlsx_templates/not_sent.xlsx')
         objects = get_not_sent(month, year)
         ws = wb["Лист1"]
         ws['A1'] = 'Список районов , не заполнивших форму за период {}.{} г.'.format(month,year)
