@@ -916,7 +916,7 @@ def get_self_examination_form(request):
         else:
             try:
                 #trying to find existing form of current month for further user editition
-                instance = get_object_or_404(RegionModel, month=datetime.today().strftime('%m'), year=datetime.today().strftime('%Y'))
+                instance = get_object_or_404(RegionModel, region_name=request.user.region_name, month=datetime.today().strftime('%m'), year=datetime.today().strftime('%Y'))
                 region_form = SE_Form(instance=instance)
             except Http404:
                 #else creating a new empty one
