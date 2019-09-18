@@ -457,7 +457,7 @@ class RegionModel(models.Model):
     free_land_provision_has_document_template_comment = models.TextField(default='', blank=True)
 
     def __str__(self):
-        return self.region_name +"-" + self.year + "/" + self.month + "/" + self.day + " " + self.time.strftime('%%H:%M:%S')
+        return self.region_name +"-" + self.year + "/" + self.month + "/" + self.day + " " + self.time.strftime('%H:%M:%S')
 
 
 class CustomUser(AbstractUser):

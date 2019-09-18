@@ -8,6 +8,10 @@ urlpatterns = [
 
     re_path(r'^logout/$', views.logout_view, name='logout'),
 
+    re_path(r'^profile/$', views.get_profile, name='get_profile'),
+
+re_path(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
+
     re_path(r'^export/all/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.export_all, name='export_all'),
 
     re_path(r'export/with_troubles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.export_with_troubles,

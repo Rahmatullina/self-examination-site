@@ -1268,8 +1268,9 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=254)
 
     class Meta:
         model = CustomUser
-        fields = ('first_name','last_name','region_name',)
-
+        fields = ('email','username')

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from openpyxl import load_workbook
 from openpyxl.writer.excel import save_virtual_workbook
-from .forms import SE_Form, LoginForm
+from .forms import SE_Form, LoginForm, CustomUserChangeForm
 from .models import RegionModel
 from openpyxl.styles.borders import Border, Side
 from openpyxl.styles import Alignment
@@ -870,7 +870,8 @@ def get_with_no_troubles(request, month, year):
                                                      'num_month': month,
                                                      'zipped': zip(regions_names, short_regions_names),
                                                      'username': request.user.username,
-                                                     'years': [i for i in range(2016, int(datetime.now().year) + 1)]
+                                                     'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                                    'zipped_service_names': zip(full_service_names, short_service_names)
                                                      })
 
 @login_required(login_url='/login/', redirect_field_name='/form/')
@@ -2891,3 +2892,43 @@ def export_not_sent(request,year,month):
                 redirect_field_name='/result_form/residential_premises/' + datetime.today().strftime('%Y/%m/'))
 def empty_view(request):
     return HttpResponseRedirect('/login/')
+
+@login_required(login_url='/login/',redirect_field_name='/profile/')
+def get_profile(request):
+    if request.method == 'GET':
+        return render(request, 'app/profile.html', {
+                                           'username': request.user.username,
+                                            'region_name': request.user.region_name,
+                                            'email': request.user.email,
+                                           'year': datetime.today().strftime('%Y'),
+                                           'month': MONTHS[MONTH_NUMBERS.index(datetime.today().strftime('%m'))],
+                                           'num_month': datetime.today().strftime('%m'),
+                                           'zipped': zip(regions_names, short_regions_names),
+                                           'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                           'zipped_service_names': zip(full_service_names, short_service_names)
+                                           })
+    else:
+        return HttpResponseNotFound('Sorry Page Not Found')
+
+
+
+@login_required(login_url='/login/',redirect_field_name='/profile/edit/')
+def edit_profile(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/profile/')
+    elif request.method == 'GET':
+        form = CustomUserChangeForm(instance=request.user)
+
+    return render(request, 'app/edit_profile.html', {
+                                            'region_name': request.user.region_name,
+                                           'form': form,
+                                           'year': datetime.today().strftime('%Y'),
+                                           'month': MONTHS[MONTH_NUMBERS.index(datetime.today().strftime('%m'))],
+                                           'num_month': datetime.today().strftime('%m'),
+                                           'zipped': zip(regions_names, short_regions_names),
+                                           'years': [i for i in range(2016, int(datetime.now().year) + 1)],
+                                           'zipped_service_names': zip(full_service_names, short_service_names)
+                                           })
