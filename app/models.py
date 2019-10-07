@@ -462,4 +462,5 @@ class RegionModel(models.Model):
 
 class CustomUser(AbstractUser):
     region_name = models.CharField(max_length=500,choices=REGION_CHOICES)
+    email = models.EmailField(blank=True)
 
